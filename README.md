@@ -1,2 +1,4 @@
-# react-redux-profissional-autoescola
-Curso React Profissional - Desafio Autoescola
+# Curso React Profissional - Desafio Autoescola
+
+Desafio Autoescola para o curso [React Profissional](http://nardiniacademy.com/). Os detalhes estão no curso.
+
