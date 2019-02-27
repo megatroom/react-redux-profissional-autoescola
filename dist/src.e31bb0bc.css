@@ -1,0 +1,326 @@
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+body {
+  background-color: #032e74;
+  margin: 0;
+  font-family: "Share Tech Mono", monospace;
+}
+
+h1 {
+  margin: 10px 0;
+}
+
+.container {
+  display: flex;
+  max-width: 600px;
+  margin: auto;
+  padding: 70px 20px;
+}
+
+.alunos-container {
+  color: #11f5ff;
+  width: 100%;
+}
+
+.aluno {
+  display: flex;
+  background-color: #032e74;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #11f5ff;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.aluno__text {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+.aluno__button {
+  background-color: transparent;
+  border: none;
+  color: #11f5ff;
+}
+.aluno__input {
+  flex: 1;
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #11f5ff;
+  color: #11f5ff;
+}
+.aluno__input:focus {
+  outline: none;
+}
+
+.new-aluno {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.new-aluno__input {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #032e74;
+  border: 2px solid #11f5ff;
+  border-radius: 2px;
+  padding: 10px;
+  color: #11f5ff;
+}
+.new-aluno__input::placeholder {
+  color: #11f5ff;
+  opacity: 0.5;
+}
+.new-aluno__input:focus {
+  background-color: #0442a6;
+}
+.new-aluno__button {
+  margin-top: 10px;
+  padding: 5px;
+  align-self: flex-end;
+  width: 20%;
+  background-color: transparent;
+  border: 2px solid #11f5ff;
+  color: #11f5ff;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.new-aluno__button:hover {
+  background-color: #0442a6;
+}
+
+.home {
+  color: #11f5ff;
+  width: 100%;
+}
+.home__button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #032e74;
+  border: 2px solid #11f5ff;
+  border-radius: 2px;
+  color: #11f5ff;
+  width: 130px;
+  padding: 10px 0;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.home__button i {
+  margin-bottom: 10px;
+}
+.home__button:hover {
+  background-color: #0442a6;
+}
+
+.line {
+  width: 100%;
+  border-bottom: 1px solid #11f5ff;
+  margin: 10px 0;
+}
+
+.navigation-drawer {
+  background-color: #032e74;
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 260px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  height: 100vh;
+  transition: left 0.5s ease-in-out;
+}
+.navigation-drawer--open {
+  left: 0;
+}
+.navigation-drawer__head {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.navigation-drawer__head__button {
+  border: none;
+  background-color: transparent;
+  color: #11f5ff;
+  cursor: pointer;
+}
+.navigation-drawer__menu {
+  margin-top: 20px;
+}
+.navigation-drawer__menu__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  color: #11f5ff;
+  padding: 10px 0;
+  cursor: pointer;
+}
+.navigation-drawer__menu__item:hover {
+  background-color: #0442a6;
+}
+
+.turma {
+  border: 2px solid #11f5ff;
+  border-radius: 2px;
+  padding: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+}
+.turma__box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.turma__input {
+  flex: 1;
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #11f5ff;
+  color: #11f5ff;
+}
+.turma__input:focus {
+  outline: none;
+}
+.turma__button {
+  border: 1px solid #11f5ff;
+  border-radius: 2px;
+  background-color: transparent;
+  color: #11f5ff;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.turma__button:hover {
+  background-color: #0442a6;
+}
+
+.turma-alunos {
+  color: #11f5ff;
+  width: 100%;
+}
+.turma-alunos__aluno {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+  border: 2px solid #11f5ff;
+  padding: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+.turma-alunos__aluno__text {
+  flex: 1;
+}
+.turma-alunos__aluno__button {
+  border: 2px solid #11f5ff;
+  background-color: transparent;
+  border-radius: 2px;
+  color: #11f5ff;
+}
+
+.new-turma {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.new-turma__input {
+  flex: 1;
+  background-color: transparent;
+  color: #11f5ff;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #11f5ff;
+}
+.new-turma__button {
+  color: #11f5ff;
+  background-color: transparent;
+  border: none;
+  margin-left: 10px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.aula-teorica {
+  width: 100%;
+  color: #11f5ff;
+  display: flex;
+  flex-direction: column;
+}
+.aula-teorica__button {
+  background-color: #032e74;
+  border: none;
+  align-self: flex-end;
+  color: #11f5ff;
+  margin-top: -35px;
+  margin-right: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+.aula-teorica__button i {
+  font-size: 48px;
+}
+
+.error {
+  text-align: center;
+  color: #11f5ff;
+}
+.error__button {
+  color: #11f5ff;
+  background-color: #0442a6;
+  border: none;
+  border-radius: 2px;
+  padding: 10px 12px;
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.app-bar {
+  background-color: #0442a6;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  color: #11f5ff;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+.app-bar__container {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: auto;
+}
+.app-bar__action {
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  color: #11f5ff;
+  background-color: transparent;
+}
+.app-bar__action--rotation {
+  animation: rotation 2s infinite linear;
+}
+.app-bar__action:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.app-bar__brand {
+  flex: 1;
+  padding: 0 10px;
+}
