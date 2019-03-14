@@ -39,8 +39,9 @@ jspm_packages/
 # TypeScript v1 declaration files
 typings/
 
-# Optional npm cache directory
-.npm
+# Optional npm cache directories
+.npm/
+.cache/
 
 # Optional eslint cache
 .eslintcache
@@ -59,3 +60,9 @@ typings/
 
 # next.js build output
 .next
+
+# Build directory
+dist/
+
+# Visual Studio Code directory
+.vscode/
