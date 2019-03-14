@@ -1,0 +1,36 @@
+{
+  "name": "senna",
+  "version": "1.0.0",
+  "description": "Autoescola Senna",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacob-cabral/react-redux-profissional-autoescola.git"
+  },
+  "keywords": [
+    "autoescola",
+    "senna"
+  ],
+  "author": "Jacob Cabral",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jacob-cabral/react-redux-profissional-autoescola/issues"
+  },
+  "homepage": "https://github.com/jacob-cabral/react-redux-profissional-autoescola#readme",
+  "dependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "^1.12.1",
+    "prettier": "1.16.4",
+    "sass": "^1.17.2"
+  }
+}
