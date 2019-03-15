@@ -34,10 +34,61 @@ body {
 }
 
 .student {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
   background-color: white;
-  padding: 10px 12px;
+  padding: 5px 12px;
   border-radius: 2px;
 
   @include box-shadow(2);
+
+  &__text {
+    flex: 1;
+  }
+
+  &__input {
+    flex: 1;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1px solid silver;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &--red {
+      color: red;
+    }
+
+    &--green {
+      color: green;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+
+    &--arrow {
+      padding: 0;
+      display: inline-block;
+      width: 100%;
+
+      &--none {
+        width: 1px;
+      }
+    }
+  }
+
+  &__arrows {
+    width: 32px;
+
+    &--hidden {
+      visibility: hidden;
+      width: 1px;
+    }
+  }
 }
