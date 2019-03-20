@@ -4,16 +4,27 @@ import uuid from "uuid/v1";
 import AppBar from "./AppBar";
 import NewStudent from "./NewStudent";
 import StudentList from "./StudentList";
+import StudentService from "../services/StudentService";
+import Error from "./Error";
 
 export default class App extends React.Component {
   state = {
-    students: []
+    students: [],
+    isLoading: false,
+    reloadHasError: false,
+    saveHasError: false
   };
 
+  componentDidMount() {
+    this.handleReload();
+  }
+
   handleAdd = name => {
-    this.setState(state => ({
-      students: state.students.concat({ id: uuid(), name: name })
-    }));
+    this.setState(state => {
+      const students = state.students.concat({ id: uuid(), name: name });
+      this.handleSave(students);
+      return { students };
+    });
   };
 
   handleEdit = (id, name) => {
@@ -21,6 +32,8 @@ export default class App extends React.Component {
       const newStudents = state.students.slice();
       const index = newStudents.findIndex(student => student.id === id);
       newStudents[index].name = name;
+
+      this.handleSave(newStudents);
 
       return {
         students: newStudents
@@ -33,6 +46,8 @@ export default class App extends React.Component {
       const newStudents = state.students.slice();
       const index = newStudents.findIndex(student => student.id === id);
       newStudents.splice(index, 1);
+
+      this.handleSave(newStudents);
 
       return {
         students: newStudents
@@ -48,6 +63,8 @@ export default class App extends React.Component {
       if (direction === "up") newStudents.splice(index - 1, 0, removedStudent);
       else newStudents.splice(index + 1, 0, removedStudent);
 
+      this.handleSave(newStudents);
+
       return {
         students: newStudents
       };
@@ -55,27 +72,45 @@ export default class App extends React.Component {
   };
 
   handleReload = () => {
-    const students = window.localStorage.getItem("students");
-    this.setState({ students: JSON.parse(students) });
+    this.setState({ isLoading: true, reloadHasError: false });
+
+    StudentService.load()
+      .then(students => this.setState({ students, isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, reloadHasError: true }));
   };
 
-  handleSave = () => {
-    const { students } = this.state;
-    window.localStorage.setItem("students", JSON.stringify(students));
+  handleSave = students => {
+    this.setState({ isLoading: true, saveHasError: false });
+
+    StudentService.save(students)
+      .then(() => this.setState({ isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
   render() {
+    const { students, isLoading, reloadHasError, saveHasError } = this.state;
+
     return (
       <div>
-        <AppBar onReload={this.handleReload} onSave={this.handleSave} />
+        <AppBar
+          isLoading={isLoading}
+          saveHasError={saveHasError}
+          onSaveRetry={() => this.handleSave(students)}
+        />
         <div className="container">
-          <NewStudent onAdd={this.handleAdd} />
-          <StudentList
-            students={this.state.students}
-            onMove={this.handleMove}
-            onEdit={this.handleEdit}
-            onDelete={this.handleDelete}
-          />
+          {reloadHasError ? (
+            <Error onRetry={this.handleReload} />
+          ) : (
+            <React.Fragment>
+              <NewStudent onAdd={this.handleAdd} />
+              <StudentList
+                students={students}
+                onMove={this.handleMove}
+                onEdit={this.handleEdit}
+                onDelete={this.handleDelete}
+              />
+            </React.Fragment>
+          )}
         </div>
       </div>
     );

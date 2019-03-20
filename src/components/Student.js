@@ -34,13 +34,13 @@ export default class Student extends React.Component {
         {isEditing && (
           <React.Fragment>
             <button
-              className="student__button student__button--red"
+              className="student__button student__button--cancel"
               onClick={this.handleCancel}
             >
               <i className="material-icons">clear</i>
             </button>
             <button
-              className="student__button student__button--green"
+              className="student__button student__button--success"
               onClick={this.handleSave}
             >
               <i className="material-icons">done</i>

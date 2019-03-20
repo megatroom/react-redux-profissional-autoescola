@@ -2,6 +2,9 @@
 
 $app-padding: 20px;
 $container-max-width: 600px;
+$color-primary: darkslateblue;
+$color-danger: red;
+$color-success: green;
 
 body {
   color: #212121;
@@ -20,7 +23,7 @@ input {
   font-size: 14pt;
   font-weight: bold;
   color: white;
-  background-color: darkslateblue;
+  background-color: $color-primary;
   position: fixed;
   top: 0;
   left: 0;
@@ -53,6 +56,14 @@ input {
 
     &:hover {
       background-color: rgba($color: black, $alpha: 0.15);
+    }
+
+    &--rotation {
+      @include rotation();
+    }
+
+    &--danger {
+      color: $color-danger;
     }
   }
 
@@ -113,12 +124,12 @@ input {
     border: 0;
     cursor: pointer;
 
-    &--red {
-      color: red;
+    &--cancel {
+      color: $color-danger;
     }
 
-    &--green {
-      color: green;
+    &--success {
+      color: $color-success;
     }
 
     &--hidden {
@@ -143,5 +154,18 @@ input {
       visibility: hidden;
       width: 1px;
     }
+  }
+}
+
+.error {
+  text-align: center;
+
+  &__button {
+    color: white;
+    background-color: $color-primary;
+    border: none;
+    border-radius: 2px;
+    padding: 10px 12px;
+    cursor: pointer;
   }
 }
