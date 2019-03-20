@@ -4,10 +4,10 @@ let failedSaveAttempts = 1;
 export default class StudentService {
   static load() {
     return new Promise((resolve, reject) => {
-      const students = window.localStorage.getItem("students");
       setTimeout(() => {
         if (failedLoadAttempts > 1) {
-          resolve(JSON.parse(students));
+          const students = window.localStorage.getItem("students");
+          resolve(students ? JSON.parse(students) : []);
         } else {
           failedLoadAttempts++;
           reject();

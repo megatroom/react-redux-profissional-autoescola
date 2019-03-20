@@ -32,15 +32,17 @@ input {
   margin: 0;
 
   &__container {
+    height: 70px;
     display: flex;
     align-items: center;
     margin: 0 auto;
-    padding: 20px $app-padding;
+    padding: 0 $app-padding;
     max-width: $container-max-width;
   }
 
   &__brand {
     flex: 1;
+    padding-left: 8px;
   }
 
   &__action {
@@ -167,5 +169,35 @@ input {
     border-radius: 2px;
     padding: 10px 12px;
     cursor: pointer;
+  }
+}
+
+.navigation-drawer {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: -280px;
+  height: 100vh;
+  width: 260px;
+  transition: left 0.5s ease-in-out;
+  
+  @include box-shadow(5);
+
+  &--open {
+    left: 0;
+  }
+
+  &__head {
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 12px;
+
+    &__button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
   }
 }

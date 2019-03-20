@@ -6,17 +6,23 @@ import NewStudent from "./NewStudent";
 import StudentList from "./StudentList";
 import StudentService from "../services/StudentService";
 import Error from "./Error";
+import NavigationDrawer from "./NavigationDrawer";
 
 export default class App extends React.Component {
   state = {
     students: [],
     isLoading: false,
     reloadHasError: false,
-    saveHasError: false
+    saveHasError: false,
+    isMenuOpen: false
   };
 
   componentDidMount() {
     this.handleReload();
+  }
+
+  componentDidCatch() {
+    this.setState({ reloadHasError: true });
   }
 
   handleAdd = name => {
@@ -87,8 +93,16 @@ export default class App extends React.Component {
       .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
+  handleOpenMenu = () => {
+    this.setState({ isMenuOpen: true });
+  }
+
+  handleCloseMenu = () => {
+    this.setState({ isMenuOpen: false });
+  }
+
   render() {
-    const { students, isLoading, reloadHasError, saveHasError } = this.state;
+    const { students, isLoading, isMenuOpen, reloadHasError, saveHasError } = this.state;
 
     return (
       <div>
@@ -96,22 +110,24 @@ export default class App extends React.Component {
           isLoading={isLoading}
           saveHasError={saveHasError}
           onSaveRetry={() => this.handleSave(students)}
+          onOpenMenu={this.handleOpenMenu}
         />
         <div className="container">
           {reloadHasError ? (
             <Error onRetry={this.handleReload} />
           ) : (
-            <React.Fragment>
-              <NewStudent onAdd={this.handleAdd} />
-              <StudentList
-                students={students}
-                onMove={this.handleMove}
-                onEdit={this.handleEdit}
-                onDelete={this.handleDelete}
-              />
-            </React.Fragment>
-          )}
+              <React.Fragment>
+                <NewStudent onAdd={this.handleAdd} />
+                <StudentList
+                  students={students}
+                  onMove={this.handleMove}
+                  onEdit={this.handleEdit}
+                  onDelete={this.handleDelete}
+                />
+              </React.Fragment>
+            )}
         </div>
+        <NavigationDrawer isOpen={isMenuOpen} onCloseMenu={this.handleCloseMenu} />
       </div>
     );
   }
