@@ -1,12 +1,12 @@
 import React from "react";
 import uuid from "uuid/v1";
+import { BrowserRouter, Route } from "react-router-dom";
 
-import AppBar from "./AppBar";
-import NewStudent from "./NewStudent";
-import StudentList from "./StudentList";
+import AppBar from "../components/AppBar";
+import NavigationDrawer from "../components/NavigationDrawer";
+import About from "./About";
+import Students from "./Students";
 import StudentService from "../services/StudentService";
-import Error from "./Error";
-import NavigationDrawer from "./NavigationDrawer";
 
 export default class App extends React.Component {
   state = {
@@ -95,40 +95,56 @@ export default class App extends React.Component {
 
   handleOpenMenu = () => {
     this.setState({ isMenuOpen: true });
-  }
+  };
 
   handleCloseMenu = () => {
     this.setState({ isMenuOpen: false });
-  }
+  };
 
   render() {
-    const { students, isLoading, isMenuOpen, reloadHasError, saveHasError } = this.state;
+    const {
+      students,
+      isLoading,
+      isMenuOpen,
+      reloadHasError,
+      saveHasError
+    } = this.state;
 
     return (
-      <div>
-        <AppBar
-          isLoading={isLoading}
-          saveHasError={saveHasError}
-          onSaveRetry={() => this.handleSave(students)}
-          onOpenMenu={this.handleOpenMenu}
-        />
-        <div className="container">
-          {reloadHasError ? (
-            <Error onRetry={this.handleReload} />
-          ) : (
-              <React.Fragment>
-                <NewStudent onAdd={this.handleAdd} />
-                <StudentList
-                  students={students}
-                  onMove={this.handleMove}
-                  onEdit={this.handleEdit}
-                  onDelete={this.handleDelete}
-                />
-              </React.Fragment>
-            )}
+      <BrowserRouter>
+        <div>
+          <AppBar
+            isLoading={isLoading}
+            saveHasError={saveHasError}
+            onSaveRetry={() => this.handleSave(students)}
+            onOpenMenu={this.handleOpenMenu}
+          />
+          <div className="container">
+            <React.Fragment>
+              <Route
+                path="/"
+                exact
+                render={props => (
+                  <Students
+                    students={students}
+                    reloadHasError={reloadHasError}
+                    onRetry={this.handleReload}
+                    onAdd={this.handleAdd}
+                    onMove={this.handleMove}
+                    onEdit={this.handleEdit}
+                    onDelete={this.handleDelete}
+                  />
+                )}
+              />
+              <Route path="/about" exact component={About} />
+            </React.Fragment>
+          </div>
+          <NavigationDrawer
+            isOpen={isMenuOpen}
+            onCloseMenu={this.handleCloseMenu}
+          />
         </div>
-        <NavigationDrawer isOpen={isMenuOpen} onCloseMenu={this.handleCloseMenu} />
-      </div>
+      </BrowserRouter>
     );
   }
 }

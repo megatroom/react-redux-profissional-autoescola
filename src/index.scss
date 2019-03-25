@@ -159,6 +159,10 @@ input {
   }
 }
 
+.about {
+  text-align: center;
+}
+
 .error {
   text-align: center;
 
@@ -180,7 +184,7 @@ input {
   height: 100vh;
   width: 260px;
   transition: left 0.5s ease-in-out;
-  
+
   @include box-shadow(5);
 
   &--open {
@@ -198,6 +202,31 @@ input {
       background-color: transparent;
       border: none;
       cursor: pointer;
+    }
+  }
+
+  &__menu {
+    margin-top: 16px;
+    padding: 0 16px 0 8px;
+
+    &__item {
+      background-color: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      vertical-align: middle;
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 6px 8px;
+      cursor: pointer;
+
+      i {
+        margin-right: 8px;
+      }
+
+      &:hover {
+        background-color: rgba($color: black, $alpha: 0.08);
+      }
     }
   }
 }
