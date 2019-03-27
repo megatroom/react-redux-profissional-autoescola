@@ -4,7 +4,8 @@
   "description": "Autoescola Senna",
   "main": "index.html",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,7 @@
   "homepage": "https://github.com/jacob-cabral/react-redux-profissional-autoescola#readme",
   "dependencies": {
     "classnames": "^2.2.6",
-    "react": "^16.8.4",
+    "react": "^16.8.5",
     "react-dom": "^16.8.4",
     "react-router-dom": "^5.0.0"
   },
