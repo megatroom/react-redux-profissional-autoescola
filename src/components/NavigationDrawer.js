@@ -21,7 +21,25 @@ const NavigationDrawer = ({ isOpen, onCloseMenu, history }) => (
           history.push("/");
         }}
       >
-        <i className="material-icons">note</i> Notas
+        <i className="material-icons">home</i> Página Inicial
+      </button>
+      <button
+        className="navigation-drawer__menu__item"
+        onClick={() => {
+          onCloseMenu();
+          history.push("/theory-class");
+        }}
+      >
+        <i className="material-icons">class</i> Aula Teórica
+      </button>
+      <button
+        className="navigation-drawer__menu__item"
+        onClick={() => {
+          onCloseMenu();
+          history.push("/students");
+        }}
+      >
+        <i className="material-icons">person</i> Alunos
       </button>
       <button
         className="navigation-drawer__menu__item"

@@ -6,7 +6,9 @@ const AppBar = ({ isLoading, saveHasError, onSaveRetry, onOpenMenu }) => (
       <button className="app-bar__action" onClick={onOpenMenu}>
         <i className="material-icons">menu</i>
       </button>
-      <span className="app-bar__brand">Autoescola Senna</span>
+      <span className="app-bar__brand">
+        <h1>Autoescola Senna</h1>
+      </span>
       {isLoading && (
         <div className="app-bar__action--rotation">
           <i className="material-icons">refresh</i>

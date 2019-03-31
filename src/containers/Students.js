@@ -6,6 +6,7 @@ import Error from "../components/Error";
 
 const Students = ({
   students,
+  isAdding,
   reloadHasError,
   onAdd,
   onEdit,
@@ -17,7 +18,8 @@ const Students = ({
 
   return (
     <React.Fragment>
-      <NewStudent onAdd={onAdd} />
+      <h2>Alunos</h2>
+      <NewStudent onAdd={onAdd} isAdding={isAdding} />
       <StudentList
         students={students}
         onMove={onMove}

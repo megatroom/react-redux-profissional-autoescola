@@ -5,18 +5,44 @@ $container-max-width: 600px;
 $color-primary: darkslateblue;
 $color-danger: red;
 $color-success: green;
+$color-hover: rgba(
+  $color: black,
+  $alpha: 0.15
+);
+$icon-height: 24px;
+$icon-width: 24px;
 
 body {
   color: #212121;
   background-color: whitesmoke;
-  font-family: "Roboto", sans-serif;
-  font-size: 12pt;
+  font-family: "Gloria Hallelujah", cursive;
   margin: 0;
   padding: 0;
 }
 
-input {
+h1 {
   font-size: 12pt;
+}
+
+h2 {
+  font-weight: lighter;
+  width: 100%;
+  border-bottom: 1pt black solid;
+}
+
+input,
+button {
+  font-family: inherit;
+}
+
+button {
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-hover;
+  }
 }
 
 .app-bar {
@@ -57,7 +83,7 @@ input {
     }
 
     &:hover {
-      background-color: rgba($color: black, $alpha: 0.15);
+      background-color: $color-hover;
     }
 
     &--rotation {
@@ -66,6 +92,10 @@ input {
 
     &--danger {
       color: $color-danger;
+    }
+
+    & i {
+      display: block;
     }
   }
 
@@ -79,18 +109,58 @@ input {
 }
 
 .new-student {
-  background-color: white;
-  padding: 20px 12px;
-  border-radius: 2px;
+  max-width: $container-max-width;
+  display: flex;
 
-  @include box-shadow(1);
+  &__container {
+    flex: 1;
+    display: flex;
+    background-color: white;
+    padding: 16px 12px;
+    border-radius: 2px;
+
+    @include box-shadow(1);
+  }
 
   &__input {
-    width: 100%;
+    flex: 1;
     border: none;
 
     &:focus {
       outline: none;
+    }
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: $icon-height;
+    width: $icon-width;
+
+    &:hover {
+      background-color: $color-hover;
+    }
+
+    &--floating {
+      font-size: 20px;
+      border-radius: 45px;
+      width: 50px;
+      height: 50px;
+      position: fixed;
+      top: 100px;
+      right: 20px;
+
+      @include box-shadow(2);
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    & i {
+      display: block;
     }
   }
 }
@@ -123,8 +193,15 @@ input {
 
   &__button {
     background-color: transparent;
-    border: 0;
-    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: $icon-height;
+    width: $icon-width;
+
+    &:hover {
+      background-color: $color-hover;
+    }
 
     &--cancel {
       color: $color-danger;
@@ -151,6 +228,8 @@ input {
 
   &__arrows {
     width: 24px;
+    height: 58px;
+    padding: 2px;
 
     &--hidden {
       visibility: hidden;
@@ -202,6 +281,10 @@ input {
       background-color: transparent;
       border: none;
       cursor: pointer;
+
+      & i {
+        display: block;
+      }
     }
   }
 
@@ -217,16 +300,35 @@ input {
       vertical-align: middle;
       width: 100%;
       margin-bottom: 12px;
-      padding: 6px 8px;
       cursor: pointer;
 
-      i {
-        margin-right: 8px;
-      }
-
-      &:hover {
-        background-color: rgba($color: black, $alpha: 0.08);
+      & i {
+        display: block;
+        padding-right: 8px;
       }
     }
+  }
+}
+
+.home {
+  & i {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  &-container {
+    background-color: $color-primary;
+    width: 128px;
+    border-radius: 2px;
+  }
+
+  &__button {
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-radius: 2px;
+    width: inherit;
+    padding: 16px;
+    cursor: pointer;
   }
 }

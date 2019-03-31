@@ -1,8 +1,34 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
-const Home = () => (
+const Home = ({ history, onCloseMenu }) => (
   <div className="home">
-    <button>Serviços</button>
-    <button>Cadastros</button>
+    <h2>Serviços</h2>
+    <div className="home-container">
+      <button
+        className="home__button"
+        onClick={() => {
+          onCloseMenu();
+          history.push("/theory-class");
+        }}
+      >
+        <i className="material-icons">class</i>Aula Teórica
+      </button>
+    </div>
+    <h2>Cadastros</h2>
+    <div className="home-container">
+      <button
+        className="home__button"
+        onClick={() => {
+          onCloseMenu();
+          history.push("/students");
+        }}
+      >
+        <i className="material-icons">person</i>
+        Alunos
+      </button>
+    </div>
   </div>
 );
+
+export default withRouter(Home);

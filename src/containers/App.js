@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import AppBar from "../components/AppBar";
 import NavigationDrawer from "../components/NavigationDrawer";
+import Home from "./Home";
 import About from "./About";
 import Students from "./Students";
 import StudentService from "../services/StudentService";
@@ -11,10 +12,11 @@ import StudentService from "../services/StudentService";
 export default class App extends React.Component {
   state = {
     students: [],
+    isAdding: false,
     isLoading: false,
+    isMenuOpen: false,
     reloadHasError: false,
-    saveHasError: false,
-    isMenuOpen: false
+    saveHasError: false
   };
 
   componentDidMount() {
@@ -104,6 +106,7 @@ export default class App extends React.Component {
   render() {
     const {
       students,
+      isAdding,
       isLoading,
       isMenuOpen,
       reloadHasError,
@@ -124,9 +127,15 @@ export default class App extends React.Component {
               <Route
                 path="/"
                 exact
-                render={props => (
+                render={() => <Home onCloseMenu={this.handleCloseMenu} />}
+              />
+              <Route
+                path="/students"
+                exact
+                render={() => (
                   <Students
                     students={students}
+                    isAdding={isAdding}
                     reloadHasError={reloadHasError}
                     onRetry={this.handleReload}
                     onAdd={this.handleAdd}

@@ -16,7 +16,7 @@ export default class Student extends React.Component {
   };
 
   render() {
-    const { student, index, total, onEdit, onDelete, onMove } = this.props;
+    const { student, index, total, onDelete, onMove } = this.props;
     const { isEditing } = this.state;
 
     return (
