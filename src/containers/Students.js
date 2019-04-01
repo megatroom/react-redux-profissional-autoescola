@@ -18,7 +18,14 @@ const Students = ({
 
   return (
     <React.Fragment>
-      <h2>Alunos</h2>
+      <div className="students__container">
+        <div className="students__button__background">
+          <button className="students__button students__button--floating">
+            <i className="material-icons">add</i>
+          </button>
+        </div>
+        <h2>Alunos</h2>
+      </div>
       <NewStudent onAdd={onAdd} isAdding={isAdding} />
       <StudentList
         students={students}
