@@ -29,10 +29,17 @@ export default class App extends React.Component {
 
   handleAdd = name => {
     this.setState(state => {
-      const students = state.students.concat({ id: uuid(), name: name });
+      const students = state.students.concat({
+        id: uuid(),
+        name: name
+      });
       this.handleSave(students);
       return { students };
     });
+  };
+
+  handleAdding = isAdding => {
+    this.setState({ isAdding: isAdding });
   };
 
   handleEdit = (id, name) => {
@@ -80,19 +87,40 @@ export default class App extends React.Component {
   };
 
   handleReload = () => {
-    this.setState({ isLoading: true, reloadHasError: false });
+    this.setState({
+      isLoading: true,
+      reloadHasError: false
+    });
 
     StudentService.load()
-      .then(students => this.setState({ students, isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, reloadHasError: true }));
+      .then(students =>
+        this.setState({
+          students,
+          isLoading: false
+        })
+      )
+      .catch(() =>
+        this.setState({
+          isLoading: false,
+          reloadHasError: true
+        })
+      );
   };
 
   handleSave = students => {
-    this.setState({ isLoading: true, saveHasError: false });
+    this.setState({
+      isLoading: true,
+      saveHasError: false
+    });
 
     StudentService.save(students)
       .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+      .catch(() =>
+        this.setState({
+          isLoading: false,
+          saveHasError: true
+        })
+      );
   };
 
   handleOpenMenu = () => {
@@ -139,6 +167,7 @@ export default class App extends React.Component {
                     reloadHasError={reloadHasError}
                     onRetry={this.handleReload}
                     onAdd={this.handleAdd}
+                    onAdding={this.handleAdding}
                     onMove={this.handleMove}
                     onEdit={this.handleEdit}
                     onDelete={this.handleDelete}

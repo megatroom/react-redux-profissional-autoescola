@@ -9,6 +9,7 @@ const Students = ({
   isAdding,
   reloadHasError,
   onAdd,
+  onAdding,
   onEdit,
   onDelete,
   onMove,
@@ -20,13 +21,25 @@ const Students = ({
     <React.Fragment>
       <div className="students__container">
         <div className="students__button__background">
-          <button className="students__button students__button--floating">
-            <i className="material-icons">add</i>
-          </button>
+          {isAdding ? (
+            <button
+              className="students__button students__button--floating"
+              onClick={() => onAdding(false)}
+            >
+              <i className="material-icons">clear</i>
+            </button>
+          ) : (
+            <button
+              className="students__button students__button--floating"
+              onClick={() => onAdding(true)}
+            >
+              <i className="material-icons">add</i>
+            </button>
+          )}
         </div>
         <h2>Alunos</h2>
       </div>
-      <NewStudent onAdd={onAdd} isAdding={isAdding} />
+      {isAdding && <NewStudent onAdd={onAdd} />}
       <StudentList
         students={students}
         onMove={onMove}
