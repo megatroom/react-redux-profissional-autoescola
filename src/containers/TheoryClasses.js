@@ -1,11 +1,11 @@
 import React from "react";
 
-import NewStudent from "../components/NewStudent";
-import StudentList from "../components/StudentList";
+import NewTheoryClass from "../components/NewTheoryClass";
+import TheoryClassList from "../components/TheoryClassList";
 import Error from "../components/Error";
 
 const TheoryClasses = ({
-  classes,
+  theoryClasses,
   isAdding,
   reloadHasError,
   onAdd,
@@ -19,29 +19,29 @@ const TheoryClasses = ({
 
   return (
     <React.Fragment>
-      <div className="classes__container">
-        <div className="classes__button__background">
+      <div className="theory-classes__container">
+        <div className="theory-classes__button__background">
           {isAdding ? (
             <button
-              className="classes__button classes__button--floating"
+              className="theory-classes__button theory-classes__button--floating"
               onClick={() => onAdding(false)}
             >
               <i className="material-icons">clear</i>
             </button>
           ) : (
             <button
-              className="classes__button classes__button--floating"
+              className="theory-classes__button theory-classes__button--floating"
               onClick={() => onAdding(true)}
             >
               <i className="material-icons">add</i>
             </button>
           )}
         </div>
-        <h2>Alunos</h2>
+        <h2>Aulas Teóricas</h2>
       </div>
       {isAdding && <NewTheoryClass onAdd={onAdd} />}
       <TheoryClassList
-        classes={classes}
+        theoryClasses={theoryClasses}
         onMove={onMove}
         onEdit={onEdit}
         onDelete={onDelete}
