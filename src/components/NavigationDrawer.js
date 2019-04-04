@@ -27,7 +27,7 @@ const NavigationDrawer = ({ isOpen, onCloseMenu, history }) => (
         className="navigation-drawer__menu__item"
         onClick={() => {
           onCloseMenu();
-          history.push("/theory-class");
+          history.push("/theory-classes");
         }}
       >
         <i className="material-icons">class</i> Aula Teórica
