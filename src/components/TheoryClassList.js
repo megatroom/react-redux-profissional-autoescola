@@ -1,18 +1,13 @@
 import React from "react";
 
-import Student from "./Student";
+import TheoryClass from "./TheoryClass";
 
-const TheoryClassList = ({
-  classes: theoryClasses,
-  onEdit,
-  onDelete,
-  onMove
-}) => (
-  <div className="student-list">
+const TheoryClassList = ({ theoryClasses, onEdit, onDelete, onMove }) => (
+  <div className="theory-class-list">
     {theoryClasses.map((theoryClass, index) => (
-      <Student
+      <TheoryClass
         key={theoryClass.id}
-        student={theoryClass}
+        theoryClass={theoryClass}
         index={index}
         total={theoryClasses.length}
         onEdit={onEdit}
