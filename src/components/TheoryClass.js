@@ -11,36 +11,36 @@ export default class TheoryClass extends React.Component {
   handleCancel = () => this.setState({ isEditing: false });
 
   handleSave = () => {
-    this.props.onEdit(this.props.student.id, this.input.value);
+    this.props.onEdit(this.props.theoryClass.id, this.input.value);
     this.setState({ isEditing: false });
   };
 
   render() {
-    const { student, index, total, onDelete, onMove } = this.props;
+    const { theoryClass, index, total, onDelete, onMove } = this.props;
     const { isEditing } = this.state;
 
     return (
-      <div className="student">
+      <div className="theory-class">
         {isEditing ? (
           <input
             type="text"
-            className="student__input"
-            defaultValue={student.name}
+            className="theory-class__input"
+            defaultValue={theoryClass.name}
             ref={current => (this.input = current)}
           />
         ) : (
-          <span className="student__text">{student.name}</span>
+          <span className="theory-class__text">{theoryClass.name}</span>
         )}
         {isEditing && (
           <React.Fragment>
             <button
-              className="student__button student__button--cancel"
+              className="theory-class__button theory-class__button--cancel"
               onClick={this.handleCancel}
             >
               <i className="material-icons">clear</i>
             </button>
             <button
-              className="student__button student__button--success"
+              className="theory-class__button theory-class__button--success"
               onClick={this.handleSave}
             >
               <i className="material-icons">done</i>
@@ -48,30 +48,34 @@ export default class TheoryClass extends React.Component {
           </React.Fragment>
         )}
         <button
-          className="student__button"
+          className="theory-class__button"
           disabled={isEditing}
           onClick={this.handleEdit}
         >
           <i className="material-icons">edit</i>
         </button>
         <button
-          className="student__button"
+          className="theory-class__button"
           disabled={isEditing}
           onClick={() => {
-            onDelete(student.id);
+            onDelete(theoryClass.id);
           }}
         >
           <i className="material-icons">delete</i>
         </button>
         <div
-          className={classNames("student__arrows", {
-            "student__arrows--hidden": total === 1
+          className={classNames("theory-class__arrows", {
+            "theory-class__arrows--hidden": total === 1
           })}
         >
           <button
-            className={classNames("student__button", "student__button--arrow", {
-              "student__button--hidden": index === 0
-            })}
+            className={classNames(
+              "theory-class__button",
+              "theory-class__button--arrow",
+              {
+                "theory-class__button--hidden": index === 0
+              }
+            )}
             onClick={() => {
               onMove("up", index);
             }}
@@ -79,9 +83,13 @@ export default class TheoryClass extends React.Component {
             <i className="material-icons">keyboard_arrow_up</i>
           </button>
           <button
-            className={classNames("student__button", "student__button--arrow", {
-              "student__button--hidden": index === total - 1
-            })}
+            className={classNames(
+              "theory-class__button",
+              "theory-class__button--arrow",
+              {
+                "theory-class__button--hidden": index === total - 1
+              }
+            )}
             onClick={() => {
               onMove("down", index);
             }}
