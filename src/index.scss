@@ -265,6 +265,82 @@ button {
   }
 }
 
+.new-theory-class {
+  @extend .new-student;
+
+  &__input {
+    @extend .new-student__input;
+  }
+
+  &__button {
+    @extend .new-student__button;
+  }
+}
+
+.theory-class {
+  @extend .student;
+
+  &__input {
+    @extend .student__input;
+  }
+
+  &__text {
+    @extend .student__text;
+  }
+
+  &__button {
+    @extend .student__button;
+
+    &--cancel {
+      @extend .student__button--cancel;
+    }
+
+    &--success {
+      @extend .student__button--success;
+    }
+
+    &--arrow {
+      @extend .student__button--arrow;
+    }
+
+    &--hidden {
+      @extend .student__button--hidden;
+    }
+  }
+
+  &__arrows {
+    @extend .student__arrows;
+
+    &--hidden {
+      @extend .student__arrows--hidden;
+    }
+  }
+}
+
+.theory-classes {
+  @extend .students;
+
+  &__container {
+    @extend .students__container;
+  }
+
+  &__button {
+    @extend .students__button;
+
+    &__background {
+      @extend .students__button__background;
+    }
+
+    &--floating {
+      @extend .students__button--floating;
+    }
+  }
+}
+
+.theory-class-list {
+  @extend .student-list;
+}
+
 .about {
   text-align: center;
 }
