@@ -9,7 +9,7 @@ const Home = ({ history, onCloseMenu }) => (
         className="home__button"
         onClick={() => {
           onCloseMenu();
-          history.push("/theory-class");
+          history.push("/theory-classes");
         }}
       >
         <i className="material-icons">class</i>Aula Teórica
