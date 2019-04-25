@@ -276,7 +276,15 @@ export default class App extends React.Component {
           <AppBar
             isLoading={isLoadingStudents || isLoadingTheoryClasses}
             saveHasError={saveStudentsHasError || saveTheoryClassesHasError}
-            onSaveRetry={() => this.handleSaveStudents(students)}
+            onSaveRetry={() => {
+              if (saveStudentsHasError) {
+                this.handleSaveStudents(students);
+              }
+
+              if (saveTheoryClassesHasError) {
+                this.handleSaveTheoryClasses(theoryClasses);
+              }
+            }}
             onOpenMenu={this.handleOpenMenu}
           />
           <div className="container">
@@ -300,6 +308,7 @@ export default class App extends React.Component {
                     onMove={this.handleMoveTheoryClass}
                     onEdit={this.handleEditTheoryClass}
                     onDelete={this.handleDeleteTheoryClass}
+                    onCloseMenu={this.handleCloseMenu}
                   />
                 )}
               />
