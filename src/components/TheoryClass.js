@@ -1,7 +1,8 @@
 import React from "react";
 import classNames from "classnames";
+import { withRouter } from "react-router-dom";
 
-export default class TheoryClass extends React.Component {
+class TheoryClass extends React.Component {
   state = {
     isEditing: false
   };
@@ -16,7 +17,15 @@ export default class TheoryClass extends React.Component {
   };
 
   render() {
-    const { theoryClass, index, total, onDelete, onMove } = this.props;
+    const {
+      theoryClass,
+      index,
+      total,
+      history,
+      onDelete,
+      onMove,
+      onCloseMenu
+    } = this.props;
     const { isEditing } = this.state;
 
     return (
@@ -50,6 +59,16 @@ export default class TheoryClass extends React.Component {
         <button
           className="theory-class__button"
           disabled={isEditing}
+          onClick={() => {
+            onCloseMenu();
+            history.push("/enroll");
+          }}
+        >
+          <i className="material-icons">group</i>
+        </button>
+        <button
+          className="theory-class__button"
+          disabled={isEditing}
           onClick={this.handleEdit}
         >
           <i className="material-icons">edit</i>
@@ -57,9 +76,7 @@ export default class TheoryClass extends React.Component {
         <button
           className="theory-class__button"
           disabled={isEditing}
-          onClick={() => {
-            onDelete(theoryClass.id);
-          }}
+          onClick={() => onDelete(theoryClass.id)}
         >
           <i className="material-icons">delete</i>
         </button>
@@ -101,3 +118,5 @@ export default class TheoryClass extends React.Component {
     );
   }
 }
+
+export default withRouter(TheoryClass);

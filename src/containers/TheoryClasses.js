@@ -13,6 +13,7 @@ const TheoryClasses = ({
   onEdit,
   onDelete,
   onMove,
+  onCloseMenu,
   onRetry
 }) => {
   if (reloadHasError) return <Error onRetry={onRetry} />;
@@ -45,6 +46,7 @@ const TheoryClasses = ({
         onMove={onMove}
         onEdit={onEdit}
         onDelete={onDelete}
+        onCloseMenu={onCloseMenu}
       />
     </React.Fragment>
   );
