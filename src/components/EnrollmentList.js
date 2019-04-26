@@ -2,13 +2,13 @@ import React from "react";
 
 import Enrollment from "./Enrollment";
 
-const EnrollmentList = ({ students, onEnroll, onUnenroll }) => (
-  <div className="student-list">
-    {students.map((student, index) => (
+const EnrollmentList = ({ students, theoryClass, onEnroll, onUnenroll }) => (
+  <div className="enrollment-list">
+    {students.map(student => (
       <Enrollment
         key={student.id}
         student={student}
-        index={index}
+        theoryClass={theoryClass}
         onEnroll={onEnroll}
         onUnenroll={onUnenroll}
       />

@@ -5,20 +5,22 @@ import Error from "../components/Error";
 
 const Enrollments = ({
   students,
+  theoryClass,
   reloadHasError,
   onEnroll,
   onUnenroll,
   onRetry
 }) => {
-  if (reloadHasError) return <Error onRetry={onRetry} />;
+  if (reloadHasError || theoryClass == null) return <Error onRetry={onRetry} />;
 
   return (
     <React.Fragment>
       <div className="students__container">
-        <h2>Descrição da Aula Teórica</h2>
+        <h2>{theoryClass.name}</h2>
       </div>
       <EnrollmentList
         students={students}
+        theoryClass={theoryClass}
         onEnroll={onEnroll}
         onUnenroll={onUnenroll}
       />
