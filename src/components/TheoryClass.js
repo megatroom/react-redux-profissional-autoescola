@@ -61,7 +61,7 @@ class TheoryClass extends React.Component {
           disabled={isEditing}
           onClick={() => {
             onCloseMenu();
-            history.push("/enroll");
+            history.push("/enrollments");
           }}
         >
           <i className="material-icons">group</i>
