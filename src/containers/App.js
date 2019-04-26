@@ -10,6 +10,7 @@ import Students from "./Students";
 import TheoryClasses from "./TheoryClasses";
 import StudentService from "../services/StudentService";
 import TheoryClassService from "../services/TheoryClassService";
+import Enrollments from "./Enrollments";
 
 export default class App extends React.Component {
   state = {
@@ -326,6 +327,17 @@ export default class App extends React.Component {
                     onMove={this.handleMoveStudent}
                     onEdit={this.handleEditStudent}
                     onDelete={this.handleDeleteStudent}
+                  />
+                )}
+              />
+              <Route
+                path="/enrollments"
+                exact
+                render={() => (
+                  <Enrollments
+                    students={students}
+                    reloadHasError={reloadStudentsHasError}
+                    onRetry={this.handleReloadStudents}
                   />
                 )}
               />
