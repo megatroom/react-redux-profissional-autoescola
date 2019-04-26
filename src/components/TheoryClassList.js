@@ -7,6 +7,7 @@ const TheoryClassList = ({
   onEdit,
   onDelete,
   onMove,
+  onManageEnrollment,
   onCloseMenu
 }) => (
   <div className="theory-class-list">
@@ -19,6 +20,7 @@ const TheoryClassList = ({
         onEdit={onEdit}
         onDelete={onDelete}
         onMove={onMove}
+        onManageEnrollment={onManageEnrollment}
         onCloseMenu={onCloseMenu}
       />
     ))}
