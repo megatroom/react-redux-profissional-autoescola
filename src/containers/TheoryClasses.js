@@ -13,6 +13,7 @@ const TheoryClasses = ({
   onEdit,
   onDelete,
   onMove,
+  onManageEnrollment,
   onCloseMenu,
   onRetry
 }) => {
@@ -46,6 +47,7 @@ const TheoryClasses = ({
         onMove={onMove}
         onEdit={onEdit}
         onDelete={onDelete}
+        onManageEnrollment={onManageEnrollment}
         onCloseMenu={onCloseMenu}
       />
     </React.Fragment>
