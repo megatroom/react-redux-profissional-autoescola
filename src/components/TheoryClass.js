@@ -24,6 +24,7 @@ class TheoryClass extends React.Component {
       history,
       onDelete,
       onMove,
+      onManageEnrollment,
       onCloseMenu
     } = this.props;
     const { isEditing } = this.state;
@@ -60,6 +61,7 @@ class TheoryClass extends React.Component {
           className="theory-class__button"
           disabled={isEditing}
           onClick={() => {
+            onManageEnrollment(theoryClass);
             onCloseMenu();
             history.push("/enrollments");
           }}
