@@ -24,7 +24,8 @@ export default class App extends React.Component {
     isAddingTheoryClass: false,
     isLoadingTheoryClasses: false,
     reloadTheoryClassesHasError: false,
-    saveTheoryClassesHasError: false
+    saveTheoryClassesHasError: false,
+    theoryClassToEnroll: null
   };
 
   componentDidMount() {
@@ -256,6 +257,14 @@ export default class App extends React.Component {
       );
   };
 
+  handleManageEnrollment = theoryClass => {
+    this.setState({ theoryClassToEnroll: theoryClass });
+  };
+
+  handleEnroll = (student, theoryClass) => {};
+
+  handleUnenroll = (student, theoryClass) => {};
+
   render() {
     const {
       isMenuOpen,
@@ -268,7 +277,8 @@ export default class App extends React.Component {
       isAddingTheoryClass,
       isLoadingTheoryClasses,
       reloadTheoryClassesHasError,
-      saveTheoryClassesHasError
+      saveTheoryClassesHasError,
+      theoryClassToEnroll
     } = this.state;
 
     return (
@@ -309,6 +319,7 @@ export default class App extends React.Component {
                     onMove={this.handleMoveTheoryClass}
                     onEdit={this.handleEditTheoryClass}
                     onDelete={this.handleDeleteTheoryClass}
+                    onManageEnrollment={this.handleManageEnrollment}
                     onCloseMenu={this.handleCloseMenu}
                   />
                 )}
@@ -336,6 +347,9 @@ export default class App extends React.Component {
                 render={() => (
                   <Enrollments
                     students={students}
+                    theoryClass={theoryClassToEnroll}
+                    onEnroll={this.handleEnroll}
+                    onUnenroll={this.handleUnenroll}
                     reloadHasError={reloadStudentsHasError}
                     onRetry={this.handleReloadStudents}
                   />
