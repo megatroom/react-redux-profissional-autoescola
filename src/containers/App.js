@@ -8,9 +8,10 @@ import Home from "./Home";
 import About from "./About";
 import Students from "./Students";
 import TheoryClasses from "./TheoryClasses";
+import Enrollments from "./Enrollments";
 import StudentService from "../services/StudentService";
 import TheoryClassService from "../services/TheoryClassService";
-import Enrollments from "./Enrollments";
+import EnrollmentService from "../services/EnrollmentService";
 
 export default class App extends React.Component {
   state = {
@@ -362,7 +363,9 @@ export default class App extends React.Component {
                 exact
                 render={() => (
                   <Enrollments
-                    students={students}
+                    students={EnrollmentService.loadStudentsAbleToEnroll(
+                      theoryClassToEnroll
+                    )}
                     theoryClass={theoryClassToEnroll}
                     onEnroll={this.handleEnroll}
                     onUnenroll={this.handleUnenroll}
