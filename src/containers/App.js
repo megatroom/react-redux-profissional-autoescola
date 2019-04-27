@@ -261,9 +261,25 @@ export default class App extends React.Component {
     this.setState({ theoryClassToEnroll: theoryClass });
   };
 
-  handleEnroll = (student, theoryClass) => {};
+  handleEnroll = (student, theoryClass) => {
+    this.setState(state => {
+      const newStudents = state.students.slice();
+      const index = newStudents.findIndex(
+        newStudent => newStudent.id === student.id
+      );
+      newStudents[index].theoryClass = theoryClass;
 
-  handleUnenroll = (student, theoryClass) => {};
+      this.handleSaveStudents(newStudents);
+
+      return {
+        students: newStudents
+      };
+    });
+  };
+
+  handleUnenroll = student => {
+    return this.handleEnroll(student, null);
+  };
 
   render() {
     const {
