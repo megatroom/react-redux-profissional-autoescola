@@ -19,7 +19,7 @@ export default class Enrollment extends React.Component {
           className={classNames("enrollment__button", {
             "enrollment__button--hidden": student.theoryClass != null
           })}
-          onClick={onEnroll(student, theoryClass)}
+          onClick={() => onEnroll(student, theoryClass)}
         >
           <i className="material-icons">add</i>
         </button>
@@ -27,7 +27,7 @@ export default class Enrollment extends React.Component {
           className={classNames("enrollment__button", {
             "enrollment__button--hidden": student.theoryClass == null
           })}
-          onClick={() => onUnenroll(student, theoryClass)}
+          onClick={() => onUnenroll(student)}
         >
           <i className="material-icons">clear</i>
         </button>
