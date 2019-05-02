@@ -56,7 +56,7 @@ export default class Student extends React.Component {
         </button>
         <button
           className="student__button"
-          disabled={isEditing}
+          disabled={isEditing || student.theoryClass}
           onClick={() => {
             onDelete(student.id);
           }}
