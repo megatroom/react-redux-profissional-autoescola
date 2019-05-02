@@ -3,29 +3,59 @@ import React from "react";
 import EnrollmentList from "../components/EnrollmentList";
 import Error from "../components/Error";
 
-const Enrollments = ({
-  students,
-  theoryClass,
-  reloadHasError,
-  onEnroll,
-  onUnenroll,
-  onRetry
-}) => {
-  if (reloadHasError || theoryClass == null) return <Error onRetry={onRetry} />;
+export default class Enrollments extends React.Component {
+  state = {
+    students: []
+  };
 
-  return (
-    <React.Fragment>
-      <div className="students__container">
-        <h2>{theoryClass.name}</h2>
-      </div>
-      <EnrollmentList
-        students={students}
-        theoryClass={theoryClass}
-        onEnroll={onEnroll}
-        onUnenroll={onUnenroll}
-      />
-    </React.Fragment>
-  );
-};
+  filterStudentsAbleToEnroll = () => {
+    const { theoryClass, students } = this.props;
 
-export default Enrollments;
+    if (!students) {
+      throw new Error("The students is invalid.");
+    } else if (!Array.isArray(students)) {
+      throw new Error("The students does not match the array type.");
+    }
+
+    students.forEach(student => {
+      if (
+        student &&
+        (!student.theoryClass || student.theoryClass === theoryClass.id)
+      )
+        this.setState(state => state.students.push(student));
+    });
+  };
+
+  componentDidMount() {
+    this.filterStudentsAbleToEnroll();
+  }
+
+  render() {
+    const {
+      theoryClass,
+      reloadHasError,
+      onEnroll,
+      onUnenroll,
+      onRetry
+    } = this.props;
+
+    const { students } = this.state;
+
+    if (reloadHasError || theoryClass == null)
+      return <Error onRetry={onRetry} />;
+
+    return (
+      <React.Fragment>
+        <div className="students__container">
+          <h2>{theoryClass.name}</h2>
+        </div>
+        <EnrollmentList
+          students={students}
+          theoryClass={theoryClass}
+          onEnroll={onEnroll}
+          onUnenroll={onUnenroll}
+        />
+      </React.Fragment>
+    );
+  }
+}
