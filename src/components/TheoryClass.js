@@ -4,8 +4,15 @@ import { withRouter } from "react-router-dom";
 
 class TheoryClass extends React.Component {
   state = {
-    isEditing: false
+    isEditing: false,
+    enrollments: 0
   };
+
+  componentDidMount() {
+    const enrollments = this.props.theoryClass.enrollments;
+
+    if (enrollments) this.setState({ enrollments: enrollments.length });
+  }
 
   handleEdit = () => this.setState({ isEditing: true });
 
@@ -27,7 +34,7 @@ class TheoryClass extends React.Component {
       onManageEnrollment,
       onCloseMenu
     } = this.props;
-    const { isEditing } = this.state;
+    const { isEditing, enrollments } = this.state;
 
     return (
       <div className="theory-class">
@@ -39,7 +46,17 @@ class TheoryClass extends React.Component {
             ref={current => (this.input = current)}
           />
         ) : (
-          <span className="theory-class__text">{theoryClass.name}</span>
+          <div className="theory-class__text">
+            <span>{theoryClass.name}</span>
+            <br />
+            <span>
+              {enrollments > 0
+                ? enrollments == 1
+                  ? enrollments + " aluno"
+                  : enrollments + " alunos"
+                : "Nenhum aluno"}
+            </span>
+          </div>
         )}
         {isEditing && (
           <React.Fragment>
@@ -77,7 +94,7 @@ class TheoryClass extends React.Component {
         </button>
         <button
           className="theory-class__button"
-          disabled={isEditing}
+          disabled={isEditing || enrollments > 0}
           onClick={() => onDelete(theoryClass.id)}
         >
           <i className="material-icons">delete</i>
