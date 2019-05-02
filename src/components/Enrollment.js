@@ -10,14 +10,14 @@ export default class Enrollment extends React.Component {
         <span className="enrollment__text">{student.name}</span>
         <span
           className={classNames("enrollment__text--done", {
-            "enrollment__text--hidden": student.theoryClass == null
+            "enrollment__text--hidden": !student.theoryClass
           })}
         >
           <i className="material-icons">done</i>
         </span>
         <button
           className={classNames("enrollment__button", {
-            "enrollment__button--hidden": student.theoryClass != null
+            "enrollment__button--hidden": student.theoryClass
           })}
           onClick={() => onEnroll(student, theoryClass)}
         >
@@ -25,9 +25,9 @@ export default class Enrollment extends React.Component {
         </button>
         <button
           className={classNames("enrollment__button", {
-            "enrollment__button--hidden": student.theoryClass == null
+            "enrollment__button--hidden": !student.theoryClass
           })}
-          onClick={() => onUnenroll(student)}
+          onClick={() => onUnenroll(student, theoryClass)}
         >
           <i className="material-icons">clear</i>
         </button>
