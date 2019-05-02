@@ -11,7 +11,6 @@ import TheoryClasses from "./TheoryClasses";
 import Enrollments from "./Enrollments";
 import StudentService from "../services/StudentService";
 import TheoryClassService from "../services/TheoryClassService";
-import EnrollmentService from "../services/EnrollmentService";
 
 export default class App extends React.Component {
   state = {
@@ -41,6 +40,40 @@ export default class App extends React.Component {
     });
   }
 
+  domains = () => ["Student", "TheoryClass"];
+
+  collections = () => ["students", "theoryClasses"];
+
+  forceValidValue = (range, value) => {
+    if (!range) {
+      throw new Error("The range is invalid.");
+    } else if (!Array.isArray(range)) {
+      throw new Error("The range type does not match an array.");
+    } else if (range.length == 0) {
+      throw new Error("The range is empty.");
+    } else if (!value) {
+      throw new Error("The value is incorrect.");
+    } else if (!(typeof value === "string")) {
+      throw new Error("The value type does not match a string.");
+    } else if (value.trim().length == 0) {
+      throw new Error("The value is an empty string.");
+    } else if (!range.includes(value)) {
+      throw new Error("The value is not supported.");
+    }
+  };
+
+  forceValidDomain = domainName => {
+    this.forceValidValue(this.domains(), domainName);
+  };
+
+  forceValidCollection = collectionName => {
+    this.forceValidValue(this.collections(), collectionName);
+  };
+
+  buildNewState = (key, value) => {
+    return JSON.parse(`{ "${key}": ${JSON.stringify(value)} }`);
+  };
+
   handleOpenMenu = () => {
     this.setState({ isMenuOpen: true });
   };
@@ -49,65 +82,82 @@ export default class App extends React.Component {
     this.setState({ isMenuOpen: false });
   };
 
-  handleAddingStudent = isAddingStudent => {
-    this.setState({
-      isAddingStudent: isAddingStudent
-    });
+  handleAdding = (domain, isAdding) => {
+    this.forceValidDomain(domain);
+    this.setState(
+      this.buildNewState(`isAdding${domain}`, new Boolean(isAdding))
+    );
   };
 
-  handleAddStudent = name => {
+  handleAdd = (collectionName, name) => {
+    this.forceValidCollection(collectionName);
+
     this.setState(state => {
-      const students = state.students.concat({
+      const collection = state[collectionName].concat({
         id: uuid(),
         name: name
       });
-      this.handleSaveStudents(students);
-      return { students };
+
+      return this.buildNewState(collectionName, collection);
     });
+  };
+
+  handleEdit = (collectionName, id, name) => {
+    this.setState(state => {
+      const collection = state[collectionName].slice();
+      const index = collection.findIndex(element => element.id === id);
+
+      collection[index].name = name;
+
+      return this.buildNewState(collectionName, collection);
+    });
+  };
+
+  handleDelete = (collectionName, id) => {
+    this.setState(state => {
+      const collection = state[collectionName].slice();
+      const index = collection.findIndex(element => element.id === id);
+
+      collection.splice(index, 1);
+
+      return this.buildNewState(collectionName, collection);
+    });
+  };
+
+  handleMove = (collectionName, direction, index) => {
+    this.setState(state => {
+      const collection = state[collectionName].slice();
+      const removedElement = collection.splice(index, 1)[0];
+
+      if (direction === "up") collection.splice(index - 1, 0, removedElement);
+      else collection.splice(index + 1, 0, removedElement);
+
+      return this.buildNewState(collectionName, collection);
+    });
+  };
+
+  handleAddingStudent = isAdding => {
+    this.handleAdding("Student", isAdding);
+  };
+
+  handleAddStudent = name => {
+    this.handleAdd("students", name);
+    this.handleSaveStudents(this.state.students);
   };
 
   handleEditStudent = (id, name) => {
-    this.setState(state => {
-      const newStudents = state.students.slice();
-      const index = newStudents.findIndex(student => student.id === id);
-      newStudents[index].name = name;
-
-      this.handleSaveStudents(newStudents);
-
-      return {
-        students: newStudents
-      };
-    });
+    this.handleEdit("students", id, name);
+    this.handleSaveStudents(this.state.students);
   };
 
   handleDeleteStudent = id => {
-    this.setState(state => {
-      const newStudents = state.students.slice();
-      const index = newStudents.findIndex(student => student.id === id);
-      newStudents.splice(index, 1);
-
-      this.handleSaveStudents(newStudents);
-
-      return {
-        students: newStudents
-      };
-    });
+    this.handleDelete("students", id);
+    this.handleSaveStudents(this.state.students);
   };
 
   handleMoveStudent = (direction, index) => {
-    this.setState(state => {
-      const newStudents = state.students.slice();
-      const removedStudent = newStudents.splice(index, 1)[0];
-
-      if (direction === "up") newStudents.splice(index - 1, 0, removedStudent);
-      else newStudents.splice(index + 1, 0, removedStudent);
-
-      this.handleSaveStudents(newStudents);
-
-      return {
-        students: newStudents
-      };
-    });
+    this.handleMove("students", direction, index);
+    this.handleSaveStudents(this.state.students);
   };
 
   handleReloadStudents = () => {
@@ -151,70 +201,28 @@ export default class App extends React.Component {
       );
   };
 
-  handleAddingTheoryClass = isAddingTheoryClass => {
-    this.setState({
-      isAddingTheoryClass: isAddingTheoryClass
-    });
+  handleAddingTheoryClass = isAdding => {
+    this.handleAdding("TheoryClass", isAdding);
   };
 
   handleAddTheoryClass = name => {
-    this.setState(state => {
-      const theoryClasses = state.theoryClasses.concat({
-        id: uuid(),
-        name: name
-      });
-      this.handleSaveTheoryClasses(theoryClasses);
-      return { theoryClasses: theoryClasses };
-    });
+    this.handleAdd("theoryClasses", name);
+    this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
   handleEditTheoryClass = (id, name) => {
-    this.setState(state => {
-      const newTheoryClasses = state.theoryClasses.slice();
-      const index = newTheoryClasses.findIndex(
-        theoryClass => theoryClass.id === id
-      );
-      newTheoryClasses[index].name = name;
-
-      this.handleSaveTheoryClasses(newTheoryClasses);
-
-      return {
-        theoryClasses: newTheoryClasses
-      };
-    });
+    this.handleEdit("theoryClasses", id, name);
+    this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
   handleDeleteTheoryClass = id => {
-    this.setState(state => {
-      const newTheoryClasses = state.theoryClasses.slice();
-      const index = newTheoryClasses.findIndex(
-        theoryClass => theoryClass.id === id
-      );
-      newTheoryClasses.splice(index, 1);
-
-      this.handleSaveTheoryClasses(newTheoryClasses);
-
-      return {
-        theoryClasses: newTheoryClasses
-      };
-    });
+    this.handleDelete("theoryClasses", id);
+    this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
   handleMoveTheoryClass = (direction, index) => {
-    this.setState(state => {
-      const newTheoryClasses = state.theoryClasses.slice();
-      const removedTheoryClass = newTheoryClasses.splice(index, 1)[0];
-
-      if (direction === "up")
-        newTheoryClasses.splice(index - 1, 0, removedTheoryClass);
-      else newTheoryClasses.splice(index + 1, 0, removedTheoryClass);
-
-      this.handleSaveTheoryClasses(newTheoryClasses);
-
-      return {
-        theoryClasses: newTheoryClasses
-      };
-    });
+    this.handleMove("theoryClasses", direction, index);
+    this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
   handleReloadTheoryClasses = () => {
@@ -259,27 +267,71 @@ export default class App extends React.Component {
   };
 
   handleManageEnrollment = theoryClass => {
-    this.setState({ theoryClassToEnroll: theoryClass });
+    this.setState({
+      theoryClassToEnroll: theoryClass
+    });
+
+    if (!this.state.students) {
+      this.handleReloadStudents();
+    }
   };
 
   handleEnroll = (student, theoryClass) => {
     this.setState(state => {
       const newStudents = state.students.slice();
-      const index = newStudents.findIndex(
+      const studentIndex = newStudents.findIndex(
         newStudent => newStudent.id === student.id
       );
-      newStudents[index].theoryClass = theoryClass;
+      newStudents[studentIndex].theoryClass = theoryClass.id;
 
-      this.handleSaveStudents(newStudents);
+      const newTheoryClasses = state.theoryClasses.slice();
+      const theoryClassIndex = newTheoryClasses.findIndex(
+        newTheoryClass => newTheoryClass.id === theoryClass.id
+      );
+
+      if (!Array.isArray(newTheoryClasses[theoryClassIndex].enrollments))
+        newTheoryClasses[theoryClassIndex].enrollments = [];
+
+      newTheoryClasses[theoryClassIndex].enrollments.push(student.id);
 
       return {
-        students: newStudents
+        students: newStudents,
+        theoryClasses: newTheoryClasses
       };
     });
+
+    this.handleSaveStudents(this.state.students);
+    this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
-  handleUnenroll = student => {
-    return this.handleEnroll(student, null);
+  handleUnenroll = (student, theoryClass) => {
+    this.setState(state => {
+      const newStudents = state.students.slice();
+      const studentIndex = newStudents.findIndex(
+        newStudent => newStudent.id === student.id
+      );
+      delete newStudents[studentIndex].theoryClass;
+
+      const newEnrollments = theoryClass.enrollments.slice();
+      const enrollmentIndex = newEnrollments.findIndex(
+        enrollment => enrollment === student.id
+      );
+      newEnrollments.splice(enrollmentIndex, 1);
+
+      const newTheoryClasses = state.theoryClasses.slice();
+      const theoryClassIndex = newTheoryClasses.findIndex(
+        newTheoryClass => newTheoryClass.id === theoryClass.id
+      );
+      newTheoryClasses[theoryClassIndex].enrollments = newEnrollments;
+
+      return {
+        students: newStudents,
+        theoryClasses: newTheoryClasses
+      };
+    });
+
+    this.handleSaveStudents(this.state.students);
+    this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
   render() {
@@ -363,14 +415,15 @@ export default class App extends React.Component {
                 exact
                 render={() => (
                   <Enrollments
-                    students={EnrollmentService.loadStudentsAbleToEnroll(
-                      theoryClassToEnroll
-                    )}
+                    students={students}
                     theoryClass={theoryClassToEnroll}
                     onEnroll={this.handleEnroll}
                     onUnenroll={this.handleUnenroll}
                     reloadHasError={reloadStudentsHasError}
-                    onRetry={this.handleReloadStudents}
+                    onRetry={() => {
+                      this.handleReloadStudents();
+                      history.back();
+                    }}
                   />
                 )}
               />
