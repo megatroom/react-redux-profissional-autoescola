@@ -1,12 +1,14 @@
 import React from "react";
 
-export default class NewTheoryClass extends React.Component {
+import "./student.scss";
+
+export default class NewStudent extends React.Component {
   state = {
     name: ""
   };
 
-  handleAdd(theoryClass) {
-    this.props.onAdd(theoryClass);
+  handleAdd(student) {
+    this.props.onAdd(student);
     this.setState({ name: "" });
   }
 
@@ -14,11 +16,11 @@ export default class NewTheoryClass extends React.Component {
     const { name } = this.state;
 
     return (
-      <div className="new-theory-class">
+      <div className="new-student">
         <input
           type="text"
-          className="new-theory-class__input"
-          placeholder="Digite o nome da nova turma..."
+          className="new-student__input"
+          placeholder="Digite o nome do novo aluno..."
           value={name}
           onChange={event => this.setState({ name: event.target.value })}
           onKeyPress={event => {
@@ -26,11 +28,9 @@ export default class NewTheoryClass extends React.Component {
           }}
         />
         <button
-          className="new-theory-class__button"
+          className="new-student__button"
           onClick={() =>
-            this.handleAdd(
-              document.querySelector(".new-theory-class__input").value
-            )
+            this.handleAdd(document.querySelector(".new-student__input").value)
           }
         >
           <i className="material-icons">save</i>

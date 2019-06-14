@@ -2,6 +2,8 @@ import React from "react";
 
 import Enrollment from "./Enrollment";
 
+import "./enrollment.scss";
+
 const EnrollmentList = ({ students, theoryClass, onEnroll, onUnenroll }) => (
   <div className="enrollment-list">
     {students.map(student => (

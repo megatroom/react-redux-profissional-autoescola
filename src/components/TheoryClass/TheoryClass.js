@@ -2,6 +2,8 @@ import React from "react";
 import classNames from "classnames";
 import { withRouter } from "react-router-dom";
 
+import "./theory-class.scss";
+
 class TheoryClass extends React.Component {
   state = {
     isEditing: false,

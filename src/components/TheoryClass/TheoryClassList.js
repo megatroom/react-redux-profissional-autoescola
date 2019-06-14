@@ -2,6 +2,8 @@ import React from "react";
 
 import TheoryClass from "./TheoryClass";
 
+import "./theory-class.scss";
+
 const TheoryClassList = ({
   theoryClasses,
   onEdit,

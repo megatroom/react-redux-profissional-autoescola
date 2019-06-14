@@ -1,8 +1,6 @@
 import React from "react";
 
-import NewStudent from "../components/NewStudent";
-import StudentList from "../components/StudentList";
-import Error from "../components/Error";
+import { NewStudent, StudentList, Error } from "../components";
 
 const Students = ({
   students,

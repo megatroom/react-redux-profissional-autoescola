@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
+import "./student.scss";
+
 export default class Student extends React.Component {
   state = {
     isEditing: false

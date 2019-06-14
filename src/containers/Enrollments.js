@@ -1,7 +1,6 @@
 import React from "react";
 
-import EnrollmentList from "../components/EnrollmentList";
-import Error from "../components/Error";
+import { EnrollmentList, Error } from "../components";
 
 export default class Enrollments extends React.Component {
   state = {

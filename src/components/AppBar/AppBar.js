@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./app-bar.scss";
+
 const AppBar = ({ isLoading, saveHasError, onSaveRetry, onOpenMenu }) => (
   <div className="app-bar">
     <div className="app-bar__container">

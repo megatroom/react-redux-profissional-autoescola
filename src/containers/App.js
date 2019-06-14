@@ -2,8 +2,8 @@ import React from "react";
 import uuid from "uuid/v1";
 import { BrowserRouter, Route } from "react-router-dom";
 
-import AppBar from "../components/AppBar";
-import NavigationDrawer from "../components/NavigationDrawer";
+import { AppBar, NavigationDrawer } from "../components";
+
 import Home from "./Home";
 import About from "./About";
 import Students from "./Students";

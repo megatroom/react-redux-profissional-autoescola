@@ -1,8 +1,6 @@
 import React from "react";
 
-import NewTheoryClass from "../components/NewTheoryClass";
-import TheoryClassList from "../components/TheoryClassList";
-import Error from "../components/Error";
+import { NewTheoryClass, TheoryClassList, Error } from "../components";
 
 const TheoryClasses = ({
   theoryClasses,

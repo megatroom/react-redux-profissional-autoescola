@@ -1,6 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
+import "./enrollment.scss";
+
 export default class Enrollment extends React.Component {
   render() {
     const { student, theoryClass, onEnroll, onUnenroll } = this.props;

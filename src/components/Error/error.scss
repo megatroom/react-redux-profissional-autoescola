@@ -1,0 +1,21 @@
+@import "../../styles/variables.scss";
+
+.error {
+  text-align: center;
+
+  &__button {
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-radius: inherit;
+    padding: 10px 12px;
+    cursor: pointer;
+
+    &__background {
+      background-color: $color-primary;
+      width: fit-content;
+      border-radius: 2px;
+      display: inline-block;
+    }
+  }
+}

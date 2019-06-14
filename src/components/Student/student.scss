@@ -1,0 +1,158 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixin.scss";
+
+.new-student {
+  max-width: $container-max-width;
+  display: flex;
+  background-color: white;
+  padding: 16px 12px;
+  border-radius: 2px;
+
+  @include box-shadow(1);
+
+  &__input {
+    flex: 1;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: $icon-height;
+    width: $icon-width;
+
+    &:hover {
+      background-color: $color-hover;
+    }
+
+    & i {
+      display: block;
+    }
+  }
+}
+
+.students {
+  &__container {
+    margin-bottom: 40px;
+  }
+
+  &__button {
+    background-color: whitesmoke;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: $icon-height;
+    width: $icon-width;
+
+    &__background {
+      background-color: whitesmoke;
+      border-radius: 45px;
+      width: 50px;
+      height: 50px;
+      position: relative;
+      float: right;
+      top: 24px;
+      right: 20px;
+    }
+
+    &:hover {
+      background-color: $color-hover;
+    }
+
+    &--floating {
+      font-size: 20px;
+      border-radius: 45px;
+      width: 50px;
+      height: 50px;
+
+      @include box-shadow(2);
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    & i {
+      display: block;
+    }
+  }
+}
+
+.student-list {
+  margin: 40px 0;
+}
+
+.student {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 0px 12px;
+  border-radius: 2px;
+
+  @include box-shadow(1);
+
+  &__text {
+    flex: 1;
+  }
+
+  &__input {
+    flex: 1;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1px solid silver;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: $icon-height;
+    width: $icon-width;
+
+    &:hover {
+      background-color: $color-hover;
+    }
+
+    &--cancel {
+      color: $color-danger;
+    }
+
+    &--success {
+      color: $color-success;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+
+    &--arrow {
+      padding: 0;
+      display: inline-block;
+      width: 100%;
+
+      &--none {
+        width: 1px;
+      }
+    }
+  }
+
+  &__arrows {
+    width: 24px;
+    height: 58px;
+    padding: 2px;
+
+    &--hidden {
+      visibility: hidden;
+      width: 1px;
+    }
+  }
+}

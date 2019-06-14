@@ -1,0 +1,46 @@
+@import "../Student/student.scss";
+
+.enrollment {
+  @extend .student;
+
+  &__text {
+    padding: 16px 0px;
+
+    &--done {
+      @extend .student__text;
+      color: $color-success;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+  }
+
+  &__button {
+    @extend .student__button;
+
+    &--hidden {
+      display: none;
+    }
+  }
+}
+
+.enrollments {
+  @extend .students;
+
+  &__container {
+    @extend .students__container;
+  }
+
+  &__button {
+    @extend .students__button;
+
+    &__background {
+      @extend .students__button__background;
+    }
+  }
+}
+
+.enrollment-list {
+  @extend .student-list;
+}
