@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { NewTheoryClass, TheoryClassList, Error } from "../components";
+import { NewTheoryClass, TheoryClassList, Error } from '../../components';
 
 const TheoryClasses = ({
   theoryClasses,
@@ -19,21 +19,19 @@ const TheoryClasses = ({
 
   return (
     <React.Fragment>
-      <div className="theory-classes__container">
-        <div className="theory-classes__button__background">
+      <div className='theory-classes__container'>
+        <div className='theory-classes__button__background'>
           {isAdding ? (
             <button
-              className="theory-classes__button theory-classes__button--floating"
-              onClick={() => onAdding(false)}
-            >
-              <i className="material-icons">clear</i>
+              className='theory-classes__button theory-classes__button--floating'
+              onClick={() => onAdding(false)}>
+              <i className='material-icons'>clear</i>
             </button>
           ) : (
             <button
-              className="theory-classes__button theory-classes__button--floating"
-              onClick={() => onAdding(true)}
-            >
-              <i className="material-icons">add</i>
+              className='theory-classes__button theory-classes__button--floating'
+              onClick={() => onAdding(true)}>
+              <i className='material-icons'>add</i>
             </button>
           )}
         </div>

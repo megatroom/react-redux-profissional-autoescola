@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { EnrollmentList, Error } from "../components";
+import { EnrollmentList, Error } from '../../components';
 
 export default class Enrollments extends React.Component {
   state = {
@@ -11,9 +11,9 @@ export default class Enrollments extends React.Component {
     const { theoryClass, students } = this.props;
 
     if (!students) {
-      throw new Error("The students is invalid.");
+      throw new Error('The students is invalid.');
     } else if (!Array.isArray(students)) {
-      throw new Error("The students does not match the array type.");
+      throw new Error('The students does not match the array type.');
     }
 
     students.forEach(student => {
@@ -45,7 +45,7 @@ export default class Enrollments extends React.Component {
 
     return (
       <React.Fragment>
-        <div className="students__container">
+        <div className='students__container'>
           <h2>{theoryClass.name}</h2>
         </div>
         <EnrollmentList

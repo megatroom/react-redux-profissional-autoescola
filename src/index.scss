@@ -1,11 +1,9 @@
-@import "styles/mixin.scss";
-@import "styles/variables.scss";
-
+@import 'styles/variables.scss';
 
 body {
   color: #212121;
   background-color: whitesmoke;
-  font-family: "Gloria Hallelujah", cursive;
+  font-family: 'Gloria Hallelujah', cursive;
   margin: 0;
   padding: 0;
 }
@@ -32,46 +30,5 @@ button {
 
   &:hover {
     background-color: $color-hover;
-  }
-}
-
-
-.container {
-  margin: 0 auto;
-  padding: 100px $app-padding;
-  max-width: $container-max-width;
-}
-
-
-
-
-
-.about {
-  text-align: center;
-}
-
-
-
-
-.home {
-  & i {
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  &-container {
-    background-color: $color-primary;
-    width: 128px;
-    border-radius: 2px;
-  }
-
-  &__button {
-    color: white;
-    background-color: transparent;
-    border: none;
-    border-radius: 2px;
-    width: inherit;
-    padding: 16px;
-    cursor: pointer;
   }
 }

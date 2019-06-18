@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { NewStudent, StudentList, Error } from "../components";
+import { NewStudent, StudentList, Error } from '../../components';
 
 const Students = ({
   students,
@@ -17,21 +17,19 @@ const Students = ({
 
   return (
     <React.Fragment>
-      <div className="students__container">
-        <div className="students__button__background">
+      <div className='students__container'>
+        <div className='students__button__background'>
           {isAdding ? (
             <button
-              className="students__button students__button--floating"
-              onClick={() => onAdding(false)}
-            >
-              <i className="material-icons">clear</i>
+              className='students__button students__button--floating'
+              onClick={() => onAdding(false)}>
+              <i className='material-icons'>clear</i>
             </button>
           ) : (
             <button
-              className="students__button students__button--floating"
-              onClick={() => onAdding(true)}
-            >
-              <i className="material-icons">add</i>
+              className='students__button students__button--floating'
+              onClick={() => onAdding(true)}>
+              <i className='material-icons'>add</i>
             </button>
           )}
         </div>
