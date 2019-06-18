@@ -1,7 +1,12 @@
 import React from 'react';
 
-import { Header } from '../../components';
+import { Header, Button } from '../../components';
 
-const PageNotFound = () => <Header>Ops!</Header>;
+const PageNotFound = () => (
+  <React.Fragment>
+    <Header>Ops!</Header>
+    <Button>Voltar para o início</Button>
+  </React.Fragment>
+);
 
 export default PageNotFound;

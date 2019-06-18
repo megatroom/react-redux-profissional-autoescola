@@ -1,0 +1,10 @@
+@import '../../styles/variables.scss';
+
+.button {
+  color: inherit;
+  background-color: $color-primary;
+  border: none;
+  border-radius: inherit;
+  padding: 10px 12px;
+  cursor: pointer;
+}
