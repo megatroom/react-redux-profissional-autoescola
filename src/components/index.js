@@ -12,6 +12,8 @@ import TheoryClassList from './TheoryClass/TheoryClassList';
 import Header from './Header/Header';
 import Button from './Button/Button';
 import ButtonLink from './Button/ButtonLink';
+import ButtonIcon from './Button/ButtonIcon';
+import FloatButton from './Button/FloatButton';
 import Center from './Center/Center';
 
 export {
@@ -22,6 +24,8 @@ export {
   Header,
   Button,
   ButtonLink,
+  ButtonIcon,
+  FloatButton,
   Center,
   NewStudent,
   Student,
@@ -29,5 +33,5 @@ export {
   NavigationDrawer,
   NewTheoryClass,
   TheoryClass,
-  TheoryClassList
+  TheoryClassList,
 };
