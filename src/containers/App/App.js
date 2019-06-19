@@ -2,13 +2,15 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import uuid from 'uuid/v1';
 
+import Routes, { menu } from '../Routes';
 import PageLayout from '../PageLayout/PageLayout';
-import Routes from '../Routes';
+import SettingsContext from '../Settings/SettingsContext';
 
 import { StudentService, TheoryClassService } from '../../services';
 
 export default class App extends React.Component {
   state = {
+    theme: {},
     students: [],
     theoryClasses: [],
     isMenuOpen: false,
@@ -321,8 +323,13 @@ export default class App extends React.Component {
     this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
+  handleToggleTheme = theme => {
+    this.setState({ theme });
+  };
+
   render() {
     const {
+      theme,
       isMenuOpen,
       students,
       isAddingStudent,
@@ -339,52 +346,55 @@ export default class App extends React.Component {
 
     return (
       <BrowserRouter>
-        <PageLayout
-          isLoading={isLoadingStudents || isLoadingTheoryClasses}
-          saveHasError={saveStudentsHasError || saveTheoryClassesHasError}
-          onSaveRetry={() => {
-            if (saveStudentsHasError) {
-              this.handleSaveStudents(students);
-            }
+        <SettingsContext.Provider value={{ theme, toggleTheme: this.handleToggleTheme }}>
+          <PageLayout
+            menu={menu}
+            isMenuOpen={isMenuOpen}
+            isLoading={isLoadingStudents || isLoadingTheoryClasses}
+            saveHasError={saveStudentsHasError || saveTheoryClassesHasError}
+            onSaveRetry={() => {
+              if (saveStudentsHasError) {
+                this.handleSaveStudents(students);
+              }
 
-            if (saveTheoryClassesHasError) {
-              this.handleSaveTheoryClasses(theoryClasses);
-            }
-          }}
-          onOpenMenu={this.handleOpenMenu}
-          isMenuOpen={isMenuOpen}
-          onCloseMenu={this.handleCloseMenu}>
-          <Routes
-            theoryClasses={theoryClasses}
-            isAddingTheoryClass={isAddingTheoryClass}
-            reloadTheoryClassHasError={reloadTheoryClassesHasError}
-            onRetryTheoryClass={this.handleReloadTheoryClasses}
-            onAddTheoryClass={this.handleAddTheoryClass}
-            onAddingTheoryClass={this.handleAddingTheoryClass}
-            onMoveTheoryClass={this.handleMoveTheoryClass}
-            onEditTheoryClass={this.handleEditTheoryClass}
-            onDeleteTheoryClass={this.handleDeleteTheoryClass}
-            onManageEnrollment={this.handleManageEnrollment}
-            onCloseMenu={this.handleCloseMenu}
-            students={students}
-            isAddingStudent={isAddingStudent}
-            reloadStudentHasError={reloadStudentsHasError}
-            onRetryStudent={this.handleReloadStudents}
-            onAddStudent={this.handleAddStudent}
-            onAddingStudent={this.handleAddingStudent}
-            onMoveStudent={this.handleMoveStudent}
-            onEditStudent={this.handleEditStudent}
-            onDeleteStudent={this.handleDeleteStudent}
-            theoryClassToEnroll={theoryClassToEnroll}
-            onEnroll={this.handleEnroll}
-            onUnenroll={this.handleUnenroll}
-            reloadHasError={reloadStudentsHasError}
-            onRetryEnroll={() => {
-              this.handleReloadStudents();
-              history.back();
+              if (saveTheoryClassesHasError) {
+                this.handleSaveTheoryClasses(theoryClasses);
+              }
             }}
-          />
-        </PageLayout>
+            onOpenMenu={this.handleOpenMenu}
+            onCloseMenu={this.handleCloseMenu}>
+            <Routes
+              theoryClasses={theoryClasses}
+              isAddingTheoryClass={isAddingTheoryClass}
+              reloadTheoryClassHasError={reloadTheoryClassesHasError}
+              onRetryTheoryClass={this.handleReloadTheoryClasses}
+              onAddTheoryClass={this.handleAddTheoryClass}
+              onAddingTheoryClass={this.handleAddingTheoryClass}
+              onMoveTheoryClass={this.handleMoveTheoryClass}
+              onEditTheoryClass={this.handleEditTheoryClass}
+              onDeleteTheoryClass={this.handleDeleteTheoryClass}
+              onManageEnrollment={this.handleManageEnrollment}
+              onCloseMenu={this.handleCloseMenu}
+              students={students}
+              isAddingStudent={isAddingStudent}
+              reloadStudentHasError={reloadStudentsHasError}
+              onRetryStudent={this.handleReloadStudents}
+              onAddStudent={this.handleAddStudent}
+              onAddingStudent={this.handleAddingStudent}
+              onMoveStudent={this.handleMoveStudent}
+              onEditStudent={this.handleEditStudent}
+              onDeleteStudent={this.handleDeleteStudent}
+              theoryClassToEnroll={theoryClassToEnroll}
+              onEnroll={this.handleEnroll}
+              onUnenroll={this.handleUnenroll}
+              reloadHasError={reloadStudentsHasError}
+              onRetryEnroll={() => {
+                this.handleReloadStudents();
+                history.back();
+              }}
+            />
+          </PageLayout>
+        </SettingsContext.Provider>
       </BrowserRouter>
     );
   }

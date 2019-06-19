@@ -1,12 +1,21 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import About from './About/About';
-import Enrollments from './Enrollments/Enrollments';
-import Home from './Home/Home';
-import Students from './Students/Students';
-import TheoryClasses from './TheoryClasses/TheoryClasses';
+import HomePage from './Home/HomePage';
+import TheoryClassesPage from './TheoryClasses/TheoryClassesPage';
+import StudentsPage from './Students/StudentsPage';
+import EnrollmentsPage from './Enrollments/EnrollmentsPage';
+import SettingsPage from './Settings/SettingsPage';
+import AboutPage from './About/AboutPage';
 import PageNotFound from './PageNotFound/PageNotFound';
+
+export const menu = [
+  { icon: 'home', label: 'Página Inicial', path: '/' },
+  { icon: 'class', label: 'Aula Teórica', path: '/theory-classes' },
+  { icon: 'person', label: 'Alunos', path: '/students' },
+  { icon: 'settings', label: 'Configurações', path: '/settings' },
+  { icon: 'info', label: 'Sobre', path: '/about' }
+];
 
 const Routes = ({
   theoryClasses,
@@ -36,12 +45,12 @@ const Routes = ({
   onRetryEnroll
 }) => (
   <Switch>
-    <Route path='/' exact render={() => <Home onCloseMenu={onCloseMenu} />} />
+    <Route path='/' exact render={() => <HomePage onCloseMenu={onCloseMenu} />} />
     <Route
       path='/theory-classes'
       exact
       render={() => (
-        <TheoryClasses
+        <TheoryClassesPage
           theoryClasses={theoryClasses}
           isAdding={isAddingTheoryClass}
           reloadHasError={reloadTheoryClassHasError}
@@ -60,7 +69,7 @@ const Routes = ({
       path='/students'
       exact
       render={() => (
-        <Students
+        <StudentsPage
           students={students}
           isAdding={isAddingStudent}
           reloadHasError={reloadStudentHasError}
@@ -77,7 +86,7 @@ const Routes = ({
       path='/enrollments'
       exact
       render={() => (
-        <Enrollments
+        <EnrollmentsPage
           students={students}
           theoryClass={theoryClassToEnroll}
           onEnroll={onEnroll}
@@ -87,7 +96,8 @@ const Routes = ({
         />
       )}
     />
-    <Route path='/about' exact component={About} />
+    <Route path='/settings' exact component={SettingsPage} />
+    <Route path='/about' exact component={AboutPage} />
     <Route component={PageNotFound} />
   </Switch>
 );

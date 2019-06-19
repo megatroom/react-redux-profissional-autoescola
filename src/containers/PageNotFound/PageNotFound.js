@@ -1,12 +1,17 @@
 import React from 'react';
 
-import { Header, Button } from '../../components';
+import { Header, ButtonLink, Center } from '../../components';
+
+import Travolta from '../../images/travolta.gif';
 
 const PageNotFound = () => (
-  <React.Fragment>
+  <Center>
     <Header>Ops!</Header>
-    <Button>Voltar para o início</Button>
-  </React.Fragment>
+    <div>
+      <img src={Travolta} alt='John Travolta' width='200' />
+    </div>
+    <ButtonLink to='/'>Voltar para o início</ButtonLink>
+  </Center>
 );
 
 export default PageNotFound;

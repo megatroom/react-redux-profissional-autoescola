@@ -1,0 +1,18 @@
+@import '../../styles/variables.scss';
+
+.themes {
+  display: flex;
+
+  &__item {
+    color: inherit;
+    background-color: $color-primary;
+    margin-right: 8px;
+    border: none;
+    border-radius: 4px;
+    padding: 60px 12px 0px 12px;
+    min-width: 120px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}

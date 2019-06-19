@@ -1,15 +1,17 @@
 import React from 'react';
 
+import Header from '../Header/Header';
 import Button from '../Button/Button';
+import Center from '../Center/Center';
 
 import './error.scss';
 
 const Error = ({ onRetry }) => (
-  <div className='error'>
-    <h1>Ops!</h1>
+  <Center>
+    <Header>Ops!</Header>
     <p>Ocorreu um erro inesperado ao carregar os dados.</p>
     <Button onClick={onRetry}>Tentar novamente</Button>
-  </div>
+  </Center>
 );
 
 export default Error;

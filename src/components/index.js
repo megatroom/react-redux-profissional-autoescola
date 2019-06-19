@@ -11,6 +11,8 @@ import TheoryClass from './TheoryClass/TheoryClass';
 import TheoryClassList from './TheoryClass/TheoryClassList';
 import Header from './Header/Header';
 import Button from './Button/Button';
+import ButtonLink from './Button/ButtonLink';
+import Center from './Center/Center';
 
 export {
   AppBar,
@@ -19,6 +21,8 @@ export {
   EnrollmentList,
   Header,
   Button,
+  ButtonLink,
+  Center,
   NewStudent,
   Student,
   StudentList,

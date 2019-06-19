@@ -6,11 +6,12 @@ import './page-layout.scss';
 
 const PageLayout = ({
   children,
+  menu,
+  isMenuOpen,
   isLoading,
   saveHasError,
   onSaveRetry,
   onOpenMenu,
-  isMenuOpen,
   onCloseMenu
 }) => (
   <div>
@@ -21,7 +22,7 @@ const PageLayout = ({
       onOpenMenu={onOpenMenu}
     />
     <div className='container'>{children}</div>
-    <NavigationDrawer isOpen={isMenuOpen} onCloseMenu={onCloseMenu} />
+    <NavigationDrawer menu={menu} isOpen={isMenuOpen} onCloseMenu={onCloseMenu} />
   </div>
 );
 
