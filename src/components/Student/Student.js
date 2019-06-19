@@ -1,11 +1,13 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
-import "./student.scss";
+import ButtonIcon from '../Button/ButtonIcon';
+
+import './student.scss';
 
 export default class Student extends React.Component {
   state = {
-    isEditing: false
+    isEditing: false,
   };
 
   handleEdit = () => this.setState({ isEditing: true });
@@ -22,73 +24,50 @@ export default class Student extends React.Component {
     const { isEditing } = this.state;
 
     return (
-      <div className="student">
+      <div className='student'>
         {isEditing ? (
-          <input
-            type="text"
-            className="student__input"
-            defaultValue={student.name}
-            ref={current => (this.input = current)}
-          />
+          <input type='text' className='student__input' defaultValue={student.name} ref={current => (this.input = current)} />
         ) : (
-          <span className="student__text">{student.name}</span>
+          <span className='student__text'>{student.name}</span>
         )}
         {isEditing && (
           <React.Fragment>
-            <button
-              className="student__button student__button--cancel"
-              onClick={this.handleCancel}
-            >
-              <i className="material-icons">clear</i>
+            <button className='student__button student__button--cancel' onClick={this.handleCancel}>
+              <i className='material-icons'>clear</i>
             </button>
-            <button
-              className="student__button student__button--success"
-              onClick={this.handleSave}
-            >
-              <i className="material-icons">done</i>
+            <button className='student__button student__button--success' onClick={this.handleSave}>
+              <i className='material-icons'>done</i>
             </button>
           </React.Fragment>
         )}
-        <button
-          className="student__button"
-          disabled={isEditing}
-          onClick={this.handleEdit}
-        >
-          <i className="material-icons">edit</i>
+        <button className='student__button' disabled={isEditing} onClick={this.handleEdit}>
+          <i className='material-icons'>edit</i>
         </button>
-        <button
-          className="student__button"
-          disabled={isEditing || student.theoryClass}
-          onClick={() => {
-            onDelete(student.id);
-          }}
-        >
-          <i className="material-icons">delete</i>
-        </button>
+        <ButtonIcon icon='delete' disabled={isEditing || student.theoryClass} onClick={() => onDelete(student.id)} />
         <div
-          className={classNames("student__arrows", {
-            "student__arrows--hidden": total === 1
+          className={classNames('student__arrows', {
+            'student__arrows--hidden': total === 1,
           })}
         >
           <button
-            className={classNames("student__button", "student__button--arrow", {
-              "student__button--hidden": index === 0
+            className={classNames('student__button', 'student__button--arrow', {
+              'student__button--hidden': index === 0,
             })}
             onClick={() => {
-              onMove("up", index);
+              onMove('up', index);
             }}
           >
-            <i className="material-icons">keyboard_arrow_up</i>
+            <i className='material-icons'>keyboard_arrow_up</i>
           </button>
           <button
-            className={classNames("student__button", "student__button--arrow", {
-              "student__button--hidden": index === total - 1
+            className={classNames('student__button', 'student__button--arrow', {
+              'student__button--hidden': index === total - 1,
             })}
             onClick={() => {
-              onMove("down", index);
+              onMove('down', index);
             }}
           >
-            <i className="material-icons">keyboard_arrow_down</i>
+            <i className='material-icons'>keyboard_arrow_down</i>
           </button>
         </div>
       </div>

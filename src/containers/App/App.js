@@ -4,13 +4,12 @@ import uuid from 'uuid/v1';
 
 import Routes, { menu } from '../Routes';
 import PageLayout from '../PageLayout/PageLayout';
-import SettingsContext from '../Settings/SettingsContext';
+import SettingsProvider from '../Settings/SettingsProvider';
 
 import { StudentService, TheoryClassService } from '../../services';
 
 export default class App extends React.Component {
   state = {
-    theme: {},
     students: [],
     theoryClasses: [],
     isMenuOpen: false,
@@ -22,7 +21,7 @@ export default class App extends React.Component {
     isLoadingTheoryClasses: false,
     reloadTheoryClassesHasError: false,
     saveTheoryClassesHasError: false,
-    theoryClassToEnroll: null
+    theoryClassToEnroll: null,
   };
 
   componentDidMount() {
@@ -33,7 +32,7 @@ export default class App extends React.Component {
   componentDidCatch() {
     this.setState({
       reloadStudentsHasError: true,
-      reloadTheoryClassesHasError: true
+      reloadTheoryClassesHasError: true,
     });
   }
 
@@ -90,7 +89,7 @@ export default class App extends React.Component {
     this.setState(state => {
       const collection = state[collectionName].concat({
         id: uuid(),
-        name: name
+        name: name,
       });
 
       return this.buildNewState(collectionName, collection);
@@ -158,20 +157,20 @@ export default class App extends React.Component {
   handleReloadStudents = () => {
     this.setState({
       isLoadingStudents: true,
-      reloadStudentsHasError: false
+      reloadStudentsHasError: false,
     });
 
     StudentService.load()
       .then(students =>
         this.setState({
           students,
-          isLoadingStudents: false
+          isLoadingStudents: false,
         })
       )
       .catch(() =>
         this.setState({
           isLoadingStudents: false,
-          reloadStudentsHasError: true
+          reloadStudentsHasError: true,
         })
       );
   };
@@ -179,19 +178,19 @@ export default class App extends React.Component {
   handleSaveStudents = students => {
     this.setState({
       isLoadingStudents: true,
-      saveStudentsHasError: false
+      saveStudentsHasError: false,
     });
 
     StudentService.save(students)
       .then(() =>
         this.setState({
-          isLoadingStudents: false
+          isLoadingStudents: false,
         })
       )
       .catch(() =>
         this.setState({
           isLoadingStudents: false,
-          saveStudentsHasError: true
+          saveStudentsHasError: true,
         })
       );
   };
@@ -223,20 +222,20 @@ export default class App extends React.Component {
   handleReloadTheoryClasses = () => {
     this.setState({
       isLoadingTheoryClasses: true,
-      reloadTheoryClassesHasError: false
+      reloadTheoryClassesHasError: false,
     });
 
     TheoryClassService.load()
       .then(theoryClasses =>
         this.setState({
           theoryClasses: theoryClasses,
-          isLoadingTheoryClasses: false
+          isLoadingTheoryClasses: false,
         })
       )
       .catch(() =>
         this.setState({
           isLoadingTheoryClasses: false,
-          reloadTheoryClassesHasError: true
+          reloadTheoryClassesHasError: true,
         })
       );
   };
@@ -244,26 +243,26 @@ export default class App extends React.Component {
   handleSaveTheoryClasses = theoryClasses => {
     this.setState({
       isLoadingTheoryClasses: true,
-      saveTheoryClassesHasError: false
+      saveTheoryClassesHasError: false,
     });
 
     TheoryClassService.save(theoryClasses)
       .then(() =>
         this.setState({
-          isLoadingTheoryClasses: false
+          isLoadingTheoryClasses: false,
         })
       )
       .catch(() =>
         this.setState({
           isLoadingTheoryClasses: false,
-          saveTheoryClassesHasError: true
+          saveTheoryClassesHasError: true,
         })
       );
   };
 
   handleManageEnrollment = theoryClass => {
     this.setState({
-      theoryClassToEnroll: theoryClass
+      theoryClassToEnroll: theoryClass,
     });
 
     if (!this.state.students) {
@@ -278,18 +277,15 @@ export default class App extends React.Component {
       newStudents[studentIndex].theoryClass = theoryClass.id;
 
       const newTheoryClasses = state.theoryClasses.slice();
-      const theoryClassIndex = newTheoryClasses.findIndex(
-        newTheoryClass => newTheoryClass.id === theoryClass.id
-      );
+      const theoryClassIndex = newTheoryClasses.findIndex(newTheoryClass => newTheoryClass.id === theoryClass.id);
 
-      if (!Array.isArray(newTheoryClasses[theoryClassIndex].enrollments))
-        newTheoryClasses[theoryClassIndex].enrollments = [];
+      if (!Array.isArray(newTheoryClasses[theoryClassIndex].enrollments)) newTheoryClasses[theoryClassIndex].enrollments = [];
 
       newTheoryClasses[theoryClassIndex].enrollments.push(student.id);
 
       return {
         students: newStudents,
-        theoryClasses: newTheoryClasses
+        theoryClasses: newTheoryClasses,
       };
     });
 
@@ -308,14 +304,12 @@ export default class App extends React.Component {
       newEnrollments.splice(enrollmentIndex, 1);
 
       const newTheoryClasses = state.theoryClasses.slice();
-      const theoryClassIndex = newTheoryClasses.findIndex(
-        newTheoryClass => newTheoryClass.id === theoryClass.id
-      );
+      const theoryClassIndex = newTheoryClasses.findIndex(newTheoryClass => newTheoryClass.id === theoryClass.id);
       newTheoryClasses[theoryClassIndex].enrollments = newEnrollments;
 
       return {
         students: newStudents,
-        theoryClasses: newTheoryClasses
+        theoryClasses: newTheoryClasses,
       };
     });
 
@@ -323,13 +317,8 @@ export default class App extends React.Component {
     this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
-  handleToggleTheme = theme => {
-    this.setState({ theme });
-  };
-
   render() {
     const {
-      theme,
       isMenuOpen,
       students,
       isAddingStudent,
@@ -341,12 +330,12 @@ export default class App extends React.Component {
       isLoadingTheoryClasses,
       reloadTheoryClassesHasError,
       saveTheoryClassesHasError,
-      theoryClassToEnroll
+      theoryClassToEnroll,
     } = this.state;
 
     return (
       <BrowserRouter>
-        <SettingsContext.Provider value={{ theme, toggleTheme: this.handleToggleTheme }}>
+        <SettingsProvider>
           <PageLayout
             menu={menu}
             isMenuOpen={isMenuOpen}
@@ -362,7 +351,8 @@ export default class App extends React.Component {
               }
             }}
             onOpenMenu={this.handleOpenMenu}
-            onCloseMenu={this.handleCloseMenu}>
+            onCloseMenu={this.handleCloseMenu}
+          >
             <Routes
               theoryClasses={theoryClasses}
               isAddingTheoryClass={isAddingTheoryClass}
@@ -394,7 +384,7 @@ export default class App extends React.Component {
               }}
             />
           </PageLayout>
-        </SettingsContext.Provider>
+        </SettingsProvider>
       </BrowserRouter>
     );
   }

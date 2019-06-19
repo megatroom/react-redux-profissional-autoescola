@@ -1,7 +1,7 @@
 @import 'styles/variables.scss';
 
 body {
-  color: #212121;
+  color: darkslategray;
   background-color: whitesmoke;
   font-family: 'Gloria Hallelujah', cursive;
   margin: 0;
@@ -27,8 +27,4 @@ button {
   overflow: hidden;
   border-radius: 2px;
   cursor: pointer;
-
-  &:hover {
-    background-color: $color-hover;
-  }
 }

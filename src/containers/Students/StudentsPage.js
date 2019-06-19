@@ -1,38 +1,18 @@
 import React from 'react';
 
-import { NewStudent, StudentList, Error } from '../../components';
+import { NewStudent, StudentList, Error, FloatButton } from '../../components';
 
-const StudentsPage = ({
-  students,
-  isAdding,
-  reloadHasError,
-  onAdd,
-  onAdding,
-  onEdit,
-  onDelete,
-  onMove,
-  onRetry
-}) => {
+const StudentsPage = ({ students, isAdding, reloadHasError, onAdd, onAdding, onEdit, onDelete, onMove, onRetry }) => {
   if (reloadHasError) return <Error onRetry={onRetry} />;
 
   return (
     <React.Fragment>
       <div className='students__container'>
-        <div className='students__button__background'>
-          {isAdding ? (
-            <button
-              className='students__button students__button--floating'
-              onClick={() => onAdding(false)}>
-              <i className='material-icons'>clear</i>
-            </button>
-          ) : (
-            <button
-              className='students__button students__button--floating'
-              onClick={() => onAdding(true)}>
-              <i className='material-icons'>add</i>
-            </button>
-          )}
-        </div>
+        {isAdding ? (
+          <FloatButton icon='clear' onClick={() => onAdding(false)} />
+        ) : (
+          <FloatButton icon='add' onClick={() => onAdding(true)} />
+        )}
         <h2>Alunos</h2>
       </div>
       {isAdding && <NewStudent onAdd={onAdd} />}
