@@ -1,11 +1,74 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
 
 .button {
-  color: inherit;
-  background-color: $color-primary;
+  background-color: inherit;
   border: none;
   border-radius: inherit;
   padding: 10px 12px;
   text-decoration: none;
   cursor: pointer;
+
+  &:hover {
+    background-color: $color-hover;
+  }
+
+  &__icon {
+    padding: 0;
+    margin: 0;
+    height: $icon-height;
+    width: $icon-width;
+
+    &--cancel {
+      color: $color-danger;
+    }
+
+    &--success {
+      color: $color-success;
+    }
+
+    &--hidden {
+      visibility: hidden;
+    }
+
+    &--arrow {
+      padding: 0;
+      display: inline-block;
+      width: 100%;
+
+      &--none {
+        width: 1px;
+      }
+    }
+  }
+}
+
+.float-button {
+  @extend .button;
+
+  border-radius: 45px;
+  width: 50px;
+  height: 50px;
+  padding: 0px;
+
+  &__background {
+    position: relative;
+    float: right;
+    top: 22px;
+    right: 20px;
+  }
+
+  &--floating {
+    font-size: 20px;
+
+    @include box-shadow(2);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  & i {
+    display: block;
+  }
 }
