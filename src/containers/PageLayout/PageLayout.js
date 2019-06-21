@@ -1,6 +1,7 @@
 import React from 'react';
 
 import withSettings from '../Settings/withSettings';
+import withStudents from '../Students/withStudents';
 import { AppBar, NavigationDrawer } from '../../components';
 
 import './page-layout.scss';
@@ -19,4 +20,4 @@ const PageLayout = ({ children, selectedTheme, menu, isMenuOpen, isLoading, save
   </div>
 );
 
-export default withSettings(PageLayout);
+export default withSettings(withStudents(PageLayout));

@@ -14,7 +14,7 @@ export const menu = [
   { icon: 'class', label: 'Aula Teórica', path: '/theory-classes' },
   { icon: 'person', label: 'Alunos', path: '/students' },
   { icon: 'settings', label: 'Configurações', path: '/settings' },
-  { icon: 'info', label: 'Sobre', path: '/about' }
+  { icon: 'info', label: 'Sobre', path: '/about' },
 ];
 
 const Routes = ({
@@ -30,19 +30,11 @@ const Routes = ({
   onManageEnrollment,
   onCloseMenu,
   students,
-  isAddingStudent,
-  reloadStudentHasError,
-  onRetryStudent,
-  onAddStudent,
-  onAddingStudent,
-  onMoveStudent,
-  onEditStudent,
-  onDeleteStudent,
   theoryClassToEnroll,
   onEnroll,
   onUnenroll,
   reloadHasError,
-  onRetryEnroll
+  onRetryEnroll,
 }) => (
   <Switch>
     <Route path='/' exact render={() => <HomePage onCloseMenu={onCloseMenu} />} />
@@ -65,23 +57,7 @@ const Routes = ({
         />
       )}
     />
-    <Route
-      path='/students'
-      exact
-      render={() => (
-        <StudentsPage
-          students={students}
-          isAdding={isAddingStudent}
-          reloadHasError={reloadStudentHasError}
-          onRetry={onRetryStudent}
-          onAdd={onAddStudent}
-          onAdding={onAddingStudent}
-          onMove={onMoveStudent}
-          onEdit={onEditStudent}
-          onDelete={onDeleteStudent}
-        />
-      )}
-    />
+    <Route path='/students' exact component={StudentsPage} />
     <Route
       path='/enrollments'
       exact

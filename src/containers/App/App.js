@@ -5,36 +5,20 @@ import uuid from 'uuid/v1';
 import Routes, { menu } from '../Routes';
 import PageLayout from '../PageLayout/PageLayout';
 import SettingsProvider from '../Settings/SettingsProvider';
+import StudentsProvider from '../Students/StudentsProvider';
 
 import { StudentService, TheoryClassService } from '../../services';
 
 export default class App extends React.Component {
   state = {
-    students: [],
-    theoryClasses: [],
     isMenuOpen: false,
-    isAddingStudent: false,
-    isLoadingStudents: false,
-    reloadStudentsHasError: false,
-    saveStudentsHasError: false,
+    theoryClasses: [],
     isAddingTheoryClass: false,
     isLoadingTheoryClasses: false,
     reloadTheoryClassesHasError: false,
     saveTheoryClassesHasError: false,
-    theoryClassToEnroll: null
+    theoryClassToEnroll: null,
   };
-
-  componentDidMount() {
-    this.handleReloadStudents();
-    this.handleReloadTheoryClasses();
-  }
-
-  componentDidCatch() {
-    this.setState({
-      reloadStudentsHasError: true,
-      reloadTheoryClassesHasError: true
-    });
-  }
 
   domains = () => ['Student', 'TheoryClass'];
 
@@ -89,7 +73,7 @@ export default class App extends React.Component {
     this.setState(state => {
       const collection = state[collectionName].concat({
         id: uuid(),
-        name: name
+        name: name,
       });
 
       return this.buildNewState(collectionName, collection);
@@ -130,71 +114,6 @@ export default class App extends React.Component {
     });
   };
 
-  handleAddingStudent = isAdding => {
-    this.handleAdding('Student', isAdding);
-  };
-
-  handleAddStudent = name => {
-    this.handleAdd('students', name);
-    this.handleSaveStudents(this.state.students);
-  };
-
-  handleEditStudent = (id, name) => {
-    this.handleEdit('students', id, name);
-    this.handleSaveStudents(this.state.students);
-  };
-
-  handleDeleteStudent = id => {
-    this.handleDelete('students', id);
-    this.handleSaveStudents(this.state.students);
-  };
-
-  handleMoveStudent = (direction, index) => {
-    this.handleMove('students', direction, index);
-    this.handleSaveStudents(this.state.students);
-  };
-
-  handleReloadStudents = () => {
-    this.setState({
-      isLoadingStudents: true,
-      reloadStudentsHasError: false
-    });
-
-    StudentService.load()
-      .then(students =>
-        this.setState({
-          students,
-          isLoadingStudents: false
-        })
-      )
-      .catch(() =>
-        this.setState({
-          isLoadingStudents: false,
-          reloadStudentsHasError: true
-        })
-      );
-  };
-
-  handleSaveStudents = students => {
-    this.setState({
-      isLoadingStudents: true,
-      saveStudentsHasError: false
-    });
-
-    StudentService.save(students)
-      .then(() =>
-        this.setState({
-          isLoadingStudents: false
-        })
-      )
-      .catch(() =>
-        this.setState({
-          isLoadingStudents: false,
-          saveStudentsHasError: true
-        })
-      );
-  };
-
   handleAddingTheoryClass = isAdding => {
     this.handleAdding('TheoryClass', isAdding);
   };
@@ -222,20 +141,20 @@ export default class App extends React.Component {
   handleReloadTheoryClasses = () => {
     this.setState({
       isLoadingTheoryClasses: true,
-      reloadTheoryClassesHasError: false
+      reloadTheoryClassesHasError: false,
     });
 
     TheoryClassService.load()
       .then(theoryClasses =>
         this.setState({
           theoryClasses: theoryClasses,
-          isLoadingTheoryClasses: false
+          isLoadingTheoryClasses: false,
         })
       )
       .catch(() =>
         this.setState({
           isLoadingTheoryClasses: false,
-          reloadTheoryClassesHasError: true
+          reloadTheoryClassesHasError: true,
         })
       );
   };
@@ -243,146 +162,62 @@ export default class App extends React.Component {
   handleSaveTheoryClasses = theoryClasses => {
     this.setState({
       isLoadingTheoryClasses: true,
-      saveTheoryClassesHasError: false
+      saveTheoryClassesHasError: false,
     });
 
     TheoryClassService.save(theoryClasses)
       .then(() =>
         this.setState({
-          isLoadingTheoryClasses: false
+          isLoadingTheoryClasses: false,
         })
       )
       .catch(() =>
         this.setState({
           isLoadingTheoryClasses: false,
-          saveTheoryClassesHasError: true
+          saveTheoryClassesHasError: true,
         })
       );
-  };
-
-  handleManageEnrollment = theoryClass => {
-    this.setState({
-      theoryClassToEnroll: theoryClass
-    });
-
-    if (!this.state.students) {
-      this.handleReloadStudents();
-    }
-  };
-
-  handleEnroll = (student, theoryClass) => {
-    this.setState(state => {
-      const newStudents = state.students.slice();
-      const studentIndex = newStudents.findIndex(newStudent => newStudent.id === student.id);
-      newStudents[studentIndex].theoryClass = theoryClass.id;
-
-      const newTheoryClasses = state.theoryClasses.slice();
-      const theoryClassIndex = newTheoryClasses.findIndex(newTheoryClass => newTheoryClass.id === theoryClass.id);
-
-      if (!Array.isArray(newTheoryClasses[theoryClassIndex].enrollments)) newTheoryClasses[theoryClassIndex].enrollments = [];
-
-      newTheoryClasses[theoryClassIndex].enrollments.push(student.id);
-
-      return {
-        students: newStudents,
-        theoryClasses: newTheoryClasses
-      };
-    });
-
-    this.handleSaveStudents(this.state.students);
-    this.handleSaveTheoryClasses(this.state.theoryClasses);
-  };
-
-  handleUnenroll = (student, theoryClass) => {
-    this.setState(state => {
-      const newStudents = state.students.slice();
-      const studentIndex = newStudents.findIndex(newStudent => newStudent.id === student.id);
-      delete newStudents[studentIndex].theoryClass;
-
-      const newEnrollments = theoryClass.enrollments.slice();
-      const enrollmentIndex = newEnrollments.findIndex(enrollment => enrollment === student.id);
-      newEnrollments.splice(enrollmentIndex, 1);
-
-      const newTheoryClasses = state.theoryClasses.slice();
-      const theoryClassIndex = newTheoryClasses.findIndex(newTheoryClass => newTheoryClass.id === theoryClass.id);
-      newTheoryClasses[theoryClassIndex].enrollments = newEnrollments;
-
-      return {
-        students: newStudents,
-        theoryClasses: newTheoryClasses
-      };
-    });
-
-    this.handleSaveStudents(this.state.students);
-    this.handleSaveTheoryClasses(this.state.theoryClasses);
   };
 
   render() {
     const {
       isMenuOpen,
-      students,
-      isAddingStudent,
-      isLoadingStudents,
-      reloadStudentsHasError,
-      saveStudentsHasError,
       theoryClasses,
       isAddingTheoryClass,
       isLoadingTheoryClasses,
       reloadTheoryClassesHasError,
       saveTheoryClassesHasError,
-      theoryClassToEnroll
+      theoryClassToEnroll,
     } = this.state;
 
     return (
       <BrowserRouter>
         <SettingsProvider>
-          <PageLayout
-            menu={menu}
-            isMenuOpen={isMenuOpen}
-            isLoading={isLoadingStudents || isLoadingTheoryClasses}
-            saveHasError={saveStudentsHasError || saveTheoryClassesHasError}
-            onSaveRetry={() => {
-              if (saveStudentsHasError) {
-                this.handleSaveStudents(students);
-              }
-
-              if (saveTheoryClassesHasError) {
-                this.handleSaveTheoryClasses(theoryClasses);
-              }
-            }}
-            onOpenMenu={this.handleOpenMenu}
-            onCloseMenu={this.handleCloseMenu}>
-            <Routes
-              theoryClasses={theoryClasses}
-              isAddingTheoryClass={isAddingTheoryClass}
-              reloadTheoryClassHasError={reloadTheoryClassesHasError}
-              onRetryTheoryClass={this.handleReloadTheoryClasses}
-              onAddTheoryClass={this.handleAddTheoryClass}
-              onAddingTheoryClass={this.handleAddingTheoryClass}
-              onMoveTheoryClass={this.handleMoveTheoryClass}
-              onEditTheoryClass={this.handleEditTheoryClass}
-              onDeleteTheoryClass={this.handleDeleteTheoryClass}
-              onManageEnrollment={this.handleManageEnrollment}
-              onCloseMenu={this.handleCloseMenu}
-              students={students}
-              isAddingStudent={isAddingStudent}
-              reloadStudentHasError={reloadStudentsHasError}
-              onRetryStudent={this.handleReloadStudents}
-              onAddStudent={this.handleAddStudent}
-              onAddingStudent={this.handleAddingStudent}
-              onMoveStudent={this.handleMoveStudent}
-              onEditStudent={this.handleEditStudent}
-              onDeleteStudent={this.handleDeleteStudent}
-              theoryClassToEnroll={theoryClassToEnroll}
-              onEnroll={this.handleEnroll}
-              onUnenroll={this.handleUnenroll}
-              reloadHasError={reloadStudentsHasError}
-              onRetryEnroll={() => {
-                this.handleReloadStudents();
-                history.back();
-              }}
-            />
-          </PageLayout>
+          <StudentsProvider>
+            <PageLayout menu={menu} isMenuOpen={isMenuOpen} onOpenMenu={this.handleOpenMenu} onCloseMenu={this.handleCloseMenu}>
+              <Routes
+                theoryClasses={theoryClasses}
+                isAddingTheoryClass={isAddingTheoryClass}
+                reloadTheoryClassHasError={reloadTheoryClassesHasError}
+                onRetryTheoryClass={this.handleReloadTheoryClasses}
+                onAddTheoryClass={this.handleAddTheoryClass}
+                onAddingTheoryClass={this.handleAddingTheoryClass}
+                onMoveTheoryClass={this.handleMoveTheoryClass}
+                onEditTheoryClass={this.handleEditTheoryClass}
+                onDeleteTheoryClass={this.handleDeleteTheoryClass}
+                onManageEnrollment={this.handleManageEnrollment}
+                onCloseMenu={this.handleCloseMenu}
+                theoryClassToEnroll={theoryClassToEnroll}
+                onEnroll={this.handleEnroll}
+                onUnenroll={this.handleUnenroll}
+                reloadHasError={reloadStudentsHasError}
+                onRetryEnroll={() => {
+                  this.handleReloadStudents();
+                  history.back();
+                }}
+              />
+            </PageLayout>
+          </StudentsProvider>
         </SettingsProvider>
       </BrowserRouter>
     );

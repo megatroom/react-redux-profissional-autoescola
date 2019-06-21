@@ -1,6 +1,7 @@
 import React from 'react';
 
 import withSettings from '../Settings/withSettings';
+import withStudents from './withStudents';
 import { NewStudent, StudentList, Error, FloatButton } from '../../components';
 
 const StudentsPage = ({ selectedTheme, students, isAdding, reloadHasError, onAdd, onAdding, onEdit, onDelete, onMove, onRetry }) => {
@@ -22,4 +23,4 @@ const StudentsPage = ({ selectedTheme, students, isAdding, reloadHasError, onAdd
   );
 };
 
-export default withSettings(StudentsPage);
+export default withSettings(withStudents(StudentsPage));
