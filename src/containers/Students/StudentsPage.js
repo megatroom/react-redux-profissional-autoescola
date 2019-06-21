@@ -1,17 +1,18 @@
 import React from 'react';
 
+import withSettings from '../Settings/withSettings';
 import { NewStudent, StudentList, Error, FloatButton } from '../../components';
 
-const StudentsPage = ({ students, isAdding, reloadHasError, onAdd, onAdding, onEdit, onDelete, onMove, onRetry }) => {
-  if (reloadHasError) return <Error onRetry={onRetry} />;
+const StudentsPage = ({ selectedTheme, students, isAdding, reloadHasError, onAdd, onAdding, onEdit, onDelete, onMove, onRetry }) => {
+  if (reloadHasError) return <Error style={selectedTheme && selectedTheme.style} onRetry={onRetry} />;
 
   return (
     <React.Fragment>
       <div className='students__container'>
         {isAdding ? (
-          <FloatButton icon='clear' onClick={() => onAdding(false)} />
+          <FloatButton icon='clear' style={selectedTheme && selectedTheme.style} onClick={() => onAdding(false)} />
         ) : (
-          <FloatButton icon='add' onClick={() => onAdding(true)} />
+          <FloatButton icon='add' style={selectedTheme && selectedTheme.style} onClick={() => onAdding(true)} />
         )}
         <h2>Alunos</h2>
       </div>
@@ -21,4 +22,4 @@ const StudentsPage = ({ students, isAdding, reloadHasError, onAdd, onAdding, onE
   );
 };
 
-export default StudentsPage;
+export default withSettings(StudentsPage);

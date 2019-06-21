@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import SettingsContext from './SettingsContext';
 
 const themes = [
-  { key: 'default', label: 'Padrão', navBar: { color: 'white' } },
-  { key: 'classic', label: 'Clássico', navBar: { backgroundColor: 'maroon', color: 'white' } },
-  { key: 'light', label: 'Light', navBar: { backgroundColor: 'white' } },
+  { key: 'default', label: 'Padrão', style: { backgroundColor: 'darkslateblue', color: 'white' } },
+  { key: 'classic', label: 'Clássico', style: { backgroundColor: 'maroon', color: 'white' } },
+  { key: 'light', label: 'Light', style: { backgroundColor: 'white' } }
 ];
 
 class SettingsProvider extends Component {
   state = {
     themes: themes,
-    selectedTheme: themes[0],
+    selectedTheme: themes[0]
   };
 
   handleToggleTheme = selectedTheme => {

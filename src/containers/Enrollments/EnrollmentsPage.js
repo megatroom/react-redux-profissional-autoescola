@@ -17,8 +17,7 @@ export default class EnrollmentsPage extends React.Component {
     }
 
     students.forEach(student => {
-      if (student && (!student.theoryClass || student.theoryClass === theoryClass.id))
-        this.setState(state => state.students.push(student));
+      if (student && (!student.theoryClass || student.theoryClass === theoryClass.id)) this.setState(state => state.students.push(student));
     });
   };
 
@@ -38,12 +37,7 @@ export default class EnrollmentsPage extends React.Component {
         <div className='students__container'>
           <h2>{theoryClass.name}</h2>
         </div>
-        <EnrollmentList
-          students={students}
-          theoryClass={theoryClass}
-          onEnroll={onEnroll}
-          onUnenroll={onUnenroll}
-        />
+        <EnrollmentList students={students} theoryClass={theoryClass} onEnroll={onEnroll} onUnenroll={onUnenroll} />
       </React.Fragment>
     );
   }

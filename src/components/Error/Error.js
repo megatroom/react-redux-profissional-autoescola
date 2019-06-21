@@ -6,11 +6,13 @@ import Center from '../Center/Center';
 
 import './error.scss';
 
-const Error = ({ onRetry }) => (
+const Error = ({ style, onRetry }) => (
   <Center>
     <Header>Ops!</Header>
     <p>Ocorreu um erro inesperado ao carregar os dados.</p>
-    <Button onClick={onRetry}>Tentar novamente</Button>
+    <Button style={style} onClick={onRetry}>
+      Tentar novamente
+    </Button>
   </Center>
 );
 

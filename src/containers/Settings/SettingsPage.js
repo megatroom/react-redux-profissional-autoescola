@@ -1,7 +1,7 @@
 import React from 'react';
 
 import withSettings from './withSettings';
-import { Header } from '../../components';
+import { Header, Button } from '../../components';
 
 import './settings.scss';
 
@@ -10,12 +10,12 @@ const SettingsPage = ({ themes, selectedTheme, toggleTheme }) => (
     <Header>Temas</Header>
     <div className='themes'>
       {themes.map(theme => (
-        <button key={theme.key} className='themes__item' style={theme.navBar} onClick={() => toggleTheme(theme)}>
-          <p>
+        <Button key={theme.key} style={theme.style} onClick={() => toggleTheme(theme)}>
+          <p className='themes__item'>
             {theme.label}
             {theme.key === selectedTheme.key && <i className='material-icons'>check</i>}
           </p>
-        </button>
+        </Button>
       ))}
     </div>
   </div>

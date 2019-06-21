@@ -2,10 +2,12 @@ import React from 'react';
 
 import './button.scss';
 
-const Button = ({ children, onClick }) => (
-  <button className='button' onClick={onClick}>
-    {children}
-  </button>
+const Button = ({ children, style, onClick }) => (
+  <div className='button__background' style={style}>
+    <button className='button' onClick={onClick}>
+      {children}
+    </button>
+  </div>
 );
 
 export default Button;

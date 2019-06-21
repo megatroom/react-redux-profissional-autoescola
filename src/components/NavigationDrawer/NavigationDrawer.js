@@ -3,18 +3,18 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 
 import MenuItem from './MenuItem';
+import ButtonIcon from '../Button/ButtonIcon';
 
 import './navigation-drawer.scss';
 
-const NavigationDrawer = ({ menu, isOpen, onCloseMenu, history, location }) => (
+const NavigationDrawer = ({ menu, isOpen, onCloseMenu, style, history, location }) => (
   <div
+    style={style}
     className={classNames('navigation-drawer', {
       'navigation-drawer--open': isOpen
     })}>
     <div className='navigation-drawer__head'>
-      <button className='navigation-drawer__head__button' onClick={onCloseMenu}>
-        <i className='material-icons'>close</i>
-      </button>
+      <ButtonIcon icon='close' onClick={onCloseMenu} />
     </div>
 
     <div className='navigation-drawer__menu'>

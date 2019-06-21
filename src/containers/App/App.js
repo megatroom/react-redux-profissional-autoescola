@@ -21,7 +21,7 @@ export default class App extends React.Component {
     isLoadingTheoryClasses: false,
     reloadTheoryClassesHasError: false,
     saveTheoryClassesHasError: false,
-    theoryClassToEnroll: null,
+    theoryClassToEnroll: null
   };
 
   componentDidMount() {
@@ -32,7 +32,7 @@ export default class App extends React.Component {
   componentDidCatch() {
     this.setState({
       reloadStudentsHasError: true,
-      reloadTheoryClassesHasError: true,
+      reloadTheoryClassesHasError: true
     });
   }
 
@@ -89,7 +89,7 @@ export default class App extends React.Component {
     this.setState(state => {
       const collection = state[collectionName].concat({
         id: uuid(),
-        name: name,
+        name: name
       });
 
       return this.buildNewState(collectionName, collection);
@@ -157,20 +157,20 @@ export default class App extends React.Component {
   handleReloadStudents = () => {
     this.setState({
       isLoadingStudents: true,
-      reloadStudentsHasError: false,
+      reloadStudentsHasError: false
     });
 
     StudentService.load()
       .then(students =>
         this.setState({
           students,
-          isLoadingStudents: false,
+          isLoadingStudents: false
         })
       )
       .catch(() =>
         this.setState({
           isLoadingStudents: false,
-          reloadStudentsHasError: true,
+          reloadStudentsHasError: true
         })
       );
   };
@@ -178,19 +178,19 @@ export default class App extends React.Component {
   handleSaveStudents = students => {
     this.setState({
       isLoadingStudents: true,
-      saveStudentsHasError: false,
+      saveStudentsHasError: false
     });
 
     StudentService.save(students)
       .then(() =>
         this.setState({
-          isLoadingStudents: false,
+          isLoadingStudents: false
         })
       )
       .catch(() =>
         this.setState({
           isLoadingStudents: false,
-          saveStudentsHasError: true,
+          saveStudentsHasError: true
         })
       );
   };
@@ -222,20 +222,20 @@ export default class App extends React.Component {
   handleReloadTheoryClasses = () => {
     this.setState({
       isLoadingTheoryClasses: true,
-      reloadTheoryClassesHasError: false,
+      reloadTheoryClassesHasError: false
     });
 
     TheoryClassService.load()
       .then(theoryClasses =>
         this.setState({
           theoryClasses: theoryClasses,
-          isLoadingTheoryClasses: false,
+          isLoadingTheoryClasses: false
         })
       )
       .catch(() =>
         this.setState({
           isLoadingTheoryClasses: false,
-          reloadTheoryClassesHasError: true,
+          reloadTheoryClassesHasError: true
         })
       );
   };
@@ -243,26 +243,26 @@ export default class App extends React.Component {
   handleSaveTheoryClasses = theoryClasses => {
     this.setState({
       isLoadingTheoryClasses: true,
-      saveTheoryClassesHasError: false,
+      saveTheoryClassesHasError: false
     });
 
     TheoryClassService.save(theoryClasses)
       .then(() =>
         this.setState({
-          isLoadingTheoryClasses: false,
+          isLoadingTheoryClasses: false
         })
       )
       .catch(() =>
         this.setState({
           isLoadingTheoryClasses: false,
-          saveTheoryClassesHasError: true,
+          saveTheoryClassesHasError: true
         })
       );
   };
 
   handleManageEnrollment = theoryClass => {
     this.setState({
-      theoryClassToEnroll: theoryClass,
+      theoryClassToEnroll: theoryClass
     });
 
     if (!this.state.students) {
@@ -285,7 +285,7 @@ export default class App extends React.Component {
 
       return {
         students: newStudents,
-        theoryClasses: newTheoryClasses,
+        theoryClasses: newTheoryClasses
       };
     });
 
@@ -309,7 +309,7 @@ export default class App extends React.Component {
 
       return {
         students: newStudents,
-        theoryClasses: newTheoryClasses,
+        theoryClasses: newTheoryClasses
       };
     });
 
@@ -330,7 +330,7 @@ export default class App extends React.Component {
       isLoadingTheoryClasses,
       reloadTheoryClassesHasError,
       saveTheoryClassesHasError,
-      theoryClassToEnroll,
+      theoryClassToEnroll
     } = this.state;
 
     return (
@@ -351,8 +351,7 @@ export default class App extends React.Component {
               }
             }}
             onOpenMenu={this.handleOpenMenu}
-            onCloseMenu={this.handleCloseMenu}
-          >
+            onCloseMenu={this.handleCloseMenu}>
             <Routes
               theoryClasses={theoryClasses}
               isAddingTheoryClass={isAddingTheoryClass}

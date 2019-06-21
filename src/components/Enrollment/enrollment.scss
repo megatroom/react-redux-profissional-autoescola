@@ -1,4 +1,4 @@
-@import "../Student/student.scss";
+@import '../Student/student.scss';
 
 .enrollment {
   @extend .student;
@@ -17,8 +17,6 @@
   }
 
   &__button {
-    @extend .student__button;
-
     &--hidden {
       display: none;
     }
@@ -30,14 +28,6 @@
 
   &__container {
     @extend .students__container;
-  }
-
-  &__button {
-    @extend .students__button;
-
-    &__background {
-      @extend .students__button__background;
-    }
   }
 }
 

@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { NewTheoryClass, TheoryClassList, Error } from '../../components';
+import withSettings from '../Settings/withSettings';
+import { NewTheoryClass, TheoryClassList, Error, FloatButton } from '../../components';
 
 const TheoryClassesPage = ({
+  selectedTheme,
   theoryClasses,
   isAdding,
   reloadHasError,
@@ -15,24 +17,16 @@ const TheoryClassesPage = ({
   onCloseMenu,
   onRetry
 }) => {
-  if (reloadHasError) return <Error onRetry={onRetry} />;
+  if (reloadHasError) return <Error style={selectedTheme && selectedTheme.style} onRetry={onRetry} />;
 
   return (
     <React.Fragment>
       <div className='theory-classes__container'>
         <div className='theory-classes__button__background'>
           {isAdding ? (
-            <button
-              className='theory-classes__button theory-classes__button--floating'
-              onClick={() => onAdding(false)}>
-              <i className='material-icons'>clear</i>
-            </button>
+            <FloatButton icon='clear' style={selectedTheme && selectedTheme.style} onClick={() => onAdding(false)} />
           ) : (
-            <button
-              className='theory-classes__button theory-classes__button--floating'
-              onClick={() => onAdding(true)}>
-              <i className='material-icons'>add</i>
-            </button>
+            <FloatButton icon='add' style={selectedTheme && selectedTheme.style} onClick={() => onAdding(true)} />
           )}
         </div>
         <h2>Aulas Teóricas</h2>
@@ -50,4 +44,4 @@ const TheoryClassesPage = ({
   );
 };
 
-export default TheoryClassesPage;
+export default withSettings(TheoryClassesPage);
