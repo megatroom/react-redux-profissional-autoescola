@@ -40,13 +40,15 @@
     padding: 0 16px 0 8px;
 
     &__item {
+      color: inherit;
       background-color: transparent;
       border: none;
       display: flex;
       align-items: center;
       vertical-align: middle;
       width: 100%;
-      margin-bottom: 12px;
+      padding: 4px 8px;
+      margin-bottom: 4px;
       cursor: pointer;
 
       & i {
@@ -55,7 +57,8 @@
       }
 
       &--active {
-        color: inherit;
+        background-color: $color-hover;
+        border-radius: 4px;
       }
     }
   }
