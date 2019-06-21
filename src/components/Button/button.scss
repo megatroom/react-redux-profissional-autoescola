@@ -63,9 +63,7 @@
 
   &__background {
     position: relative;
-    float: right;
-    top: 22px;
-    right: 20px;
+    float: inherit;
   }
 
   &--floating {
