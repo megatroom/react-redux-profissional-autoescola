@@ -3,6 +3,10 @@
 .themes {
   display: flex;
 
+  &__box {
+    margin-right: 8px;
+  }
+
   &__item {
     padding: 60px 12px 0px 12px;
     min-width: 120px;
