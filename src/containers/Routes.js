@@ -14,7 +14,7 @@ export const menu = [
   { icon: 'class', label: 'Aula Teórica', path: '/theory-classes' },
   { icon: 'person', label: 'Alunos', path: '/students' },
   { icon: 'settings', label: 'Configurações', path: '/settings' },
-  { icon: 'info', label: 'Sobre', path: '/about' },
+  { icon: 'info', label: 'Sobre', path: '/about' }
 ];
 
 const Routes = ({
@@ -34,11 +34,11 @@ const Routes = ({
   onEnroll,
   onUnenroll,
   reloadHasError,
-  onRetryEnroll,
+  onRetryEnroll
 }) => (
   <Switch>
     <Route path='/' exact render={() => <HomePage onCloseMenu={onCloseMenu} />} />
-    <Route
+    {/* <Route
       path='/theory-classes'
       exact
       render={() => (
@@ -56,9 +56,9 @@ const Routes = ({
           onCloseMenu={onCloseMenu}
         />
       )}
-    />
+    /> */}
     <Route path='/students' exact component={StudentsPage} />
-    <Route
+    {/* <Route
       path='/enrollments'
       exact
       render={() => (
@@ -71,7 +71,7 @@ const Routes = ({
           onRetry={onRetryEnroll}
         />
       )}
-    />
+    /> */}
     <Route path='/settings' exact component={SettingsPage} />
     <Route path='/about' exact component={AboutPage} />
     <Route component={PageNotFound} />

@@ -16,6 +16,7 @@ export default class Student extends React.Component {
 
   handleSave = () => {
     this.props.onEdit(this.props.student.id, this.input.value);
+    this.props.student.name = this.input.value;
     this.setState({ isEditing: false });
   };
 
@@ -47,7 +48,7 @@ export default class Student extends React.Component {
           <ButtonIcon
             icon='keyboard_arrow_up'
             classes={classNames('button__icon--arrow', {
-              'button__icon--arrow--none': total === 1
+              'button__icon--hidden': total === 1 || index === 0
             })}
             onClick={() => {
               onMove('up', index);
@@ -56,7 +57,7 @@ export default class Student extends React.Component {
           <ButtonIcon
             icon='keyboard_arrow_down'
             classes={classNames('button__icon--arrow', {
-              'button__icon--arrow--none': total === 1
+              'button__icon--hidden': total === 1 || index === total - 1
             })}
             onClick={() => {
               onMove('down', index);

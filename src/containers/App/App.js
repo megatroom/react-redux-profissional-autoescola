@@ -17,7 +17,7 @@ export default class App extends React.Component {
     isLoadingTheoryClasses: false,
     reloadTheoryClassesHasError: false,
     saveTheoryClassesHasError: false,
-    theoryClassToEnroll: null,
+    theoryClassToEnroll: null
   };
 
   domains = () => ['Student', 'TheoryClass'];
@@ -73,7 +73,7 @@ export default class App extends React.Component {
     this.setState(state => {
       const collection = state[collectionName].concat({
         id: uuid(),
-        name: name,
+        name: name
       });
 
       return this.buildNewState(collectionName, collection);
@@ -141,20 +141,20 @@ export default class App extends React.Component {
   handleReloadTheoryClasses = () => {
     this.setState({
       isLoadingTheoryClasses: true,
-      reloadTheoryClassesHasError: false,
+      reloadTheoryClassesHasError: false
     });
 
     TheoryClassService.load()
       .then(theoryClasses =>
         this.setState({
           theoryClasses: theoryClasses,
-          isLoadingTheoryClasses: false,
+          isLoadingTheoryClasses: false
         })
       )
       .catch(() =>
         this.setState({
           isLoadingTheoryClasses: false,
-          reloadTheoryClassesHasError: true,
+          reloadTheoryClassesHasError: true
         })
       );
   };
@@ -162,19 +162,19 @@ export default class App extends React.Component {
   handleSaveTheoryClasses = theoryClasses => {
     this.setState({
       isLoadingTheoryClasses: true,
-      saveTheoryClassesHasError: false,
+      saveTheoryClassesHasError: false
     });
 
     TheoryClassService.save(theoryClasses)
       .then(() =>
         this.setState({
-          isLoadingTheoryClasses: false,
+          isLoadingTheoryClasses: false
         })
       )
       .catch(() =>
         this.setState({
           isLoadingTheoryClasses: false,
-          saveTheoryClassesHasError: true,
+          saveTheoryClassesHasError: true
         })
       );
   };
@@ -187,7 +187,7 @@ export default class App extends React.Component {
       isLoadingTheoryClasses,
       reloadTheoryClassesHasError,
       saveTheoryClassesHasError,
-      theoryClassToEnroll,
+      theoryClassToEnroll
     } = this.state;
 
     return (
@@ -196,21 +196,21 @@ export default class App extends React.Component {
           <StudentsProvider>
             <PageLayout menu={menu} isMenuOpen={isMenuOpen} onOpenMenu={this.handleOpenMenu} onCloseMenu={this.handleCloseMenu}>
               <Routes
-                theoryClasses={theoryClasses}
-                isAddingTheoryClass={isAddingTheoryClass}
-                reloadTheoryClassHasError={reloadTheoryClassesHasError}
-                onRetryTheoryClass={this.handleReloadTheoryClasses}
-                onAddTheoryClass={this.handleAddTheoryClass}
-                onAddingTheoryClass={this.handleAddingTheoryClass}
-                onMoveTheoryClass={this.handleMoveTheoryClass}
-                onEditTheoryClass={this.handleEditTheoryClass}
-                onDeleteTheoryClass={this.handleDeleteTheoryClass}
-                onManageEnrollment={this.handleManageEnrollment}
-                onCloseMenu={this.handleCloseMenu}
-                theoryClassToEnroll={theoryClassToEnroll}
-                onEnroll={this.handleEnroll}
-                onUnenroll={this.handleUnenroll}
-                reloadHasError={reloadStudentsHasError}
+                // theoryClasses={theoryClasses}
+                // isAddingTheoryClass={isAddingTheoryClass}
+                // reloadTheoryClassHasError={reloadTheoryClassesHasError}
+                // onRetryTheoryClass={this.handleReloadTheoryClasses}
+                // onAddTheoryClass={this.handleAddTheoryClass}
+                // onAddingTheoryClass={this.handleAddingTheoryClass}
+                // onMoveTheoryClass={this.handleMoveTheoryClass}
+                // onEditTheoryClass={this.handleEditTheoryClass}
+                // onDeleteTheoryClass={this.handleDeleteTheoryClass}
+                // onManageEnrollment={this.handleManageEnrollment}
+                // onCloseMenu={this.handleCloseMenu}
+                // theoryClassToEnroll={theoryClassToEnroll}
+                // onEnroll={this.handleEnroll}
+                // onUnenroll={this.handleUnenroll}
+                // reloadHasError={reloadStudentsHasError}
                 onRetryEnroll={() => {
                   this.handleReloadStudents();
                   history.back();

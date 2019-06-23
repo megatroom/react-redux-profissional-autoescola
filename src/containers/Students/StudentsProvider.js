@@ -7,6 +7,8 @@ import { StudentService } from '../../services';
 class StudentsProvider extends Component {
   state = { students: [], isAdding: false, isLoading: false, reloadHasError: false, saveHasError: false };
 
+  service = new StudentService();
+
   componentDidMount() {
     this.handleReload();
   }
@@ -15,73 +17,79 @@ class StudentsProvider extends Component {
     this.setState({ reloadHasError: true });
   }
 
-  handleAdding = isAdding => {
+  handleAdd = isAdding => {
     this.setState({ isAdding: isAdding });
   };
 
-  handleAdd = name => {
-    this.setState(state => {
-      const students = state['students'].concat({ id: uuid(), name: name });
-      return { students: students };
-    });
+  handleSave = name => {
+    this.setState({ isLoading: true, saveHasError: false });
 
-    this.handleSave(this.state.students);
+    const student = { id: uuid(), name: name };
+    this.state.students.push(student);
+
+    this.service
+      .save(student)
+      .then(() => this.setState({ isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+  };
+
+  handleSaveAll = students => {
+    this.setState({ isLoading: true, saveHasError: false });
+
+    !Array.isArray(students) && (students = []);
+
+    this.service
+      .saveAll(students)
+      .then(() => this.setState({ isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
   handleEdit = (id, name) => {
-    this.setState(state => {
-      const students = state['students'].slice();
-      const index = students.findIndex(student => student.id === id);
+    this.setState({ isLoading: true, saveHasError: false });
 
-      students[index].name = name;
+    const student = { id: id, name: name };
 
-      return { students: students };
-    });
-
-    this.handleSave(this.state.students);
+    this.service
+      .update(student)
+      .then(() => this.setState({ isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
   handleDelete = id => {
-    this.setState(state => {
-      const students = state['students'].slice();
-      const index = students.findIndex(student => student.id === id);
+    this.setState({ isLoading: true, saveHasError: false });
 
-      students.splice(index, 1);
+    const index = this.state.students.findIndex(student => student.id === id);
 
-      return { students: students };
-    });
+    index > -1 && this.state.students.splice(index, 1);
 
-    this.handleSave(this.state.students);
+    this.service
+      .delete(id)
+      .then(() => this.setState({ isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
   handleMove = (direction, index) => {
-    this.setState(state => {
-      const students = state['students'].slice();
-      const movedStudent = students.splice(index, 1)[0];
+    this.setState(
+      state => {
+        const students = state['students'].slice();
+        const movedStudent = students.splice(index, 1)[0];
 
-      if (direction === 'up') students.splice(index - 1, 0, movedStudent);
-      else students.splice(index + 1, 0, movedStudent);
+        if (direction === 'up') students.splice(index - 1, 0, movedStudent);
+        else students.splice(index + 1, 0, movedStudent);
 
-      return { students: students };
-    });
-
-    this.handleSave(this.state.students);
+        return { students, isLoading: true, reloadHasError: false };
+      },
+      () => this.handleSaveAll(this.state.students)
+    );
   };
 
   handleReload = () => {
     this.setState({ isLoading: true, reloadHasError: false });
 
-    StudentService.load()
+    this.service
+      .list()
       .then(students => this.setState({ students, isLoading: false }))
       .catch(() => this.setState({ isLoading: false, reloadHasError: true }));
-  };
-
-  handleSave = students => {
-    this.setState({ isLoading: true, saveHasError: false });
-
-    StudentService.save(students)
-      .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
   render() {
@@ -89,15 +97,14 @@ class StudentsProvider extends Component {
       <StudentsContext.Provider
         value={{
           ...this.state,
-          onSaveRetry: () => this.handleSave(this.state.students),
+          onSaveRetry: () => this.handleSaveAll(this.state.students),
           onRetry: this.handleReload,
-          onAdd: this.handleAdd,
-          onAdding: this.handleAdding,
           onMove: this.handleMove,
+          onAdd: this.handleAdd,
+          onSave: this.handleSave,
           onEdit: this.handleEdit,
-          onDelete: this.handleDelete,
-        }}
-      >
+          onDelete: this.handleDelete
+        }}>
         {this.props.children}
       </StudentsContext.Provider>
     );

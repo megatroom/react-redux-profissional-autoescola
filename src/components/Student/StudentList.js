@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import Student from "./Student";
+import Student from './Student';
 
-import "./student.scss";
+import './student.scss';
 
 const StudentList = ({ students, onEdit, onDelete, onMove }) => (
-  <div className="student-list">
+  <div className='student-list'>
     {students.map((student, index) => (
       <Student
         key={student.id}

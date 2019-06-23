@@ -9,8 +9,8 @@ export default class NewStudent extends React.Component {
     name: ''
   };
 
-  handleAdd(student) {
-    this.props.onAdd(student);
+  handleSave(student) {
+    this.props.onSave(student);
     this.setState({ name: '' });
   }
 
@@ -26,10 +26,10 @@ export default class NewStudent extends React.Component {
           value={name}
           onChange={event => this.setState({ name: event.target.value })}
           onKeyPress={event => {
-            if (event.key === 'Enter') this.handleAdd(event.target.value);
+            if (event.key === 'Enter') this.handleSave(event.target.value);
           }}
         />
-        <ButtonIcon icon='save' onClick={() => this.handleAdd(document.querySelector('.new-student__input').value)} />
+        <ButtonIcon icon='save' onClick={() => this.handleSave(document.querySelector('.new-student__input').value)} />
       </div>
     );
   }
