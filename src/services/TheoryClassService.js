@@ -6,14 +6,16 @@ export default class TheoryClassService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          let theoryClasses = window.localStorage.getItem('theoryClasses');
+          this.list()
+            .then(theoryClasses => {
+              if (theoryClasses.find(tc => tc.id === theoryClass.id))
+                throw new Error('O sistema apresentou um estado inválido ao salvar a aula teórica.');
 
-          if (!theoryClasses) theoryClasses = [];
-          else if (theoryClasses.find(theoryClass)) throw new Error('O sistema apresentou um estado inválido ao salvar a aula teórica.');
-
-          theoryClasses.push(theoryClass);
-          window.localStorage.setItem('theoryClasses', JSON.stringify(theoryClasses));
-          resolve();
+              theoryClasses.push(theoryClass);
+              window.localStorage.setItem('theoryClasses', JSON.stringify(theoryClasses));
+              resolve();
+            })
+            .catch(() => reject());
         } else {
           failedSaveAttempts++;
           reject();
@@ -42,14 +44,19 @@ export default class TheoryClassService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          const theoryClasses = window.localStorage.getItem('theoryClasses');
-          const index = theoryClasses.findIndex(t => t.id === theoryClass.id);
+          const theoryClasses = [];
 
-          if (index === -1) throw new Error('O sistema apresentou um estado inválido ao atualizar a aula teórica.');
+          this.list()
+            .then(theoryClasses => {
+              const index = theoryClasses.findIndex(tc => tc.id === theoryClass.id);
 
-          theoryClasses[index] = theoryClass;
-          window.localStorage.setItem('theoryClasses', JSON.stringify(theoryClasses));
-          resolve();
+              if (index === -1) throw new Error('O sistema apresentou um estado inválido ao atualizar a aula teórica.');
+
+              theoryClasses[index] = theoryClass;
+              window.localStorage.setItem('theoryClasses', JSON.stringify(theoryClasses));
+              resolve();
+            })
+            .catch(() => reject());
         } else {
           failedSaveAttempts++;
           reject();
@@ -62,15 +69,19 @@ export default class TheoryClassService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          const theoryClasses = window.localStorage.getItem('theoryClasses');
-          const index = theoryClasses.findIndex(t => t.id === student.id);
+          const theoryClasses = [];
 
-          if (index === -1) throw new Error('O sistema apresentou um estado inválido ao remover a aula teórica.');
+          this.list()
+            .then(theoryClasses => {
+              const index = theoryClasses.findIndex(theoryClass => theoryClass.id === id);
 
-          theoryClasses.splice(index, 1);
-          theoryClasses[index] = student;
-          window.localStorage.setItem('theoryClasses', JSON.stringify(theoryClasses));
-          resolve();
+              if (index === -1) throw new Error('O sistema apresentou um estado inválido ao remover a aula teórica.');
+
+              theoryClasses.splice(index, 1);
+              window.localStorage.setItem('theoryClasses', JSON.stringify(theoryClasses));
+              resolve();
+            })
+            .catch(() => reject());
         } else {
           failedSaveAttempts++;
           reject();
@@ -83,9 +94,14 @@ export default class TheoryClassService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          const theoryClasses = window.localStorage.getItem('theoryClasses');
-          const student = theoryClasses.find(theoryClass => theoryClass.id === id);
-          resolve(student);
+          const theoryClasses = [];
+
+          this.list()
+            .then(theoryClasses => {
+              const theoryClass = theoryClasses.find(theoryClass => theoryClass.id === id);
+              resolve(theoryClass);
+            })
+            .catch(() => reject());
         } else {
           failedSaveAttempts++;
           reject();

@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import { withRouter } from 'react-router-dom';
 
 import ButtonIcon from '../Button/ButtonIcon';
 
@@ -24,11 +23,12 @@ class TheoryClass extends React.Component {
 
   handleSave = () => {
     this.props.onEdit(this.props.theoryClass.id, this.input.value);
+    this.props.theoryClass.name = this.input.value;
     this.setState({ isEditing: false });
   };
 
   render() {
-    const { theoryClass, index, total, history, onDelete, onMove, onManageEnrollment, onCloseMenu } = this.props;
+    const { theoryClass, index, total, onDelete, onMove, onManageEnrollment } = this.props;
     const { isEditing, enrollments } = this.state;
 
     return (
@@ -49,15 +49,7 @@ class TheoryClass extends React.Component {
           </React.Fragment>
         )}
 
-        <ButtonIcon
-          icon='group'
-          disabled={isEditing}
-          onClick={() => {
-            onManageEnrollment(theoryClass);
-            onCloseMenu();
-            history.push('/enrollments');
-          }}
-        />
+        <ButtonIcon icon='group' disabled={isEditing} onClick={() => onManageEnrollment(theoryClass)} />
         <ButtonIcon icon='edit' disabled={isEditing} onClick={this.handleEdit} />
         <ButtonIcon icon='delete' disabled={isEditing || enrollments > 0} onClick={() => onDelete(theoryClass.id)} />
 
@@ -68,7 +60,7 @@ class TheoryClass extends React.Component {
           <ButtonIcon
             icon='keyboard_arrow_up'
             classes={classNames('button__icon--arrow', {
-              'button__icon--arrow--none': total === 1
+              'button__icon--hidden': total === 1 || index === 0
             })}
             onClick={() => {
               onMove('up', index);
@@ -77,7 +69,7 @@ class TheoryClass extends React.Component {
           <ButtonIcon
             icon='keyboard_arrow_down'
             classes={classNames('button__icon--arrow', {
-              'button__icon--arrow--none': total === 1
+              'button__icon--hidden': total === 1 || index === total - 1
             })}
             onClick={() => {
               onMove('down', index);
@@ -89,4 +81,4 @@ class TheoryClass extends React.Component {
   }
 }
 
-export default withRouter(TheoryClass);
+export default TheoryClass;

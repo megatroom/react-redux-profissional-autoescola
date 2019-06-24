@@ -4,19 +4,7 @@ import withSettings from '../Settings/withSettings';
 import withStudents from './withStudents';
 import { NewStudent, StudentList, Error, FloatButton } from '../../components';
 
-const StudentsPage = ({
-  selectedTheme,
-  students,
-  isAdding,
-  reloadHasError,
-  saveHasError,
-  onMove,
-  onAdd,
-  onSave,
-  onEdit,
-  onDelete,
-  onRetry
-}) => {
+const StudentsPage = ({ selectedTheme, students, isAdding, reloadHasError, onAdd, onSave, onEdit, onDelete, onMove, onRetry }) => {
   if (reloadHasError) return <Error style={selectedTheme && selectedTheme.style} onRetry={onRetry} />;
 
   return (
@@ -29,8 +17,8 @@ const StudentsPage = ({
         )}
         <h2>Alunos</h2>
       </div>
-      {isAdding && <NewStudent saveHasError={saveHasError} onAdd={onAdd} onSave={onSave} />}
-      <StudentList students={students} onMove={onMove} onEdit={onEdit} onDelete={onDelete} />
+      {isAdding && <NewStudent onAdd={onAdd} onSave={onSave} />}
+      <StudentList students={students} onEdit={onEdit} onDelete={onDelete} onMove={onMove} />
     </React.Fragment>
   );
 };

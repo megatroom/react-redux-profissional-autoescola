@@ -17,61 +17,12 @@ export const menu = [
   { icon: 'info', label: 'Sobre', path: '/about' }
 ];
 
-const Routes = ({
-  theoryClasses,
-  isAddingTheoryClass,
-  reloadTheoryClassHasError,
-  onRetryTheoryClass,
-  onAddTheoryClass,
-  onAddingTheoryClass,
-  onMoveTheoryClass,
-  onEditTheoryClass,
-  onDeleteTheoryClass,
-  onManageEnrollment,
-  onCloseMenu,
-  students,
-  theoryClassToEnroll,
-  onEnroll,
-  onUnenroll,
-  reloadHasError,
-  onRetryEnroll
-}) => (
+const Routes = ({ onCloseMenu }) => (
   <Switch>
     <Route path='/' exact render={() => <HomePage onCloseMenu={onCloseMenu} />} />
-    {/* <Route
-      path='/theory-classes'
-      exact
-      render={() => (
-        <TheoryClassesPage
-          theoryClasses={theoryClasses}
-          isAdding={isAddingTheoryClass}
-          reloadHasError={reloadTheoryClassHasError}
-          onRetry={onRetryTheoryClass}
-          onAdd={onAddTheoryClass}
-          onAdding={onAddingTheoryClass}
-          onMove={onMoveTheoryClass}
-          onEdit={onEditTheoryClass}
-          onDelete={onDeleteTheoryClass}
-          onManageEnrollment={onManageEnrollment}
-          onCloseMenu={onCloseMenu}
-        />
-      )}
-    /> */}
+    <Route path='/theory-classes' exact component={TheoryClassesPage} />
     <Route path='/students' exact component={StudentsPage} />
-    {/* <Route
-      path='/enrollments'
-      exact
-      render={() => (
-        <EnrollmentsPage
-          students={students}
-          theoryClass={theoryClassToEnroll}
-          onEnroll={onEnroll}
-          onUnenroll={onUnenroll}
-          reloadHasError={reloadHasError}
-          onRetry={onRetryEnroll}
-        />
-      )}
-    /> */}
+    <Route path='/enrollments' exact component={EnrollmentsPage} />
     <Route path='/settings' exact component={SettingsPage} />
     <Route path='/about' exact component={AboutPage} />
     <Route component={PageNotFound} />

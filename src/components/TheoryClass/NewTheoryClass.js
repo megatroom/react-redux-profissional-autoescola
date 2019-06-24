@@ -9,8 +9,8 @@ export default class NewTheoryClass extends React.Component {
     name: ''
   };
 
-  handleAdd(theoryClass) {
-    this.props.onAdd(theoryClass);
+  handleSave(theoryClass) {
+    this.props.onSave(theoryClass);
     this.setState({ name: '' });
   }
 
@@ -26,10 +26,10 @@ export default class NewTheoryClass extends React.Component {
           value={name}
           onChange={event => this.setState({ name: event.target.value })}
           onKeyPress={event => {
-            if (event.key === 'Enter') this.handleAdd(event.target.value);
+            if (event.key === 'Enter') this.handleSave(event.target.value);
           }}
         />
-        <ButtonIcon icon='save' onClick={() => this.handleAdd(document.querySelector('.new-theory-class__input').value)} />
+        <ButtonIcon icon='save' onClick={() => this.handleSave(document.querySelector('.new-theory-class__input').value)} />
       </div>
     );
   }

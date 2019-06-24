@@ -1,18 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import TheoryClass from "./TheoryClass";
+import TheoryClass from './TheoryClass';
 
-import "./theory-class.scss";
+import './theory-class.scss';
 
-const TheoryClassList = ({
-  theoryClasses,
-  onEdit,
-  onDelete,
-  onMove,
-  onManageEnrollment,
-  onCloseMenu
-}) => (
-  <div className="theory-class-list">
+const TheoryClassList = ({ theoryClasses, onEdit, onDelete, onMove, onManageEnrollment }) => (
+  <div className='theory-class-list'>
     {theoryClasses.map((theoryClass, index) => (
       <TheoryClass
         key={theoryClass.id}
@@ -23,7 +16,6 @@ const TheoryClassList = ({
         onDelete={onDelete}
         onMove={onMove}
         onManageEnrollment={onManageEnrollment}
-        onCloseMenu={onCloseMenu}
       />
     ))}
   </div>

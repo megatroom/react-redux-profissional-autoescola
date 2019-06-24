@@ -1,97 +1,110 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import EnrollmentsContext from './EnrollmentsContext';
 import { StudentService, TheoryClassService } from '../../services';
 
 class EnrollmentsProvider extends Component {
-  state = { theoryClass: null, students: [], isLoading: false, reloadHasError: false };
+  state = { theoryClass: null, students: [], isLoading: false, reloadHasError: false, saveHasError: false };
 
-  // TODO Remover o carregamento da inicialização.
-  componentDidMount() {
-    this.handleReload();
-  }
+  studentsService = new StudentService();
+  theoryClassesService = new TheoryClassService();
 
   componentDidCatch() {
     this.setState({ reloadHasError: true });
   }
 
+  componentDidMount() {
+    this.handleReload();
+  }
+
   handleReload = () => {
     this.setState({ isLoading: true, reloadHasError: false });
 
-    const availableStudents = [];
+    const { theoryClass } = this.state;
 
-    if (this.state.theoryClass) {
-      StudentService.load()
+    if (theoryClass) {
+      this.studentsService
+        .list(theoryClass)
         .then(students => {
           if (!Array.isArray(students)) throw new Error('O sistema apresentou um estado inválido ao carregar os dados dos estudantes.');
 
-          students.forEach(
-            student => (!student.theoryClass || student.theoryClass == this.state.theoryClass.id) && availableStudents.push(student)
-          );
-
-          this.setState({ students: availableStudents, isLoading: false });
+          this.setState({ students: students, isLoading: false });
         })
         .catch(() => this.setState({ isLoading: false, reloadHasError: true }));
     } else {
-      this.setState({ students: availableStudents, isLoading: false });
+      this.setState({ students: [], isLoading: false });
     }
   };
 
   handleManageEnrollment = theoryClass => {
-    this.setState({ theoryClass });
+    this.setState({ theoryClass: theoryClass });
     this.handleReload();
+    this.props.history.push('/enrollments');
   };
 
   handleEnroll = (student, theoryClass) => {
     this.setState(state => {
-      const newStudents = state.students.slice();
-      const studentIndex = newStudents.findIndex(newStudent => newStudent.id === student.id);
-      newStudents[studentIndex].theoryClass = theoryClass.id;
+      if (!Array.isArray(theoryClass.enrollments)) theoryClass.enrollments = [];
 
-      const newTheoryClasses = state.theoryClasses.slice();
-      const theoryClassIndex = newTheoryClasses.findIndex(newTheoryClass => newTheoryClass.id === theoryClass.id);
+      theoryClass.enrollments.push(student.id);
+      student.enrollment = theoryClass.id;
 
-      if (!Array.isArray(newTheoryClasses[theoryClassIndex].enrollments)) newTheoryClasses[theoryClassIndex].enrollments = [];
+      const students = Array.from(state.students);
+      const index = students.findIndex(s => s.id === student.id);
 
-      newTheoryClasses[theoryClassIndex].enrollments.push(student.id);
+      if (index > -1) students[index] = student;
 
-      return {
-        students: newStudents,
-        theoryClasses: newTheoryClasses,
-      };
+      return { theoryClass: theoryClass, students: students };
     });
 
-    this.handleSaveStudents(this.state.students);
-    this.handleSaveTheoryClasses(this.state.theoryClasses);
+    this.props.onSaveStudent(student);
+    this.props.onSaveTheoryClasses(theoryClasses);
   };
 
   handleUnenroll = (student, theoryClass) => {
     this.setState(state => {
-      const newStudents = state.students.slice();
-      const studentIndex = newStudents.findIndex(newStudent => newStudent.id === student.id);
-      delete newStudents[studentIndex].theoryClass;
+      delete student.enrollment;
 
-      const newEnrollments = theoryClass.enrollments.slice();
-      const enrollmentIndex = newEnrollments.findIndex(enrollment => enrollment === student.id);
-      newEnrollments.splice(enrollmentIndex, 1);
+      const students = Array.from(state.students);
+      const index = students.findIndex(s => s.id === student.id);
 
-      const newTheoryClasses = state.theoryClasses.slice();
-      const theoryClassIndex = newTheoryClasses.findIndex(newTheoryClass => newTheoryClass.id === theoryClass.id);
-      newTheoryClasses[theoryClassIndex].enrollments = newEnrollments;
+      if (index > -1) students[index] = student;
+
+      index = theoryClass.enrollments.findIndex(e => e === student.id);
+
+      if (index > -1) theoryClass.enrollments.splice(index, 1);
 
       return {
-        students: newStudents,
-        theoryClasses: newTheoryClasses,
+        theoryClass: theoryClass,
+        students: students
       };
     });
 
-    this.handleSaveStudents(this.state.students);
-    this.handleSaveTheoryClasses(this.state.theoryClasses);
+    this.props.onSaveStudent(student);
+    this.props.onSaveTheoryClasses(theoryClasses);
+  };
+
+  handleSaveAll = () => {
+    this.studentsService.saveAll(this.state.students);
+    this.theoryClassesService.save(this.state.theoryClass);
   };
 
   render() {
-    <EnrollmentsContext.Provider></EnrollmentsContext.Provider>;
+    return (
+      <EnrollmentsContext.Provider
+        value={{
+          ...this.state,
+          onSaveRetry: () => this.handleSaveAll(this.state.theoryClasses),
+          onEnroll: this.handleEnroll,
+          onUnenroll: this.handleUnenroll,
+          onManageEnrollment: this.handleManageEnrollment,
+          onRetry: this.handleReload
+        }}>
+        {this.props.children}
+      </EnrollmentsContext.Provider>
+    );
   }
 }
 
-export default EnrollmentsProvider;
+export default withRouter(EnrollmentsProvider);
