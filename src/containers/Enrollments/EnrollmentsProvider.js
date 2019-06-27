@@ -14,14 +14,10 @@ class EnrollmentsProvider extends Component {
     this.setState({ reloadHasError: true });
   }
 
-  componentDidMount() {
-    this.handleReload();
-  }
-
-  handleReload = () => {
+  handleReload = (theoryClass = null) => {
     this.setState({ isLoading: true, reloadHasError: false });
 
-    const { theoryClass } = this.state;
+    !theoryClass && (theoryClass = this.state.theoryClass);
 
     if (theoryClass) {
       this.studentsService
@@ -39,7 +35,7 @@ class EnrollmentsProvider extends Component {
 
   handleManageEnrollment = theoryClass => {
     this.setState({ theoryClass: theoryClass });
-    this.handleReload();
+    this.handleReload(theoryClass);
     this.props.history.push('/enrollments');
   };
 
@@ -58,8 +54,9 @@ class EnrollmentsProvider extends Component {
       return { theoryClass: theoryClass, students: students };
     });
 
-    this.props.onSaveStudent(student);
-    this.props.onSaveTheoryClasses(theoryClasses);
+    Promise.all([this.studentsService.save(student), this.theoryClassesService.save(theoryClass)])
+      .then(() => this.setState({ isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
   handleUnenroll = (student, theoryClass) => {
@@ -81,13 +78,17 @@ class EnrollmentsProvider extends Component {
       };
     });
 
-    this.props.onSaveStudent(student);
-    this.props.onSaveTheoryClasses(theoryClasses);
+    Promise.all([this.studentsService.save(student), this.theoryClassesService.save(theoryClass)])
+      .then(() => this.setState({ isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
   handleSaveAll = () => {
-    this.studentsService.saveAll(this.state.students);
-    this.theoryClassesService.save(this.state.theoryClass);
+    this.setState({ isLoading: true, saveHasError: false });
+
+    Promise.all([this.studentsService.saveAll(this.state.students), this.theoryClassesService.save(this.state.theoryClass)])
+      .then(() => this.setState({ isLoading: false }))
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
   render() {
@@ -95,12 +96,13 @@ class EnrollmentsProvider extends Component {
       <EnrollmentsContext.Provider
         value={{
           ...this.state,
-          onSaveRetry: () => this.handleSaveAll(this.state.theoryClasses),
+          onSaveRetry: () => this.handleSaveAll(),
           onEnroll: this.handleEnroll,
           onUnenroll: this.handleUnenroll,
           onManageEnrollment: this.handleManageEnrollment,
           onRetry: this.handleReload
-        }}>
+        }}
+      >
         {this.props.children}
       </EnrollmentsContext.Provider>
     );
