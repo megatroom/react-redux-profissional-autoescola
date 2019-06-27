@@ -14,19 +14,24 @@ const PageLayout = ({ children, selectedTheme, menu, isMenuOpen, onOpenMenu, onC
       {({ isLoading: isLoadingStudents, saveHasError: saveStudentsHasError, onSaveRetry: onSaveStudentsRetry }) => (
         <TheoryClassesContext.Consumer>
           {({ isLoading: isLoadingTheoryClasses, saveHasError: saveTheoryClassesHasError, onSaveRetry: onSaveTheoryClassesRetry }) => (
-            <Fragment>
-              <AppBar
-                style={selectedTheme && selectedTheme.style}
-                isLoading={isLoadingStudents || isLoadingTheoryClasses}
-                saveHasError={saveStudentsHasError || saveTheoryClassesHasError}
-                onSaveRetry={() => {
-                  saveStudentsHasError && onSaveStudentsRetry();
-                  saveTheoryClassesHasError && onSaveTheoryClassesRetry();
-                }}
-                onOpenMenu={onOpenMenu}
-              />
-              <div className='container'>{children}</div>
-            </Fragment>
+            <EnrollmentsContext.Consumer>
+              {({ isLoading: isLoadingEnrollments, saveHasError: saveEnrollmentsHasError, onSaveRetry: onSaveEnrollmentsRetry }) => (
+                <Fragment>
+                  <AppBar
+                    style={selectedTheme && selectedTheme.style}
+                    isLoading={isLoadingStudents || isLoadingTheoryClasses || isLoadingEnrollments}
+                    saveHasError={saveStudentsHasError || saveTheoryClassesHasError || saveEnrollmentsHasError}
+                    onSaveRetry={() => {
+                      saveStudentsHasError && onSaveStudentsRetry();
+                      saveTheoryClassesHasError && onSaveTheoryClassesRetry();
+                      saveEnrollmentsHasError && onSaveEnrollmentsRetry();
+                    }}
+                    onOpenMenu={onOpenMenu}
+                  />
+                  <div className='container'>{children}</div>
+                </Fragment>
+              )}
+            </EnrollmentsContext.Consumer>
           )}
         </TheoryClassesContext.Consumer>
       )}
