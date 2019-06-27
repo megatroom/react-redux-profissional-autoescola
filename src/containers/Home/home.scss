@@ -3,22 +3,11 @@
 .home {
   & i {
     display: block;
-    margin-bottom: 8px;
-  }
-
-  &-container {
-    background-color: $color-primary;
-    width: 128px;
-    border-radius: 2px;
   }
 
   &__button {
-    color: white;
-    background-color: transparent;
-    border: none;
-    border-radius: 2px;
-    width: inherit;
-    padding: 16px;
-    cursor: pointer;
+    display: block;
+    min-width: 96px;
+    padding: 16px 0px;
   }
 }

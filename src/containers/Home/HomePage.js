@@ -1,34 +1,40 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
+import withSettings from '../Settings/withSettings';
+import { Button } from '../../components';
+
 import './home.scss';
 
-const HomePage = ({ history, onCloseMenu }) => (
+const HomePage = ({ selectedTheme, history, onCloseMenu }) => (
   <div className='home'>
     <h2>Serviços</h2>
-    <div className='home-container'>
-      <button
-        className='home__button'
-        onClick={() => {
-          onCloseMenu();
-          history.push('/theory-classes');
-        }}>
-        <i className='material-icons'>class</i>Aula Teórica
-      </button>
-    </div>
+    <Button
+      style={selectedTheme.style}
+      onClick={() => {
+        onCloseMenu();
+        history.push('/theory-classes');
+      }}
+    >
+      <span className='home__button'>
+        <i className='material-icons'>class</i>
+        Aula Teórica
+      </span>
+    </Button>
     <h2>Cadastros</h2>
-    <div className='home-container'>
-      <button
-        className='home__button'
-        onClick={() => {
-          onCloseMenu();
-          history.push('/students');
-        }}>
+    <Button
+      style={selectedTheme.style}
+      onClick={() => {
+        onCloseMenu();
+        history.push('/students');
+      }}
+    >
+      <span className='home__button'>
         <i className='material-icons'>person</i>
         Alunos
-      </button>
-    </div>
+      </span>
+    </Button>
   </div>
 );
 
-export default withRouter(HomePage);
+export default withRouter(withSettings(HomePage));
