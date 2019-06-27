@@ -117,7 +117,7 @@ export default class StudentService {
           const students = window.localStorage.getItem('students');
           resolve(
             students
-              ? JSON.parse(students).filter(student => !theoryClass || student.theoryClass || student.theoryClass.id == theoryClass.id)
+              ? JSON.parse(students).filter(student => !theoryClass || !student.theoryClass || student.theoryClass === theoryClass.id)
               : []
           );
         } else {
