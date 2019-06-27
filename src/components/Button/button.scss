@@ -12,6 +12,15 @@
   white-space: nowrap;
   cursor: pointer;
 
+  &:disabled {
+    color: $color-disabled;
+
+    &:hover {
+      background-color: transparent;
+      cursor: not-allowed;
+    }
+  }
+
   &:hover {
     background-color: $color-hover;
   }
