@@ -8,6 +8,8 @@ export default class StudentService {
         if (failedSaveAttempts > 1) {
           this.list()
             .then(students => {
+              if (!Array.isArray(students)) students = [];
+
               if (students.find(s => s.id === student.id))
                 throw new Error('O sistema apresentou um estado inválido ao salvar o estudante.');
 
@@ -44,10 +46,10 @@ export default class StudentService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          const students = [];
-
           this.list()
             .then(students => {
+              if (!Array.isArray(students)) students = [];
+
               const index = students.findIndex(s => s.id === student.id);
 
               if (index === -1) throw new Error('O sistema apresentou um estado inválido ao atualizar o estudante.');
@@ -69,10 +71,10 @@ export default class StudentService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          const students = [];
-
           this.list()
             .then(students => {
+              if (!Array.isArray(students)) throw new Error('O estado do sistema ao remover o estudante é inválido.');
+
               const index = students.findIndex(student => student.id === id);
 
               if (index === -1) throw new Error('O sistema apresentou um estado inválido ao remover o estudante.');
@@ -117,7 +119,7 @@ export default class StudentService {
           const students = window.localStorage.getItem('students');
           resolve(
             students
-              ? JSON.parse(students).filter(student => !theoryClass || !student.theoryClass || student.theoryClass === theoryClass.id)
+              ? JSON.parse(students).filter(student => !theoryClass || !student.enrollment || student.enrollment === theoryClass.id)
               : []
           );
         } else {
