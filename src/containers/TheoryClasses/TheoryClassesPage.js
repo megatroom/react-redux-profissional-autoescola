@@ -10,6 +10,7 @@ const TheoryClassesPage = ({
   theoryClasses,
   isAdding,
   reloadHasError,
+  saveHasError,
   onAdd,
   onSave,
   onEdit,
@@ -24,15 +25,16 @@ const TheoryClassesPage = ({
     <React.Fragment>
       <div className='theory-classes__container'>
         <div className='theory-classes__button__background'>
-          {isAdding ? (
-            <FloatButton icon='clear' style={selectedTheme && selectedTheme.style} onClick={() => onAdd(false)} />
-          ) : (
-            <FloatButton icon='add' style={selectedTheme && selectedTheme.style} onClick={() => onAdd(true)} />
-          )}
+          {!saveHasError &&
+            (isAdding ? (
+              <FloatButton icon='clear' style={selectedTheme && selectedTheme.style} onClick={() => onAdd(false)} />
+            ) : (
+              <FloatButton icon='add' style={selectedTheme && selectedTheme.style} onClick={() => onAdd(true)} />
+            ))}
         </div>
         <h2>Aulas Teóricas</h2>
       </div>
-      {isAdding && <NewTheoryClass onAdd={onAdd} onSave={onSave} />}
+      {!saveHasError && isAdding && <NewTheoryClass onAdd={onAdd} onSave={onSave} />}
       <TheoryClassList
         theoryClasses={theoryClasses}
         onEdit={onEdit}
