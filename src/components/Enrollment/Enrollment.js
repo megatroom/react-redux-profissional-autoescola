@@ -14,7 +14,7 @@ export default class Enrollment extends React.Component {
         <span className='enrollment__text'>{student.name}</span>
         <span
           className={classNames('enrollment__text--done', {
-            'enrollment__text--hidden': !student.theoryClass
+            'enrollment__text--hidden': !student.enrollment
           })}>
           <i className='material-icons'>done</i>
         </span>
