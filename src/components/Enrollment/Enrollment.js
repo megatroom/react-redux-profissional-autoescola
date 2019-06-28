@@ -20,12 +20,12 @@ export default class Enrollment extends React.Component {
         </span>
         <ButtonIcon
           icon='add'
-          classes={classNames({ 'enrollment__button--hidden': student.theoryClass })}
+          classes={classNames({ 'enrollment__button--hidden': student.enrollment })}
           onClick={() => onEnroll(student, theoryClass)}
         />
         <ButtonIcon
           icon='clear'
-          classes={classNames({ 'enrollment__button--hidden': !student.theoryClass })}
+          classes={classNames({ 'enrollment__button--hidden': !student.enrollment })}
           onClick={() => onUnenroll(student, theoryClass)}
         />
       </div>
