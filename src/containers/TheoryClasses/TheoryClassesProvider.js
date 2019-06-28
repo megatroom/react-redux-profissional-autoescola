@@ -5,7 +5,14 @@ import TheoryClassesContext from './TheoryClassesContext';
 import { TheoryClassService } from '../../services';
 
 class TheoryClassesProvider extends Component {
-  state = { theoryClass: null, theoryClasses: [], isAdding: false, isLoading: false, reloadHasError: false, saveHasError: false };
+  state = {
+    theoryClass: null,
+    theoryClasses: [],
+    isAdding: false,
+    isLoading: false,
+    reloadHasError: false,
+    saveHasError: false
+  };
 
   service = new TheoryClassService();
 
@@ -49,10 +56,12 @@ class TheoryClassesProvider extends Component {
 
     const theoryClass = { id: id, name: name };
 
-    this.service
-      .update(theoryClass)
-      .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+    if (!this.state.saveHasError)
+      this.service
+        .update(theoryClass)
+        .then(() => this.setState({ isLoading: false }))
+        .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+    else this.setState({ isLoading: false, saveHasError: true });
   };
 
   handleDelete = id => {
@@ -62,10 +71,12 @@ class TheoryClassesProvider extends Component {
 
     index > -1 && this.state.theoryClasses.splice(index, 1);
 
-    this.service
-      .delete(id)
-      .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+    if (!this.state.saveHasError)
+      this.service
+        .delete(id)
+        .then(() => this.setState({ isLoading: false }))
+        .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+    else this.setState({ isLoading: false, saveHasError: true });
   };
 
   handleMove = (direction, index) => {
