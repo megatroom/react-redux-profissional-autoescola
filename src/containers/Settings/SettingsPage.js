@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import withSettings from './withSettings';
 import { Header, Button } from '../../components';
@@ -6,7 +6,7 @@ import { Header, Button } from '../../components';
 import './settings.scss';
 
 const SettingsPage = ({ themes, selectedTheme, toggleTheme }) => (
-  <div>
+  <Fragment>
     <Header>Temas</Header>
     <div className='themes'>
       {themes.map(theme => (
@@ -20,7 +20,7 @@ const SettingsPage = ({ themes, selectedTheme, toggleTheme }) => (
         </div>
       ))}
     </div>
-  </div>
+  </Fragment>
 );
 
 export default withSettings(SettingsPage);
