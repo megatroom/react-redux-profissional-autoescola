@@ -1,15 +1,14 @@
 @import '../../styles/variables.scss';
 
 .themes {
-  display: flex;
-
   &__box {
-    margin-right: 8px;
+    display: inline-block;
+    margin: 8px;
   }
 
   &__item {
-    padding: 60px 12px 0px 12px;
-    min-width: 120px;
+    padding: 48px 12px 0px 12px;
+    min-width: 96px;
     text-align: left;
     font-size: 16px;
   }
