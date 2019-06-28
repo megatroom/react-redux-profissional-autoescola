@@ -3,7 +3,7 @@ import React from 'react';
 import withTheoryClasses from './withTheoryClasses';
 import withSettings from '../Settings/withSettings';
 import withEnrollments from '../Enrollments/withEnrollments';
-import { NewTheoryClass, TheoryClassList, Error, FloatButton } from '../../components';
+import { NewTheoryClass, TheoryClassList, Error, FloatButton, Header } from '../../components';
 
 const TheoryClassesPage = ({
   selectedTheme,
@@ -32,7 +32,7 @@ const TheoryClassesPage = ({
               <FloatButton icon='add' style={selectedTheme && selectedTheme.style} onClick={() => onAdd(true)} />
             ))}
         </div>
-        <h2>Aulas Teóricas</h2>
+        <Header>Aulas Teóricas</Header>
       </div>
       {!saveHasError && isAdding && <NewTheoryClass onAdd={onAdd} onSave={onSave} />}
       <TheoryClassList
