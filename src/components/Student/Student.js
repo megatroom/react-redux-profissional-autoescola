@@ -39,7 +39,7 @@ export default class Student extends React.Component {
         )}
 
         <ButtonIcon icon='edit' disabled={isEditing} onClick={this.handleEdit} />
-        <ButtonIcon icon='delete' disabled={isEditing || student.theoryClass} onClick={() => onDelete(student.id)} />
+        <ButtonIcon icon='delete' disabled={isEditing || student.enrollment} onClick={() => onDelete(student.id)} />
 
         <div
           className={classNames('student__arrows', {
