@@ -49,10 +49,12 @@ class StudentsProvider extends Component {
 
     const student = { id: id, name: name };
 
-    this.service
-      .update(student)
-      .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+    if (!this.state.saveHasError)
+      this.service
+        .update(student)
+        .then(() => this.setState({ isLoading: false }))
+        .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+    else this.setState({ isLoading: false, saveHasError: true });
   };
 
   handleDelete = id => {
@@ -62,10 +64,12 @@ class StudentsProvider extends Component {
 
     index > -1 && this.state.students.splice(index, 1);
 
-    this.service
-      .delete(id)
-      .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+    if (!this.state.saveHasError)
+      this.service
+        .delete(id)
+        .then(() => this.setState({ isLoading: false }))
+        .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+    else this.setState({ isLoading: false, saveHasError: true });
   };
 
   handleMove = (direction, index) => {
