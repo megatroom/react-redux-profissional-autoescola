@@ -37,6 +37,7 @@ const TheoryClassesPage = ({
       {!saveHasError && isAdding && <NewTheoryClass onAdd={onAdd} onSave={onSave} />}
       <TheoryClassList
         theoryClasses={theoryClasses}
+        saveHasError={saveHasError}
         onEdit={onEdit}
         onDelete={onDelete}
         onMove={onMove}
