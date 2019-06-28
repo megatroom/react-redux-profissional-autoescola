@@ -94,11 +94,9 @@ export default class TheoryClassService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          const theoryClasses = [];
-
           this.list()
             .then(theoryClasses => {
-              const theoryClass = theoryClasses.find(theoryClass => theoryClass.id === id);
+              const theoryClass = Array.isArray(theoryClasses) ? theoryClasses.find(theoryClass => theoryClass.id === id) : null;
               resolve(theoryClass);
             })
             .catch(() => reject());
