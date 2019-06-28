@@ -4,7 +4,7 @@ import TheoryClass from './TheoryClass';
 
 import './theory-class.scss';
 
-const TheoryClassList = ({ theoryClasses, onEdit, onDelete, onMove, onManageEnrollment }) => (
+const TheoryClassList = ({ theoryClasses, saveHasError, onEdit, onDelete, onMove, onManageEnrollment }) => (
   <div className='theory-class-list'>
     {theoryClasses.map((theoryClass, index) => (
       <TheoryClass
@@ -12,6 +12,7 @@ const TheoryClassList = ({ theoryClasses, onEdit, onDelete, onMove, onManageEnro
         theoryClass={theoryClass}
         index={index}
         total={theoryClasses.length}
+        saveHasError={saveHasError}
         onEdit={onEdit}
         onDelete={onDelete}
         onMove={onMove}

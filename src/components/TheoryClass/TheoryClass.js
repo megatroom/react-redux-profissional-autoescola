@@ -28,7 +28,7 @@ class TheoryClass extends React.Component {
   };
 
   render() {
-    const { theoryClass, index, total, onDelete, onMove, onManageEnrollment } = this.props;
+    const { theoryClass, index, total, saveHasError, onDelete, onMove, onManageEnrollment } = this.props;
     const { isEditing, enrollments } = this.state;
 
     return (
@@ -49,7 +49,7 @@ class TheoryClass extends React.Component {
           </React.Fragment>
         )}
 
-        <ButtonIcon icon='group' disabled={isEditing} onClick={() => onManageEnrollment(theoryClass)} />
+        <ButtonIcon icon='group' disabled={isEditing || saveHasError} onClick={() => onManageEnrollment(theoryClass)} />
         <ButtonIcon icon='edit' disabled={isEditing} onClick={this.handleEdit} />
         <ButtonIcon icon='delete' disabled={isEditing || enrollments > 0} onClick={() => onDelete(theoryClass.id)} />
 
