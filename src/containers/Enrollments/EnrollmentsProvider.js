@@ -51,7 +51,12 @@ class EnrollmentsProvider extends Component {
 
       if (index > -1) students[index] = student;
 
-      return { theoryClass: theoryClass, students: students };
+      return {
+        theoryClass: theoryClass,
+        students: students,
+        isLoading: true,
+        saveHasError: false
+      };
     });
 
     Promise.all([this.studentsService.update(student), this.theoryClassesService.update(theoryClass)])
@@ -78,7 +83,9 @@ class EnrollmentsProvider extends Component {
 
       return {
         theoryClass: theoryClass,
-        students: students
+        students: students,
+        isLoading: true,
+        saveHasError: false
       };
     });
 
@@ -90,8 +97,20 @@ class EnrollmentsProvider extends Component {
   handleSaveAll = () => {
     this.setState({ isLoading: true, saveHasError: false });
 
-    Promise.all([this.studentsService.saveAll(this.state.students), this.theoryClassesService.update(this.state.theoryClass)])
-      .then(() => this.setState({ isLoading: false }))
+    this.studentsService
+      .list()
+      .then(students => {
+        if (!Array.isArray(students)) throw new Error('O sistema apresentou um estado inválido ao tentar salvar todos os dados.');
+
+        this.state.students.forEach(student => {
+          const index = students.findIndex(s => s.id === student.id);
+          if (index > -1) students[index] = student;
+        });
+
+        Promise.all([this.studentsService.saveAll(students), this.theoryClassesService.update(this.state.theoryClass)])
+          .then(() => this.setState({ isLoading: false }))
+          .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+      })
       .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
