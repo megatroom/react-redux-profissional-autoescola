@@ -34,7 +34,7 @@ class EnrollmentsProvider extends Component {
   };
 
   handleManageEnrollment = theoryClass => {
-    this.setState({ theoryClass: theoryClass });
+    this.setState({ theoryClass: theoryClass, students: [] });
     this.handleReload(theoryClass);
     this.props.history.push('/enrollments');
   };
