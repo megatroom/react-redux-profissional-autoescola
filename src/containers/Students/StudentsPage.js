@@ -2,7 +2,7 @@ import React from 'react';
 
 import withSettings from '../Settings/withSettings';
 import withStudents from './withStudents';
-import { NewStudent, StudentList, Error, FloatButton } from '../../components';
+import { NewStudent, StudentList, Error, FloatButton, Header } from '../../components';
 
 const StudentsPage = ({
   selectedTheme,
@@ -28,7 +28,7 @@ const StudentsPage = ({
           ) : (
             <FloatButton icon='add' style={selectedTheme && selectedTheme.style} onClick={() => onAdd(true)} />
           ))}
-        <h2>Alunos</h2>
+        <Header>Alunos</Header>
       </div>
       {!saveHasError && isAdding && <NewStudent onAdd={onAdd} onSave={onSave} />}
       <StudentList students={students} onEdit={onEdit} onDelete={onDelete} onMove={onMove} />
