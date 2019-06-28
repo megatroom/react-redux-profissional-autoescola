@@ -96,11 +96,9 @@ export default class StudentService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          const students = [];
-
           this.list()
             .then(students => {
-              const student = students.find(student => student.id === id);
+              const student = Array.isArray(students) ? students.find(student => student.id === id) : null;
               resolve(student);
             })
             .catch(() => reject());
