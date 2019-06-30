@@ -1,0 +1,35 @@
+@import '../../styles/mixin.scss';
+
+.list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 0px 12px;
+  border-radius: 2px;
+
+  @include box-shadow(1);
+
+  &__text {
+    flex: 1;
+  }
+
+  &__input {
+    flex: 1;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1px solid silver;
+  }
+
+  &__arrows {
+    width: 24px;
+    height: 58px;
+    padding: 2px;
+
+    &--hidden {
+      visibility: hidden;
+      width: 1px;
+    }
+  }
+}
