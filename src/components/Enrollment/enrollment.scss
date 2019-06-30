@@ -1,13 +1,14 @@
 @import '../Student/student.scss';
+@import '../List/list.scss';
 
 .enrollment {
-  @extend .student;
+  @extend .list-item;
 
   &__text {
     padding: 16px 0px;
 
     &--done {
-      @extend .student__text;
+      @extend .list-item__text;
       color: $color-success;
     }
 

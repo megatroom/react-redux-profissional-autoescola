@@ -8,26 +8,6 @@
   }
 }
 
-.theory-class {
-  @extend .student;
-
-  &__input {
-    @extend .student__input;
-  }
-
-  &__text {
-    @extend .student__text;
-  }
-
-  &__arrows {
-    @extend .student__arrows;
-
-    &--hidden {
-      @extend .student__arrows--hidden;
-    }
-  }
-}
-
 .theory-classes {
   @extend .students;
 
