@@ -7,6 +7,7 @@ import SettingsProvider from '../Settings/SettingsProvider';
 import StudentsProvider from '../Students/StudentsProvider';
 import TheoryClassesProvider from '../TheoryClasses/TheoryClassesProvider';
 import EnrollmentsProvider from '../Enrollments/EnrollmentsProvider';
+import TeachersProvider from '../Teachers/TeachersProvider';
 
 export default class App extends React.Component {
   state = {
@@ -30,9 +31,11 @@ export default class App extends React.Component {
           <StudentsProvider>
             <TheoryClassesProvider>
               <EnrollmentsProvider>
-                <PageLayout menu={menu} isMenuOpen={isMenuOpen} onOpenMenu={this.handleOpenMenu} onCloseMenu={this.handleCloseMenu}>
-                  <Routes onCloseMenu={this.handleCloseMenu} />
-                </PageLayout>
+                <TeachersProvider>
+                  <PageLayout menu={menu} isMenuOpen={isMenuOpen} onOpenMenu={this.handleOpenMenu} onCloseMenu={this.handleCloseMenu}>
+                    <Routes onCloseMenu={this.handleCloseMenu} />
+                  </PageLayout>
+                </TeachersProvider>
               </EnrollmentsProvider>
             </TheoryClassesProvider>
           </StudentsProvider>

@@ -1,13 +1,18 @@
-@import '../../styles/variables.scss';
-
 .home {
-  & i {
-    display: block;
-  }
-
-  &__button {
-    display: block;
-    min-width: 96px;
+  & .button {
+    min-width: 112px;
     padding: 16px 0px;
   }
+
+  & i {
+    max-width: 24px;
+  }
+
+  & span {
+    display: block;
+  }
+}
+
+.button__background {
+  margin-right: 8px;
 }

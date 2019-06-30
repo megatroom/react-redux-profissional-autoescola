@@ -8,11 +8,14 @@ import EnrollmentsPage from './Enrollments/EnrollmentsPage';
 import SettingsPage from './Settings/SettingsPage';
 import AboutPage from './About/AboutPage';
 import PageNotFound from './PageNotFound/PageNotFound';
+import TeachersPage from './Teachers/TeachersPage';
 
 export const menu = [
   { icon: 'home', label: 'Página Inicial', path: '/' },
   { icon: 'class', label: 'Aula Teórica', path: '/theory-classes' },
   { icon: 'person', label: 'Alunos', path: '/students' },
+  { icon: 'school', label: 'Professores', path: '/teachers' },
+  { icon: 'directions_car', label: 'Carros', path: '/cars' },
   { icon: 'settings', label: 'Configurações', path: '/settings' },
   { icon: 'info', label: 'Sobre', path: '/about' }
 ];
@@ -22,6 +25,8 @@ const Routes = ({ onCloseMenu }) => (
     <Route path='/' exact render={() => <HomePage onCloseMenu={onCloseMenu} />} />
     <Route path='/theory-classes' exact component={TheoryClassesPage} />
     <Route path='/students' exact component={StudentsPage} />
+    <Route path='/teachers' exact component={TeachersPage} />
+    <Route path='/cars' exact component={PageNotFound} />
     <Route path='/enrollments' exact component={EnrollmentsPage} />
     <Route path='/settings' exact component={SettingsPage} />
     <Route path='/about' exact component={AboutPage} />

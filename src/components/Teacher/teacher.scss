@@ -1,0 +1,17 @@
+@import '../Student/student.scss';
+
+.new-teacher {
+  @extend .new-student;
+
+  &__input {
+    @extend .new-student__input;
+  }
+}
+
+.teachers {
+  @extend .students;
+}
+
+.teacher-list {
+  @extend .student-list;
+}
