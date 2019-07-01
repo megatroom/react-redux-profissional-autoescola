@@ -9,6 +9,7 @@ import SettingsPage from './Settings/SettingsPage';
 import AboutPage from './About/AboutPage';
 import PageNotFound from './PageNotFound/PageNotFound';
 import TeachersPage from './Teachers/TeachersPage';
+import CarsPage from './Cars/CarsPage';
 
 export const menu = [
   { icon: 'home', label: 'Página Inicial', path: '/' },
@@ -26,7 +27,7 @@ const Routes = ({ onCloseMenu }) => (
     <Route path='/theory-classes' exact component={TheoryClassesPage} />
     <Route path='/students' exact component={StudentsPage} />
     <Route path='/teachers' exact component={TeachersPage} />
-    <Route path='/cars' exact component={PageNotFound} />
+    <Route path='/cars' exact component={CarsPage} />
     <Route path='/enrollments' exact component={EnrollmentsPage} />
     <Route path='/settings' exact component={SettingsPage} />
     <Route path='/about' exact component={AboutPage} />

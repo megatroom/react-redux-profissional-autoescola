@@ -1,0 +1,52 @@
+@import '../Student/student.scss';
+@import '../Button/button.scss';
+
+.new-car {
+  @extend .new-student;
+  align-items: center;
+
+  &__span {
+    flex: 1;
+    margin-right: 8px;
+  }
+
+  &__input {
+    @extend .new-student__input;
+
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  &__select {
+    @extend .button;
+
+    width: 100%;
+    display: block;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.car {
+  &__span {
+    @extend .new-car__span;
+  }
+
+  &__select {
+    @extend .new-car__select;
+  }
+}
+
+.cars {
+  @extend .students;
+
+  &__container {
+    @extend .students__container;
+  }
+}
+
+.car-list {
+  @extend .student-list;
+}

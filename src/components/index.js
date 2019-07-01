@@ -12,6 +12,9 @@ import TheoryClassList from './TheoryClass/TheoryClassList';
 import Teacher from './Teacher/Teacher';
 import NewTeacher from './Teacher/NewTeacher';
 import TeacherList from './Teacher/TeacherList';
+import Car from './Car/Car';
+import NewCar from './Car/NewCar';
+import CarList from './Car/CarList';
 import Header from './Header/Header';
 import Button from './Button/Button';
 import ButtonLink from './Button/ButtonLink';
@@ -39,5 +42,8 @@ export {
   TheoryClassList,
   Teacher,
   NewTeacher,
-  TeacherList
+  TeacherList,
+  Car,
+  NewCar,
+  CarList
 };

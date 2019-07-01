@@ -5,6 +5,7 @@ import StudentsContext from '../Students/StudentsContext';
 import TheoryClassesContext from '../TheoryClasses/TheoryClassesContext';
 import EnrollmentsContext from '../Enrollments/EnrollmentsContext';
 import TeachersContext from '../Teachers/TeachersContext';
+import CarsContext from '../Cars/CarsContext';
 import { AppBar, NavigationDrawer } from '../../components';
 
 import './page-layout.scss';
@@ -19,21 +20,34 @@ const PageLayout = ({ children, selectedTheme, menu, isMenuOpen, onOpenMenu, onC
               {({ isLoading: isLoadingEnrollments, saveHasError: saveEnrollmentsHasError, onSaveRetry: onSaveEnrollmentsRetry }) => (
                 <TeachersContext.Consumer>
                   {({ isLoading: isLoadingTeachers, saveHasError: saveTeachersHasError, onSaveRetry: onSaveTeachersRetry }) => (
-                    <Fragment>
-                      <AppBar
-                        style={selectedTheme && selectedTheme.style}
-                        isLoading={isLoadingStudents || isLoadingTheoryClasses || isLoadingEnrollments || isLoadingTeachers}
-                        saveHasError={saveStudentsHasError || saveTheoryClassesHasError || saveEnrollmentsHasError || saveTeachersHasError}
-                        onSaveRetry={() => {
-                          saveStudentsHasError && onSaveStudentsRetry();
-                          saveTheoryClassesHasError && onSaveTheoryClassesRetry();
-                          saveEnrollmentsHasError && onSaveEnrollmentsRetry();
-                          saveTeachersHasError && onSaveTeachersRetry();
-                        }}
-                        onOpenMenu={onOpenMenu}
-                      />
-                      <div className='container'>{children}</div>
-                    </Fragment>
+                    <CarsContext.Consumer>
+                      {({ isLoading: isLoadingCars, saveHasError: saveCarsHasError, onSaveRetry: onSaveCarsRetry }) => (
+                        <Fragment>
+                          <AppBar
+                            style={selectedTheme && selectedTheme.style}
+                            isLoading={
+                              isLoadingStudents || isLoadingTheoryClasses || isLoadingEnrollments || isLoadingTeachers || isLoadingCars
+                            }
+                            saveHasError={
+                              saveStudentsHasError ||
+                              saveTheoryClassesHasError ||
+                              saveEnrollmentsHasError ||
+                              saveTeachersHasError ||
+                              saveCarsHasError
+                            }
+                            onSaveRetry={() => {
+                              saveStudentsHasError && onSaveStudentsRetry();
+                              saveTheoryClassesHasError && onSaveTheoryClassesRetry();
+                              saveEnrollmentsHasError && onSaveEnrollmentsRetry();
+                              saveTeachersHasError && onSaveTeachersRetry();
+                              saveCarsHasError && onSaveCarsRetry();
+                            }}
+                            onOpenMenu={onOpenMenu}
+                          />
+                          <div className='container'>{children}</div>
+                        </Fragment>
+                      )}
+                    </CarsContext.Consumer>
                   )}
                 </TeachersContext.Consumer>
               )}
