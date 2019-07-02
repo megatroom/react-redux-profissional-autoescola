@@ -14,6 +14,7 @@ import CarsPage from './Cars/CarsPage';
 export const menu = [
   { icon: 'home', label: 'Página Inicial', path: '/' },
   { icon: 'class', label: 'Aula Teórica', path: '/theory-classes' },
+  { icon: 'speed', label: 'Aula Prática', path: '/practical-classes' },
   { icon: 'person', label: 'Alunos', path: '/students' },
   { icon: 'school', label: 'Professores', path: '/teachers' },
   { icon: 'directions_car', label: 'Carros', path: '/cars' },
