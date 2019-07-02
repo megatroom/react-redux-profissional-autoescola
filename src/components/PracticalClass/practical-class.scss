@@ -1,0 +1,21 @@
+@import '../Student/student.scss';
+
+.new-practical-class {
+  @extend .new-student;
+
+  &__input {
+    @extend .new-student__input;
+  }
+}
+
+.practical-classes {
+  @extend .students;
+
+  &__container {
+    @extend .students__container;
+  }
+}
+
+.practical-class-list {
+  @extend .student-list;
+}
