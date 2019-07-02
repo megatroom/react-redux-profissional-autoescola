@@ -24,6 +24,10 @@ select {
   font-family: inherit;
 }
 
+select option {
+  background-color: white;
+}
+
 .float-button__background {
   float: right;
   top: 38px;
