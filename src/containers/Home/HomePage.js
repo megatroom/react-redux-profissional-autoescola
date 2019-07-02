@@ -8,7 +8,7 @@ import './home.scss';
 
 const services = [
   { label: 'Aula Teórica', icon: 'class', path: '/theory-classes' },
-  { label: 'Aula Prática', icon: 'speedometer', path: '/practical-classes' }
+  { label: 'Aula Prática', icon: 'speed', path: '/practical-classes' }
 ];
 
 const records = [
