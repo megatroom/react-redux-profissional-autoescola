@@ -1,0 +1,84 @@
+
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.app-bar {
+    background-color: rgba(126, 105, 126, 0.979);
+    top: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+
+    &__container {
+        height: 46px;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0px 20px;
+        max-width: 500px;
+        border-radius: 2px;
+        
+    }
+
+    &__action {
+        background-color: transparent;
+        border: none;
+        margin-right: 12px;
+        cursor: pointer;
+        color: white;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            background-color: rgba(65, 57, 65, 0.979);
+            opacity: 0.8;
+            color: black;
+        }
+    }
+
+    &__brand {
+        flex: 1px;
+        color: white;
+    }
+}
+
+.container {
+    margin: 0 auto;
+    padding: 70px 20px;
+    max-width: 500px;
+}
+
+.section-header {
+    margin-top: 20px;
+    &__title {
+        font-size: 26px;
+    }
+    &__separator {
+        height: 2px;
+        background-color: gray;
+        min-width: 500px;
+    }
+}
+
+.section-button {
+    margin-top: 10px;
+    &__action {
+        height:100px;
+        width: 130px;
+        border: none;
+        background-color: rgba(126, 105, 126, 0.979);
+        color: white;
+        border-radius: 5%;
+        &__icon {
+            font-size: 50px;
+        }
+    }
+    &__title {
+        align-items: bottom;
+        font-size: 15px;
+    }
+}
