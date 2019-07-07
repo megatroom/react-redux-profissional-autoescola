@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import Routes, { menu } from '../Routes';
@@ -9,8 +9,9 @@ import TheoryClassesProvider from '../TheoryClasses/TheoryClassesProvider';
 import EnrollmentsProvider from '../Enrollments/EnrollmentsProvider';
 import TeachersProvider from '../Teachers/TeachersProvider';
 import CarProvider from '../Cars/CarsProvider';
+import PracticalClassesProvider from '../PracticalClasses/PracticalClassesProvider';
 
-export default class App extends React.Component {
+export default class App extends Component {
   state = {
     isMenuOpen: false
   };
@@ -34,9 +35,11 @@ export default class App extends React.Component {
               <EnrollmentsProvider>
                 <TeachersProvider>
                   <CarProvider>
-                    <PageLayout menu={menu} isMenuOpen={isMenuOpen} onOpenMenu={this.handleOpenMenu} onCloseMenu={this.handleCloseMenu}>
-                      <Routes onCloseMenu={this.handleCloseMenu} />
-                    </PageLayout>
+                    <PracticalClassesProvider>
+                      <PageLayout menu={menu} isMenuOpen={isMenuOpen} onOpenMenu={this.handleOpenMenu} onCloseMenu={this.handleCloseMenu}>
+                        <Routes onCloseMenu={this.handleCloseMenu} />
+                      </PageLayout>
+                    </PracticalClassesProvider>
                   </CarProvider>
                 </TeachersProvider>
               </EnrollmentsProvider>

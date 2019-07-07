@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import uuid from 'uuid/v1';
 
-import TheoryClassesContext from './TheoryClassesContext';
-import { TheoryClassService } from '../../services';
+import PracticalClassesContext from './PracticalClassesContext';
+import { CarService, StudentService, PracticalClassService } from '../../services';
 
-class TheoryClassesProvider extends Component {
+class PracticalClassesProvider extends Component {
   state = {
-    theoryClass: null,
-    theoryClasses: [],
+    practicalClass: null,
+    practicalClasses: [],
+    students: [],
+    cars: [],
     isAdding: false,
     isLoading: false,
     reloadHasError: false,
     saveHasError: false
   };
 
-  service = new TheoryClassService();
+  practicalClassService = new PracticalClassService();
+  carService = new CarService();
+  studentService = new StudentService();
 
   componentDidMount() {
     this.handleReload();
@@ -24,55 +28,75 @@ class TheoryClassesProvider extends Component {
     this.setState({ reloadHasError: true });
   }
 
+  validateCarWithTeacher(car) {
+    return car.theacher && car.theacher.id && alert('O carro não possui um professor.');
+  }
+
+  validateStudentEnrollment(student) {
+    if (!student) return false;
+
+    let counter = 0;
+    const { practicalClasses } = this.state;
+
+    practicalClasses.forEach(pc => pc.student && pc.student.id === student.id && counter++);
+
+    return counter < 10;
+  }
+
   handleAdd = isAdding => {
     this.setState({ isAdding: isAdding });
   };
 
-  handleSave = name => {
+  handleSave = (student, car, date, hour) => {
     this.setState({ isLoading: true, saveHasError: false });
 
-    const theoryClass = { id: uuid(), name: name };
-    this.state.theoryClasses.push(theoryClass);
+    const practicalClass = { id: uuid(), student, car, date, hour };
+    this.state.practicalClasses.push(practicalClass);
 
-    this.service
-      .save(theoryClass)
+    this.practicalClassService
+      .list(student)
+      .then(practicalClasses =>
+        practicalClasses.length < 10
+          ? this.practicalClassService
+              .save(practicalClass)
+              .then(() => this.setState({ isLoading: false }))
+              .catch(() => this.setState({ isLoading: false, saveHasError: true }))
+          : alert('Só pode ser cadastrado até 10 aulas por aluno.')
+      )
+      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+  };
+
+  handleSaveAll = practicalClasses => {
+    this.setState({ isLoading: true, saveHasError: false });
+
+    !Array.isArray(practicalClasses) && (practicalClasses = []);
+
+    this.practicalClassService
+      .saveAll(practicalClasses)
       .then(() => this.setState({ isLoading: false }))
       .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
-  handleSaveAll = theoryClasses => {
+  handleEdit = (id, student, car, date, hour) => {
     this.setState({ isLoading: true, saveHasError: false });
 
-    !Array.isArray(theoryClasses) && (theoryClasses = []);
+    const practicalClass = { id, student, car, date, hour };
 
-    this.service
-      .saveAll(theoryClasses)
+    this.practicalClassService
+      .update(practicalClass)
       .then(() => this.setState({ isLoading: false }))
       .catch(() => this.setState({ isLoading: false, saveHasError: true }));
-  };
-
-  handleEdit = (id, name) => {
-    this.setState({ isLoading: true, saveHasError: false });
-
-    const theoryClass = { id: id, name: name };
-
-    if (!this.state.saveHasError)
-      this.service
-        .update(theoryClass)
-        .then(() => this.setState({ isLoading: false }))
-        .catch(() => this.setState({ isLoading: false, saveHasError: true }));
-    else this.setState({ isLoading: false, saveHasError: true });
   };
 
   handleDelete = id => {
     this.setState({ isLoading: true, saveHasError: false });
 
-    const index = this.state.theoryClasses.findIndex(theoryClass => theoryClass.id === id);
+    const index = this.state.practicalClasses.findIndex(practicalClass => practicalClass.id === id);
 
-    index > -1 && this.state.theoryClasses.splice(index, 1);
+    index > -1 && this.state.practicalClasses.splice(index, 1);
 
     if (!this.state.saveHasError)
-      this.service
+      this.practicalClassService
         .delete(id)
         .then(() => this.setState({ isLoading: false }))
         .catch(() => this.setState({ isLoading: false, saveHasError: true }));
@@ -82,33 +106,37 @@ class TheoryClassesProvider extends Component {
   handleMove = (direction, index) => {
     this.setState(
       state => {
-        const theoryClasses = state['theoryClasses'].slice();
-        const movedTheoryClass = theoryClasses.splice(index, 1)[0];
+        const practicalClasses = state['practicalClasses'].slice();
+        const movedTheoryClass = practicalClasses.splice(index, 1)[0];
 
-        if (direction === 'up') theoryClasses.splice(index - 1, 0, movedTheoryClass);
-        else theoryClasses.splice(index + 1, 0, movedTheoryClass);
+        if (direction === 'up') practicalClasses.splice(index - 1, 0, movedTheoryClass);
+        else practicalClasses.splice(index + 1, 0, movedTheoryClass);
 
-        return { theoryClasses, isLoading: true, reloadHasError: false };
+        return { practicalClasses, isLoading: true, reloadHasError: false };
       },
-      () => this.handleSaveAll(this.state.theoryClasses)
+      () => this.handleSaveAll(this.state.practicalClasses)
     );
   };
 
   handleReload = () => {
     this.setState({ isLoading: true, reloadHasError: false });
 
-    this.service
-      .list()
-      .then(theoryClasses => this.setState({ theoryClasses, isLoading: false }))
+    Promise.all([this.practicalClassService.list(), this.studentService.list(), this.carService.list()])
+      .then(results => {
+        const practicalClasses = results[0];
+        const students = results[1];
+        const cars = results[2];
+        this.setState({ practicalClasses, students, cars, isLoading: false });
+      })
       .catch(() => this.setState({ isLoading: false, reloadHasError: true }));
   };
 
   render() {
     return (
-      <TheoryClassesContext.Provider
+      <PracticalClassesContext.Provider
         value={{
           ...this.state,
-          onSaveRetry: () => this.handleSaveAll(this.state.theoryClasses),
+          onSaveRetry: () => this.handleSaveAll(this.state.practicalClasses),
           onRetry: this.handleReload,
           onMove: this.handleMove,
           onAdd: this.handleAdd,
@@ -117,9 +145,9 @@ class TheoryClassesProvider extends Component {
           onDelete: this.handleDelete
         }}>
         {this.props.children}
-      </TheoryClassesContext.Provider>
+      </PracticalClassesContext.Provider>
     );
   }
 }
 
-export default TheoryClassesProvider;
+export default PracticalClassesProvider;

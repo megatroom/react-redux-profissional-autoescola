@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import withSettings from '../Settings/withSettings';
 import StudentsContext from '../Students/StudentsContext';
 import TheoryClassesContext from '../TheoryClasses/TheoryClassesContext';
+import PracticalClassesContext from '../PracticalClasses/PracticalClassesContext';
 import EnrollmentsContext from '../Enrollments/EnrollmentsContext';
 import TeachersContext from '../Teachers/TeachersContext';
 import CarsContext from '../Cars/CarsContext';
@@ -22,30 +23,45 @@ const PageLayout = ({ children, selectedTheme, menu, isMenuOpen, onOpenMenu, onC
                   {({ isLoading: isLoadingTeachers, saveHasError: saveTeachersHasError, onSaveRetry: onSaveTeachersRetry }) => (
                     <CarsContext.Consumer>
                       {({ isLoading: isLoadingCars, saveHasError: saveCarsHasError, onSaveRetry: onSaveCarsRetry }) => (
-                        <Fragment>
-                          <AppBar
-                            style={selectedTheme && selectedTheme.style}
-                            isLoading={
-                              isLoadingStudents || isLoadingTheoryClasses || isLoadingEnrollments || isLoadingTeachers || isLoadingCars
-                            }
-                            saveHasError={
-                              saveStudentsHasError ||
-                              saveTheoryClassesHasError ||
-                              saveEnrollmentsHasError ||
-                              saveTeachersHasError ||
-                              saveCarsHasError
-                            }
-                            onSaveRetry={() => {
-                              saveStudentsHasError && onSaveStudentsRetry();
-                              saveTheoryClassesHasError && onSaveTheoryClassesRetry();
-                              saveEnrollmentsHasError && onSaveEnrollmentsRetry();
-                              saveTeachersHasError && onSaveTeachersRetry();
-                              saveCarsHasError && onSaveCarsRetry();
-                            }}
-                            onOpenMenu={onOpenMenu}
-                          />
-                          <div className='container'>{children}</div>
-                        </Fragment>
+                        <PracticalClassesContext.Consumer>
+                          {({
+                            isLoading: isLoadingPracticalClasses,
+                            saveHasError: savePracticalClassesHasError,
+                            onSaveRetry: onSavePracticalClassesRetry
+                          }) => (
+                            <Fragment>
+                              <AppBar
+                                style={selectedTheme && selectedTheme.style}
+                                isLoading={
+                                  isLoadingStudents ||
+                                  isLoadingTheoryClasses ||
+                                  isLoadingEnrollments ||
+                                  isLoadingTeachers ||
+                                  isLoadingCars ||
+                                  isLoadingPracticalClasses
+                                }
+                                saveHasError={
+                                  saveStudentsHasError ||
+                                  saveTheoryClassesHasError ||
+                                  saveEnrollmentsHasError ||
+                                  saveTeachersHasError ||
+                                  saveCarsHasError ||
+                                  savePracticalClassesHasError
+                                }
+                                onSaveRetry={() => {
+                                  saveStudentsHasError && onSaveStudentsRetry();
+                                  saveTheoryClassesHasError && onSaveTheoryClassesRetry();
+                                  saveEnrollmentsHasError && onSaveEnrollmentsRetry();
+                                  saveTeachersHasError && onSaveTeachersRetry();
+                                  saveCarsHasError && onSaveCarsRetry();
+                                  savePracticalClassesHasError && onSavePracticalClassesRetry();
+                                }}
+                                onOpenMenu={onOpenMenu}
+                              />
+                              <div className='container'>{children}</div>
+                            </Fragment>
+                          )}
+                        </PracticalClassesContext.Consumer>
                       )}
                     </CarsContext.Consumer>
                   )}

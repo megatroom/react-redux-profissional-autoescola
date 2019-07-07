@@ -1,13 +1,15 @@
 import React from 'react';
 
-import withTheoryClasses from './withPracticalClasses';
 import withSettings from '../Settings/withSettings';
 import withEnrollments from '../Enrollments/withEnrollments';
+import withPracticalClasses from './withPracticalClasses';
 import { NewPracticalClass, PracticalClassList, Error, FloatButton, Header } from '../../components';
 
 const PracticalClassesPage = ({
   selectedTheme,
   practicalClasses,
+  cars,
+  students,
   isAdding,
   reloadHasError,
   saveHasError,
@@ -32,11 +34,13 @@ const PracticalClassesPage = ({
               <FloatButton icon='add' style={selectedTheme && selectedTheme.style} onClick={() => onAdd(true)} />
             ))}
         </div>
-        <Header>Aulas Teóricas</Header>
+        <Header>Aulas Práticas</Header>
       </div>
-      {!saveHasError && isAdding && <NewPracticalClass onAdd={onAdd} onSave={onSave} />}
+      {!saveHasError && isAdding && <NewPracticalClass students={students} cars={cars} onAdd={onAdd} onSave={onSave} />}
       <PracticalClassList
         practicalClasses={practicalClasses}
+        students={students}
+        cars={cars}
         saveHasError={saveHasError}
         onEdit={onEdit}
         onDelete={onDelete}
@@ -47,4 +51,4 @@ const PracticalClassesPage = ({
   );
 };
 
-export default withSettings(withEnrollments(withTheoryClasses(PracticalClassesPage)));
+export default withSettings(withEnrollments(withPracticalClasses(PracticalClassesPage)));

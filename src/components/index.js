@@ -9,6 +9,9 @@ import StudentList from './Student/StudentList';
 import NewTheoryClass from './TheoryClass/NewTheoryClass';
 import TheoryClass from './TheoryClass/TheoryClass';
 import TheoryClassList from './TheoryClass/TheoryClassList';
+import NewPracticalClass from './PracticalClass/NewPracticalClass';
+import PracticalClass from './PracticalClass/PracticalClass';
+import PracticalClassList from './PracticalClass/PracticalClassList';
 import Teacher from './Teacher/Teacher';
 import NewTeacher from './Teacher/NewTeacher';
 import TeacherList from './Teacher/TeacherList';
@@ -40,6 +43,9 @@ export {
   NewTheoryClass,
   TheoryClass,
   TheoryClassList,
+  NewPracticalClass,
+  PracticalClass,
+  PracticalClassList,
   Teacher,
   NewTeacher,
   TeacherList,

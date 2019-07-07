@@ -1,21 +1,39 @@
-@import '../Student/student.scss';
+@import '../Car/car.scss';
 
 .new-practical-class {
-  @extend .new-student;
+  @extend .new-car;
+
+  &__span {
+    @extend .new-car__span;
+  }
 
   &__input {
-    @extend .new-student__input;
+    @extend .new-car__input;
+  }
+
+  &__select {
+    @extend .new-car__select;
+  }
+}
+
+.practical-class {
+  &__span {
+    @extend .new-practical-class__span;
+  }
+
+  &__select {
+    @extend .new-practical-class__select;
   }
 }
 
 .practical-classes {
-  @extend .students;
+  @extend .cars;
 
   &__container {
-    @extend .students__container;
+    @extend .cars__container;
   }
 }
 
 .practical-class-list {
-  @extend .student-list;
+  @extend .car-list;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import TheoryClassesContext from './TheoryClassesContext';
+import PracticalClassesContext from './PracticalClassesContext';
 
-const withTheoryClasses = Component => props => (
-  <TheoryClassesContext.Consumer>{context => <Component {...props} {...context} />}</TheoryClassesContext.Consumer>
+const withPracticalClasses = Component => props => (
+  <PracticalClassesContext.Consumer>{context => <Component {...props} {...context} />}</PracticalClassesContext.Consumer>
 );
 
-export default withTheoryClasses;
+export default withPracticalClasses;

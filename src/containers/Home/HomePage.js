@@ -7,8 +7,8 @@ import { Button, Header } from '../../components';
 import './home.scss';
 
 const services = [
-  { label: 'Aula Teórica', icon: 'class', path: '/theory-classes' },
-  { label: 'Aula Prática', icon: 'speed', path: '/practical-classes' }
+  { label: 'Aulas Teóricas', icon: 'class', path: '/theory-classes' },
+  { label: 'Aulas Práticas', icon: 'speed', path: '/practical-classes' }
 ];
 
 const records = [
