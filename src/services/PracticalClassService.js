@@ -8,14 +8,18 @@ export default class PracticalClassService {
         if (failedSaveAttempts > 1) {
           this.list()
             .then(practicalClasses => {
-              if (!this.validate(practicalClass, practicalClasses)) throw new Error('O argumento referente à aula prática é inválido.');
+              try {
+                if (!this.validate(practicalClass, practicalClasses)) throw new Error('O argumento referente à aula prática é inválido.');
 
-              if (practicalClasses.find(pc => pc.id === practicalClass.id))
-                throw new Error('O sistema apresentou um estado inválido ao salvar a aula prática.');
+                if (practicalClasses.find(pc => pc.id === practicalClass.id))
+                  throw new Error('O sistema apresentou um estado inválido ao salvar a aula prática.');
 
-              practicalClasses.push(practicalClass);
-              window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
-              resolve();
+                practicalClasses.push(practicalClass);
+                window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
+                resolve();
+              } catch (error) {
+                reject(error.message);
+              }
             })
             .catch(() => reject());
         } else {
@@ -30,11 +34,15 @@ export default class PracticalClassService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          if (!Array.isArray(practicalClasses) || !this.validateAll(practicalClasses))
-            throw new Error('O argumento informado ao salvar todas as aulas práticas é inválido.');
+          try {
+            if (!Array.isArray(practicalClasses) || !this.validateAll(practicalClasses))
+              throw new Error('O argumento informado ao salvar todas as aulas práticas é inválido.');
 
-          window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
-          resolve();
+            window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
+            resolve();
+          } catch (error) {
+            reject(error.message);
+          }
         } else {
           failedSaveAttempts++;
           reject();
@@ -49,15 +57,20 @@ export default class PracticalClassService {
         if (failedSaveAttempts > 1) {
           this.list()
             .then(practicalClasses => {
-              if (!this.validate(practicalClass, practicalClasses)) throw new Error('O argumento referente à aula prática é inválido.');
+              try {
+                if (!this.validate(practicalClass, practicalClasses, true))
+                  throw new Error('O argumento referente à aula prática é inválido.');
 
-              const index = practicalClasses.findIndex(pc => pc.id === practicalClass.id);
+                const index = practicalClasses.findIndex(pc => pc.id === practicalClass.id);
 
-              if (index === -1) throw new Error('O sistema apresentou um estado inválido ao atualizar a aula prática.');
+                if (index === -1) throw new Error('O sistema apresentou um estado inválido ao atualizar a aula prática.');
 
-              practicalClasses[index] = practicalClass;
-              window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
-              resolve();
+                practicalClasses[index] = practicalClass;
+                window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
+                resolve();
+              } catch (error) {
+                reject(error.message);
+              }
             })
             .catch(() => reject());
         } else {
@@ -76,11 +89,13 @@ export default class PracticalClassService {
             .then(practicalClasses => {
               const index = practicalClasses.findIndex(practicalClass => practicalClass.id === id);
 
-              if (index === -1) throw new Error('O sistema apresentou um estado inválido ao remover a aula prática.');
-
-              practicalClasses.splice(index, 1);
-              window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
-              resolve();
+              if (index > -1) {
+                practicalClasses.splice(index, 1);
+                window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
+                resolve();
+              } else {
+                reject('O sistema apresentou um estado inválido ao remover a aula prática.');
+              }
             })
             .catch(() => reject());
         } else {
@@ -128,7 +143,7 @@ export default class PracticalClassService {
   }
 
   validate(practicalClass, practicalClasses, isUpdate = false) {
-    if (!practicalClass) return false;
+    if (!practicalClass) throw new Error('O argumento referente à aula prática é inválido.');
 
     if (!Array.isArray(practicalClasses)) throw new Error('O argumento referente à lista de aulas práticas é inválido.');
 
@@ -137,10 +152,12 @@ export default class PracticalClassService {
 
     if (!student || !car || !date || !hour) throw new Error('O argumento referente à aula prática é inválido.');
 
+    if (!car.teacher) throw new Error('O carro não possui um professor associado.');
+
     let counter = 0;
 
     for (let pc of practicalClasses) {
-      if (pc.student.id === student.id && pc.car.id !== car.id) return false;
+      if (pc.id !== id && pc.student.id === student.id && pc.car.id !== car.id) return false;
 
       if (pc.id !== id && pc.student.id === student.id && pc.date === date && pc.hour === hour) return false;
 
@@ -156,7 +173,7 @@ export default class PracticalClassService {
     let isValid = false;
 
     for (let practicalClass of practicalClasses) {
-      isValid = this.validate(practicalClass, practicalClasses);
+      isValid = this.validate(practicalClass, practicalClasses, true);
 
       if (!isValid) break;
     }
