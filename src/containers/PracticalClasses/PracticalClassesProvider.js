@@ -54,15 +54,8 @@ class PracticalClassesProvider extends Component {
     this.state.practicalClasses.push(practicalClass);
 
     this.practicalClassService
-      .list(student)
-      .then(practicalClasses =>
-        practicalClasses.length < 10
-          ? this.practicalClassService
-              .save(practicalClass)
-              .then(() => this.setState({ isLoading: false }))
-              .catch(() => this.setState({ isLoading: false, saveHasError: true }))
-          : alert('Só pode ser cadastrado até 10 aulas por aluno.')
-      )
+      .save(practicalClass)
+      .then(() => this.setState({ isLoading: false }))
       .catch(() => this.setState({ isLoading: false, saveHasError: true }));
   };
 
