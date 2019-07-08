@@ -28,12 +28,7 @@ export default class NewPracticalClass extends Component {
           <select
             className='new-practical-class__select'
             value={student.id}
-            onChange={event => {
-              const options = event.target.options;
-              const id = event.target.value;
-              const name = Array.from(options).find(o => o.value === id).text;
-              this.setState({ student: { id: id, name: name } });
-            }}>
+            onChange={event => this.setState({ student: students.find(s => s.id === event.target.value) })}>
             <option value=''>Selecione o aluno...</option>
             {students &&
               students.map(s => (
@@ -46,12 +41,7 @@ export default class NewPracticalClass extends Component {
           <select
             className='new-practical-class__select'
             value={car.id}
-            onChange={event => {
-              const options = event.target.options;
-              const id = event.target.value;
-              const name = Array.from(options).find(o => o.value === id).text;
-              this.setState({ car: { id: id, name: name } });
-            }}>
+            onChange={event => this.setState({ car: cars.find(c => c.id === event.target.value) })}>
             <option value=''>Selecione o carro...</option>
             {cars &&
               cars.map(c => (
