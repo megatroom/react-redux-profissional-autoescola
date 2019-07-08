@@ -56,7 +56,11 @@ class PracticalClassesProvider extends Component {
     this.practicalClassService
       .save(practicalClass)
       .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+      .catch(message => {
+        this.setState({ isLoading: false, saveHasError: true });
+
+        if (message) alert(message);
+      });
   };
 
   handleSaveAll = practicalClasses => {
@@ -67,18 +71,24 @@ class PracticalClassesProvider extends Component {
     this.practicalClassService
       .saveAll(practicalClasses)
       .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+      .catch(message => {
+        this.setState({ isLoading: false, saveHasError: true });
+
+        if (message) alert(message);
+      });
   };
 
-  handleEdit = (id, student, car, date, hour) => {
+  handleEdit = practicalClass => {
     this.setState({ isLoading: true, saveHasError: false });
-
-    const practicalClass = { id, student, car, date, hour };
 
     this.practicalClassService
       .update(practicalClass)
       .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, saveHasError: true }));
+      .catch(message => {
+        this.setState({ isLoading: false, saveHasError: true });
+
+        if (message) alert(message);
+      });
   };
 
   handleDelete = id => {
