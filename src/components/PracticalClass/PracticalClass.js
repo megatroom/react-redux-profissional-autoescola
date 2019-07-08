@@ -15,8 +15,14 @@ class PracticalClass extends Component {
   handleCancel = () => this.setState({ isEditing: false });
 
   handleSave = () => {
-    const { id, student, car, date, hour } = this.props.practicalClass;
-    this.props.onEdit(id, student, car, date, hour);
+    const { students, cars } = this.props;
+
+    this.props.practicalClass.student = students.find(s => s.id === this.studentSelect.value);
+    this.props.practicalClass.car = cars.find(c => c.id === this.carSelect.value);
+    this.props.practicalClass.date = this.dateInput.value;
+    this.props.practicalClass.hour = this.hourInput.value;
+
+    this.props.onEdit(this.props.practicalClass);
     this.setState({ isEditing: false });
   };
 
@@ -31,12 +37,8 @@ class PracticalClass extends Component {
             <span className='new-car__span'>
               <select
                 className='new-practical-class__select'
-                value={practicalClass.student.id}
-                onChange={event => {
-                  const selected = Array.from(event.target.options).find(o => o.value === event.target.value);
-                  practicalClass.student.id = selected.value;
-                  practicalClass.student.name = selected.text;
-                }}>
+                defaultValue={practicalClass.student.id}
+                ref={current => (this.studentSelect = current)}>
                 <option value=''>Selecione o aluno...</option>
                 {students &&
                   students.map(s => (
@@ -48,12 +50,8 @@ class PracticalClass extends Component {
 
               <select
                 className='new-practical-class__select'
-                value={practicalClass.car.id}
-                onChange={event => {
-                  const selected = Array.from(event.target.options).find(o => o.value === event.target.value);
-                  practicalClass.car.id = selected.value;
-                  practicalClass.car.name = selected.text;
-                }}>
+                defaultValue={practicalClass.car.id}
+                ref={current => (this.carSelect = current)}>
                 <option value=''>Selecione o carro...</option>
                 {cars &&
                   cars.map(c => (
@@ -66,8 +64,8 @@ class PracticalClass extends Component {
               <input
                 type='date'
                 className='new-practical-class__input'
-                value={practicalClass.date}
-                onChange={event => (practicalClass.date = event.target.value)}
+                defaultValue={practicalClass.date}
+                ref={current => (this.dateInput = current)}
                 onKeyPress={event => {
                   if (event.key === 'Enter') this.handleSave();
                 }}
@@ -76,9 +74,9 @@ class PracticalClass extends Component {
               <input
                 type='time'
                 className='new-practical-class__input'
-                value={practicalClass.hour}
+                defaultValue={practicalClass.hour}
                 step='3600'
-                onChange={event => (practicalClass.hour = event.target.value)}
+                ref={current => (this.hourInput = current)}
                 onKeyPress={event => {
                   if (event.key === 'Enter') this.handleSave();
                 }}
