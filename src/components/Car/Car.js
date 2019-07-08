@@ -15,18 +15,22 @@ class Car extends Component {
   handleCancel = () => this.setState({ isEditing: false });
 
   handleSave = () => {
-    const teacher = {
-      id: this.select.value,
-      name: Array.from(this.select.options).find(o => o.value === this.select.value).text
-    };
+    const teacher = this.select.value
+      ? {
+          id: this.select.value,
+          name: Array.from(this.select.options).find(o => o.value === this.select.value).text
+        }
+      : null;
+
     this.props.onEdit(this.props.car.id, this.input.value, teacher);
     this.props.car.name = this.input.value;
     this.props.car.teacher = teacher;
+
     this.setState({ isEditing: false });
   };
 
   render() {
-    const { car, index, total, teachers, onDelete, onMove, onAddTeacher } = this.props;
+    const { car, index, total, teachers, onDelete, onMove } = this.props;
     const { isEditing } = this.state;
 
     return (
