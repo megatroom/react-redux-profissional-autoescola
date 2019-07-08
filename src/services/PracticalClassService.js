@@ -30,7 +30,8 @@ export default class PracticalClassService {
     return new Promise((resolve, reject) =>
       setTimeout(() => {
         if (failedSaveAttempts > 1) {
-          if (!Array.isArray(practicalClasses)) throw new Error('O argumento informado ao salvar todas as aulas práticas é inválido.');
+          if (!Array.isArray(practicalClasses) || !this.validateAll(practicalClasses))
+            throw new Error('O argumento informado ao salvar todas as aulas práticas é inválido.');
 
           window.localStorage.setItem('practicalClasses', JSON.stringify(practicalClasses));
           resolve();
@@ -126,11 +127,12 @@ export default class PracticalClassService {
     });
   }
 
-  validate(practicalClass, practicalClasses) {
+  validate(practicalClass, practicalClasses, isUpdate = false) {
     if (!practicalClass) return false;
 
     if (!Array.isArray(practicalClasses)) throw new Error('O argumento referente à lista de aulas práticas é inválido.');
 
+    const limit = isUpdate ? 10 : 9;
     const { id, student, car, date, hour } = practicalClass;
 
     if (!student || !car || !date || !hour) throw new Error('O argumento referente à aula prática é inválido.');
@@ -140,11 +142,25 @@ export default class PracticalClassService {
     for (let pc of practicalClasses) {
       if (pc.student.id === student.id && pc.car.id !== car.id) return false;
 
-      if (pc.id !== id && pc.student.id === student.id && pc.hour === hour) return false;
+      if (pc.id !== id && pc.student.id === student.id && pc.date === date && pc.hour === hour) return false;
 
-      counter++;
+      if (pc.student.id === student.id) counter++;
     }
 
-    return counter < 10;
+    return counter <= limit;
+  }
+
+  validateAll(practicalClasses) {
+    if (!Array.isArray(practicalClasses)) throw new Error('O argumento referente à lista de aulas práticas é inválido.');
+
+    let isValid = false;
+
+    for (let practicalClass of practicalClasses) {
+      isValid = this.validate(practicalClass, practicalClasses);
+
+      if (!isValid) break;
+    }
+
+    return isValid;
   }
 }
