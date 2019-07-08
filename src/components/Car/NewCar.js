@@ -11,7 +11,7 @@ export default class NewCar extends Component {
   };
 
   handleSave(name, teacher) {
-    this.props.onSave(name, teacher);
+    this.props.onSave(name, teacher.id ? teacher : null);
     this.setState({ name: '', teacher: { id: '', name: '' } });
   }
 
@@ -40,7 +40,7 @@ export default class NewCar extends Component {
               const options = event.target.options;
               const id = event.target.value;
               const name = Array.from(options).find(o => o.value === id).text;
-              this.setState({ teacher: { id: id, name: name } });
+              this.setState({ teacher: { id, name } });
             }}>
             <option value=''>Selecione o professor...</option>
             {teachers &&
