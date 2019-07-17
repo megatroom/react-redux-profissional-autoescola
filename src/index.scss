@@ -66,8 +66,10 @@ body {
 
 .section-button {
     margin-top: 10px;
+    
     &__action {
         height:100px;
+        cursor: pointer;
         width: 130px;
         border: none;
         background-color: rgba(126, 105, 126, 0.979);
