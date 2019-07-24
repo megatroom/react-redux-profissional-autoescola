@@ -1,23 +1,40 @@
 import React, {Fragment} from 'react'
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 import AppBar from '../components/AppBar'
-import SectionHeader from '../components/SectionHeader';
-import SectionButton from '../components/SectionButton';
+import NavigationDrawer from '../components/NavigationDrawer'
+import HomePage from './HomePage'
+import Classes from './Classes'
+import Students from './Students'
 
 class App extends React.Component {
 
+    state = {
+        isMenuOpen: false
+    }
+
+    handleOpenMenu = () => {
+        this.setState({ isMenuOpen: true })
+    }
+
+    handleCloseMenu = () => {
+        this.setState({ isMenuOpen: false })
+    }
+
     render() {
+        
+        const {isMenuOpen} = this.state;
+
         return(
-            <Fragment>
-                <AppBar />
-                <div className="container">
-                    <SectionHeader title={"Serviços"} />
-                    <SectionButton title={"Aula Teórica"} icon={"edit"} />
-                    
-                    <SectionHeader title={"Cadastros"} />
-                    <SectionButton title={"Alunos"} icon={"person"} />
-                </div>
-            </Fragment>
+            <Router>
+                <Fragment>
+                    <AppBar onOpenMenu={this.handleOpenMenu} onCloseMenu={this.handleCloseMenu} isMenuOpen={isMenuOpen} />
+                    <Route path="/" exact render={props => <HomePage/>} />
+                    <Route path="/students" exact render={props=> <Students />} />
+                    <Route path="/classes" exact render={props=> <Classes />} />
+                    <NavigationDrawer onCloseMenu={this.handleCloseMenu} isOpen={isMenuOpen}/>
+                </Fragment>
+            </Router>
         );
     }
 }

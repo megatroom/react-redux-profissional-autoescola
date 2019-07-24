@@ -1,8 +1,9 @@
 import React from 'react'
+import { withRouter } from "react-router-dom"
 
-const SectionButton = ({title, icon}) => (
+const SectionButton = ({title, icon, destination, history}) => (
 <div className="section-button">
-    <button className="section-button__action">
+    <button className="section-button__action" onClick={ () => history.push(`/${destination}`)}>
         <div className="section-button__icon">
         <i className="material-icons">{icon}</i>
         </div>
@@ -13,4 +14,4 @@ const SectionButton = ({title, icon}) => (
 </div>
 )
 
-export default SectionButton
+export default withRouter(SectionButton)

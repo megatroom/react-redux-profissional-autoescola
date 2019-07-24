@@ -1,4 +1,4 @@
-
+@import "mixin";
 
 body {
     font-family: 'Josefin Sans', sans-serif;
@@ -82,5 +82,59 @@ body {
     &__title {
         align-items: bottom;
         font-size: 15px;
+    }
+}
+
+.navigation-drawer {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    height: 100vh;
+    width: 260px;
+    background-color: #fff;
+    @include box-shadow(5); // acima de todos os outros componentes
+    transition: left 0.5s ease-in-out;
+
+    &--open {
+        left: 0;
+    }
+
+    &__menu {
+        margin-top: 16px;
+        padding: 0 8px;
+
+        &__item {
+            display: block;
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            padding: 6px 8px;
+
+            i {
+                margin-right: 8px;
+            }
+
+            &:hover {
+                background-color: rgba(0,0,0,0.08)
+            }
+        }
+    }
+
+    &__head {
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 12px;
+
+        &__button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
     }
 }
