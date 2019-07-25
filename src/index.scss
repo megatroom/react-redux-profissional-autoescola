@@ -1,11 +1,17 @@
 @import "mixin";
 
+$app-padding: 20px;
+$container-max-width: 500px;
+$color-primary: rgba(126, 105, 126, 0.979);;
+$color-danger: #f44336;
+$color-success: #4caf50;
+
 body {
     font-family: 'Josefin Sans', sans-serif;
 }
 
 .app-bar {
-    background-color: rgba(126, 105, 126, 0.979);
+    background-color: $color-primary;
     top: 0;
     left: 0;
     right: 0;
@@ -54,6 +60,7 @@ body {
 
 .section-header {
     margin-top: 20px;
+    width: 100%
     &__title {
         font-size: 26px;
     }
@@ -61,6 +68,18 @@ body {
         height: 2px;
         background-color: gray;
         min-width: 500px;
+    }
+
+    &__action {
+        float: right;
+        background-color: white;
+        border: 1px black solid;
+        border-radius: 50%;
+        height: 42px;
+        cursor: pointer;
+        position: relative;
+        bottom: 20px;
+        right: 5%;
     }
 }
 
@@ -136,5 +155,163 @@ body {
             border: none;
             cursor: pointer;
         }
+    }
+}
+
+.new-student {
+    background-color: #fff;
+    border-radius: 2px;
+    display: flow-root;
+    margin-top: 10px;
+    &__input {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        width: 100%;
+        border: none;
+        @include box-shadow(1);
+
+        &:focus {
+            outline: none;
+        }
+    }
+    &__submit {
+        
+        background-color: transparent;
+        border: none;
+        float: right;
+        margin-top: 2px;
+        margin-bottom: 5px;
+        text-decoration: underline;
+    }
+}
+
+.note-list {
+    margin: 50px 0px;
+    width: 100%;
+}
+
+.note {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px 12px;
+    border-radius: 2px;
+    @include box-shadow(1);
+
+    &__text {
+        flex: 1;
+    }
+
+    &__input {
+        flex: 1;
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+        border-bottom: 1px solid #f5e674;
+    }
+
+    &__button {
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+
+        &--hidden {
+            visibility: hidden;
+        }
+
+        &--red {
+            color: $color-danger;
+        }
+
+        &--green {
+            color: $color-success;
+        }
+
+        &--text {
+            text-decoration: underline;
+        }
+    }
+}
+
+.theory-lesson {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px 12px;
+    border-radius: 2px;
+    height: 100%;
+    @include box-shadow(1);
+
+    &__text {
+        flex: 1;
+    }
+
+    &__input {
+        flex: 1;
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+        border-bottom: 1px solid #f5e674;
+    }
+
+    &__button {
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+
+        &--hidden {
+            visibility: hidden;
+        }
+
+        &--red {
+            color: $color-danger;
+        }
+
+        &--green {
+            color: $color-success;
+        }
+
+        &--text {
+            text-decoration: underline;
+        }
+    }
+
+    &__student-count {
+        flex: -1;
+    }
+}
+
+
+
+
+
+.new-theory-lesson {
+
+    background-color: #fff;
+    border-radius: 2px;
+    display: flow-root;
+    margin-top: 30px;
+    width: 100%;
+    &__input {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        width: 100%;
+        border: none;
+        @include box-shadow(1);
+
+        &:focus {
+            outline: none;
+        }
+    }
+    &__submit {
+        
+        background-color: transparent;
+        border: none;
+        float: right;
+        margin-top: 2px;
+        margin-bottom: 5px;
+        text-decoration: underline;
     }
 }
