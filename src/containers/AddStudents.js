@@ -43,12 +43,13 @@ class AddStudents extends React.Component {
 
     handleIncludeStudent = id => {
             this.setState(prevState => {
-                const newStudents = prevState.students.slice();
+                var newStudents = prevState.students.slice();
                 const index = newStudents.findIndex(student => student.id === id);
+                newStudents[index].lesson = this.state.lesson.id;
                 const newTheoryLessonStudents = prevState.lesson.students.concat(newStudents[index]);
                 var newLesson = prevState.lesson;
                 newLesson.students = newTheoryLessonStudents;
-                this.handleSave(newLesson);
+                this.handleSave(newLesson, newStudents);
                 return {
                     lesson: newLesson
                 }
@@ -58,31 +59,37 @@ class AddStudents extends React.Component {
     handleRemoveStudent = id => {
             this.setState(prevState => {
                 var newLesson = prevState.lesson;
-                const newStudents = newLesson.students.slice();
+                var newStudents = newLesson.students.slice();
                 const index = newStudents.findIndex(student => student.id === id);
+                newStudents[index].lesson = null;
+                const modifySavedStudents = prevState.students.slice();
+                const studentIndex = modifySavedStudents.findIndex(st => st.id === newStudents[index].id);
+                modifySavedStudents[studentIndex] = newStudents[index];
                 newStudents.splice(index, 1)[0];
                 newLesson.students = newStudents;
-                this.handleSave(newLesson);
+                this.handleSave(newLesson, modifySavedStudents);
                 return {
                     lesson: newLesson
                 };
             });
     }
 
-    handleSave = (newLesson) => {
+    handleSave = (newLesson, students) => {
         TheoryLessonService.saveOne(newLesson);
+        StudentsService.save(students);
     }
 
     render() {
 
         const {lesson, students} = this.state;
-                
+        const st = students.filter(student => student.lesson === null || student.lesson === this.state.lesson.id);
+        console.log(st)
         return(
             <div className="container">
                 <SectionHeader title={`Turma de ${lesson.text}`}/>
                 <AddStudentList 
                     lessonStudents={lesson.students} 
-                    students={students} 
+                    students={st} 
                     onAdd={this.handleIncludeStudent} 
                     onDelete={this.handleRemoveStudent} 
                 />

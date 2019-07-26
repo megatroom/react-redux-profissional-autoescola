@@ -67,6 +67,7 @@ class Students extends React.Component {
 
     render() {
         const {students} = this.state;
+        
         return (
             <div className="container">
                 <SectionHeader title={"Estudantes"} />

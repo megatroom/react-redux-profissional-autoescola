@@ -5,6 +5,7 @@ import SectionHeader from '../components/SectionHeader';
 import NewtheoryLesson from '../components/NewTheoryLesson';
 import TheoryLessonService from '../services/TheoryLessonService'
 import TheoryLessonList from '../components/TheoryLessonList'
+import StudentService from '../services/StudentsService'
 
 class TheoryLessons extends React.Component {
 
@@ -40,6 +41,9 @@ class TheoryLessons extends React.Component {
             const newTheoryLessons = prevState.theoryLessons.slice();
             const index = newTheoryLessons.findIndex(theoryLesson => theoryLesson.id === id);
             newTheoryLessons.splice(index, 1)[0];
+            
+            var students = StudentService.load();
+            console.log(students)
 
             this.handleSave(newTheoryLessons);
 
