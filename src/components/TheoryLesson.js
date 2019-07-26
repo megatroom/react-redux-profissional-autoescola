@@ -51,7 +51,11 @@ class TheoryLesson extends React.Component {
                 </React.Fragment>)
             }
 
-            <button className="theory-lesson__button theory-lesson__button--text"><span className="theory-lesson__student-count">{`${theoryLesson.students.length === 1 ? theoryLesson.students.length + ' aluno' :  theoryLesson.students.length + ' alunos' }`}</span></button>
+            <a className="theory-lesson__button theory-lesson__button--text" href={`/lesson/${theoryLesson.id}`}>
+                <span className="theory-lesson__student-count">
+                    {`${theoryLesson.students.length === 1 ? theoryLesson.students.length + ' aluno' :  theoryLesson.students.length + ' alunos' }`}
+                </span>
+            </a>
 
 
             <button

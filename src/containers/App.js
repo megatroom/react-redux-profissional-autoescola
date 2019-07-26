@@ -6,6 +6,7 @@ import NavigationDrawer from '../components/NavigationDrawer'
 import HomePage from './HomePage'
 import TheoryLessons from './TheoryLessons'
 import Students from './Students'
+import AddStudents from './AddStudents'
 
 class App extends React.Component {
 
@@ -32,6 +33,7 @@ class App extends React.Component {
                     <Route path="/" exact render={props => <HomePage/>} />
                     <Route path="/students" exact render={props=> <Students />} />
                     <Route path="/classes" exact render={props=> <TheoryLessons />} />
+                    <Route path="/lesson/:lessonId" render={props => <AddStudents id={props.match.params.lessonId} />}/>
                     <NavigationDrawer onCloseMenu={this.handleCloseMenu} isOpen={isMenuOpen}/>
                 </Fragment>
             </Router>

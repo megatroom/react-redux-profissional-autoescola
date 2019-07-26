@@ -18,7 +18,7 @@ class Students extends React.Component {
 
     handleAddStudent = text => {
         this.setState(prevState => {
-            const newStudents = prevState.students.concat({ id: uuid(), text });
+            const newStudents = prevState.students.concat({ id: uuid(), text, lesson: null });
             this.handleSave(newStudents);
             return {
                 students: newStudents
