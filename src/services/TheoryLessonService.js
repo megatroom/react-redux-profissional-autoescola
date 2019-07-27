@@ -46,9 +46,7 @@ class TheoryLessonService {
         return new Promise((resolve)=> {
             const lessons = JSON.parse(window.localStorage.getItem("theoryLessons"));
             const newLessons = lessons.map((l) => {
-                console.log(stndId, l);
                 const index = l.students.findIndex(s => s === stndId);
-                console.log(index);
                 if(index == -1){
                     return l;
                 } else {
@@ -56,7 +54,7 @@ class TheoryLessonService {
                     stndList.splice(index,1);
                     var lesson = l;
                     lesson.students = stndList;
-                    console.log(stndList)
+                    
                     return lesson;
                 };
             }); 

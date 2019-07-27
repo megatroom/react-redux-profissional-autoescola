@@ -14,6 +14,20 @@ class StudentsService {
         })
     }
 
+    static removeStudentsFromLesson(lsnId) {
+        return new Promise((resolve) => {
+        const students = JSON.parse(window.localStorage.getItem("students"));
+        const newStudents = students.map(s => {
+            if(s.lesson === lsnId){
+                s.lesson = null;
+            }
+            return s;
+        })
+        window.localStorage.setItem("students", JSON.stringify(students));
+        resolve();
+        });
+    };
+
 }
 
 export default StudentsService

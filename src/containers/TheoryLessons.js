@@ -41,10 +41,7 @@ class TheoryLessons extends React.Component {
             const newTheoryLessons = prevState.theoryLessons.slice();
             const index = newTheoryLessons.findIndex(theoryLesson => theoryLesson.id === id);
             newTheoryLessons.splice(index, 1)[0];
-            
-            var students = StudentService.load();
-            console.log(students)
-
+            StudentService.removeStudentsFromLesson(id);
             this.handleSave(newTheoryLessons);
 
             return {
