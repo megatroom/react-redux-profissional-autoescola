@@ -11,7 +11,7 @@ class AddStudent extends React.Component {
             <div className="add-student">
             <span className="add-student__text">{student.text}</span>
             {
-                lessonStudents.findIndex(s => s.id === student.id) === -1 
+                lessonStudents.findIndex(s => s === student.id) === -1 
                 ? 
                 (<button className="add-student__button" onClick={() => {
                     onAdd(student.id)

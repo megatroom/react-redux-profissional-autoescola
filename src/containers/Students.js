@@ -5,6 +5,7 @@ import NewStudent from '../components/NewStudent'
 import StudentList from '../components/StudentList'
 import StudentsService from '../services/StudentsService'
 import SectionHeader from '../components/SectionHeader'
+import TheoryLessonService from '../services/TheoryLessonService';
 
 class Students extends React.Component {
 
@@ -33,7 +34,7 @@ class Students extends React.Component {
             newStudents.splice(index, 1)[0];
 
             this.handleSave(newStudents);
-
+            TheoryLessonService.removeStudentFromLessons(id);
             return {
                 students: newStudents
             };

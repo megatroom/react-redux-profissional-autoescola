@@ -46,12 +46,13 @@ class AddStudents extends React.Component {
                 var newStudents = prevState.students.slice();
                 const index = newStudents.findIndex(student => student.id === id);
                 newStudents[index].lesson = this.state.lesson.id;
-                const newTheoryLessonStudents = prevState.lesson.students.concat(newStudents[index]);
+                const newTheoryLessonStudents = prevState.lesson.students.concat(id);
                 var newLesson = prevState.lesson;
                 newLesson.students = newTheoryLessonStudents;
                 this.handleSave(newLesson, newStudents);
                 return {
-                    lesson: newLesson
+                    lesson: newLesson,
+                    students: newStudents
                 }
             });
     }
@@ -59,17 +60,14 @@ class AddStudents extends React.Component {
     handleRemoveStudent = id => {
             this.setState(prevState => {
                 var newLesson = prevState.lesson;
-                var newStudents = newLesson.students.slice();
+                var newStudents = prevState.students.slice();
                 const index = newStudents.findIndex(student => student.id === id);
                 newStudents[index].lesson = null;
-                const modifySavedStudents = prevState.students.slice();
-                const studentIndex = modifySavedStudents.findIndex(st => st.id === newStudents[index].id);
-                modifySavedStudents[studentIndex] = newStudents[index];
-                newStudents.splice(index, 1)[0];
-                newLesson.students = newStudents;
-                this.handleSave(newLesson, modifySavedStudents);
+                newLesson.students.splice(newLesson.students.findIndex(s => s === id), 1);
+                this.handleSave(newLesson, newStudents);
                 return {
-                    lesson: newLesson
+                    lesson: newLesson,
+                    students: newStudents
                 };
             });
     }
@@ -83,7 +81,6 @@ class AddStudents extends React.Component {
 
         const {lesson, students} = this.state;
         const st = students.filter(student => student.lesson === null || student.lesson === this.state.lesson.id);
-        console.log(st)
         return(
             <div className="container">
                 <SectionHeader title={`Turma de ${lesson.text}`}/>
