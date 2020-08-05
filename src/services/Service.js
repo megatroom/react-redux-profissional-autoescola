@@ -1,17 +1,17 @@
-export default class NoteService {
+export default class AlunoService {
 	static load() {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
-				const notes = window.localStorage.getItem("notes");
-				resolve(notes ? JSON.parse(notes) : []);
+				const alunos = window.localStorage.getItem("alunos");
+				resolve(alunos ? JSON.parse(alunos) : []);
 				reject();
 			}, 1000);
 		});
 	}
-	static save(notes) {
+	static save(alunos) {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => {
-				window.localStorage.setItem("notes", JSON.stringify(notes));
+				window.localStorage.setItem("alunos", JSON.stringify(alunos));
 				resolve();
 				reject();
 			}, 500);

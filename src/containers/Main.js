@@ -1,11 +1,17 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
-const Main = () => (
+const Main = ({ history }) => (
 	<div class="main">
 		<div className="main__options">
 			<span>Serviços</span>
 			<hr />
-			<button class="main__options__button">
+			<button
+				class="main__options__button"
+				onClick={() => {
+					history.push("/alunos");
+				}}
+			>
 				<i class="material-icons">menu_book</i>
 				<span>Aula Teórica</span>
 			</button>
@@ -21,4 +27,4 @@ const Main = () => (
 	</div>
 );
 
-export default Main;
+export default withRouter(Main);

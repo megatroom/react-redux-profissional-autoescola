@@ -1,9 +1,12 @@
 @import "./mixin.scss";
+
 $container-padding: 20px;
 $container-max-width: 592px;
 $color-primary: #ffe600;
 $color-danger: #f44336;
 $color-success: #4caf50;
+$hr: 1px solid #999;
+
 body {
 	margin: 0;
 	padding: 0;
@@ -36,7 +39,7 @@ body {
 	&__action {
 		background-color: transparent;
 		border: none;
-		color: #ababab;
+		color: #2c2c2c;
 		cursor: pointer;
 		&:hover {
 			background-color: rgba(0, 0, 0, 0.13);
@@ -69,7 +72,7 @@ body {
 			font-weight: bold;
 		}
 		hr {
-			border: 1px solid #999;
+			border: $hr;
 			margin-bottom: 16px;
 			@include box-shadow(1);
 		}
@@ -87,6 +90,94 @@ body {
 			padding: 8px;
 			border: none;
 			cursor: pointer;
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.07);
+				@include box-shadow(2);
+			}
+		}
+	}
+}
+
+.alunos {
+	&__brand {
+		font-weight: bold;
+		margin-left: 4px;
+	}
+	hr {
+		border: $hr;
+	}
+	&__new {
+		@include box-shadow(1);
+		background-color: #fff;
+		padding: 8px;
+		border-radius: 4px;
+		&__input {
+			width: 100%;
+			border: none;
+			&:focus {
+				outline: none;
+			}
+		}
+		&__button {
+			margin: 4px 0;
+			float: right;
+			background-color: #ffe60050;
+			border: none;
+			border-radius: 4px;
+			padding: 8px 12px;
+			cursor: pointer;
+			@include box-shadow(1);
+			&:hover {
+				@include box-shadow(2);
+				background-color: rgba(255, 200, 0, 0.73);
+			}
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+	&__list {
+		margin-top: 48px;
+		width: 100%;
+		&__aluno {
+			background-color: #fff;
+			margin: 8px 0;
+			border-radius: 4px;
+			display: flex;
+			padding: 8px 12px;
+			align-items: center;
+			@include box-shadow(1);
+			&__text {
+				flex: 1;
+			}
+			&__input {
+				flex: 1;
+				border-top: none;
+				border-left: none;
+				border-right: none;
+				&:focus {
+					outline: none;
+				}
+			}
+			&__action {
+				background-color: transparent;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				&:hover {
+					background-color: rgba(0, 0, 0, 0.13);
+					@include box-shadow(1);
+				}
+				&:focus {
+					outline: none;
+				}
+				&--red {
+					color: $color-danger;
+				}
+				&--green {
+					color: $color-success;
+				}
+			}
 		}
 	}
 }
