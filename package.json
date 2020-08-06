@@ -11,10 +11,12 @@
 	"author": "douglas braga",
 	"license": "ISC",
 	"dependencies": {
+		"array-move": "^3.0.0",
 		"classnames": "^2.2.6",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-router-dom": "^5.2.0",
+		"react-sortable-hoc": "^1.11.0",
 		"uuid": "^8.3.0"
 	},
 	"devDependencies": {

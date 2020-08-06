@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
+import { sortableElement } from "react-sortable-hoc";
 
-export default class ListItem extends Component {
+class ListItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -75,3 +76,5 @@ export default class ListItem extends Component {
 		);
 	}
 }
+
+export default sortableElement(ListItem);

@@ -99,6 +99,15 @@ body {
 }
 
 .alunos {
+	align-items: center;
+	&__back {
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		&:focus {
+			outline: none;
+		}
+	}
 	&__brand {
 		font-weight: bold;
 		margin-left: 4px;

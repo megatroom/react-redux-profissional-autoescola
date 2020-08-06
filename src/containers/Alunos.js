@@ -1,12 +1,30 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { v1 as uuid } from "uuid";
+import { sortableContainer } from "react-sortable-hoc";
+import arrayMove from "array-move";
+import { withRouter } from "react-router-dom";
 
 import AlunoNew from "../components/AlunoNew";
 
 import AlunoService from "../services/Service";
 import ListItem from "../components/AlunoListItem";
 
-export default class Alunos extends Component {
+const Container = sortableContainer(({ alunos, onEdit, onDelete }) => (
+	<div className="alunos__list">
+		{alunos.map(({ id, nome }, i) => (
+			<ListItem
+				key={id}
+				index={i}
+				id={id}
+				nome={nome}
+				onEdit={onEdit}
+				onDelete={onDelete}
+			/>
+		))}
+	</div>
+));
+
+class Alunos extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -31,10 +49,12 @@ export default class Alunos extends Component {
 		this.setState({ reloadHasError: true });
 	}
 
-	// componentDidUpdate() {
-	// 	if (!!this.state.alunos) this.handleSave(this.state.alunos);
-	// 	console.log(!!this.state.alunos);
-	// }
+	onSortEnd = ({ oldIndex, newIndex }) => {
+		this.setState(({ alunos }) => ({
+			alunos: arrayMove(alunos, oldIndex, newIndex),
+		}));
+		this.handleSave(this.state.alunos);
+	};
 
 	handleAdd = (nome) => {
 		this.setState((prevState) => {
@@ -102,24 +122,37 @@ export default class Alunos extends Component {
 	};
 
 	render() {
-		const { alunos } = this.state;
+		const { history } = this.props;
+		const { alunos, reloadHasError } = this.state;
 		return (
 			<div className="alunos">
+				<button
+					title="Voltar para tela principal"
+					className="alunos__back material-icons"
+					onClick={() => {
+						history.push("/");
+					}}
+				>
+					chevron_left
+				</button>
 				<span className="alunos__brand">Alunos</span>
 				<hr />
-				<AlunoNew AddAluno={this.handleAdd} />
-				<div className="alunos__list">
-					{alunos.map(({ id, nome }) => (
-						<ListItem
-							key={id}
-							id={id}
-							nome={nome}
+				{reloadHasError ? (
+					<Error onRetryReload={this.handleReload} />
+				) : (
+					<Fragment>
+						<AlunoNew AddAluno={this.handleAdd} />
+						<Container
+							onSortEnd={this.onSortEnd}
+							alunos={alunos}
 							onEdit={this.handleEdit}
 							onDelete={this.handleDelete}
 						/>
-					))}
-				</div>
+					</Fragment>
+				)}
 			</div>
 		);
 	}
 }
+
+export default withRouter(Alunos);
