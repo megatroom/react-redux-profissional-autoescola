@@ -7,12 +7,13 @@ export default class NewAluno extends Component {
 	}
 
 	render() {
-		const { AddAluno } = this.props;
+		const { onAdd } = this.props;
 		const { text } = this.state;
 		return (
 			<Fragment>
 				<div className="alunos__new">
 					<input
+						placeholder="Nome do aluno"
 						type="text"
 						className="alunos__new__input"
 						value={text}
@@ -21,15 +22,16 @@ export default class NewAluno extends Component {
 						}}
 						onKeyPress={(event) => {
 							if (event.key === "Enter") {
-								AddAluno(text);
+								onAdd(text);
 								this.setState({ text: "" });
 							}
 						}}
 					/>
 				</div>
 				<button
+					title="Registrar aluno"
 					onClick={() => {
-						AddAluno(text);
+						onAdd(text);
 						this.setState({ text: "" });
 					}}
 					className="alunos__new__button"

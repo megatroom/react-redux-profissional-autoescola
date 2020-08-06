@@ -32,18 +32,21 @@ class ListItem extends Component {
 							defaultValue={nome}
 							ref={(c) => {
 								this.input = c;
+								// this.input.select();
 							}}
 							onKeyPress={(event) => {
 								if (event.key === "Enter") this.handleSave();
 							}}
 						/>
 						<button
+							title="Cancelar edição"
 							onClick={this.handleEditing}
 							className="alunos__list__aluno__action alunos__list__aluno__action--red material-icons"
 						>
 							cancel
 						</button>
 						<button
+							title="Salvar edição"
 							onClick={this.handleSave}
 							className="alunos__list__aluno__action alunos__list__aluno__action--green material-icons"
 						>
@@ -56,6 +59,7 @@ class ListItem extends Component {
 							<span>{nome}</span>
 						</div>
 						<button
+							title="Editar aluno"
 							onClick={this.handleEditing}
 							className="alunos__list__aluno__action material-icons"
 						>
@@ -65,6 +69,7 @@ class ListItem extends Component {
 				)}
 				<button
 					disabled={this.state.isEditing}
+					title="Excluir aluno"
 					onClick={() => {
 						onDelete(id);
 					}}
