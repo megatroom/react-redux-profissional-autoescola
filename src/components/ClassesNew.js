@@ -13,7 +13,7 @@ export default class ClassesNew extends Component {
 			<Fragment>
 				<div className="new">
 					<input
-						placeholder="Nome do classe"
+						placeholder="Nome da turma"
 						type="text"
 						className="new__input"
 						value={text}
@@ -29,14 +29,14 @@ export default class ClassesNew extends Component {
 					/>
 				</div>
 				<button
-					title="Registrar classe"
+					title="Registrar turma"
 					onClick={() => {
 						onAdd(text);
 						this.setState({ text: "" });
 					}}
 					className="new__button"
 				>
-					Incluir Classe
+					Incluir Turma
 				</button>
 			</Fragment>
 		);

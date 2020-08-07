@@ -58,7 +58,7 @@ class ClassesItem extends Component {
 							<span>{nome}</span>
 						</div>
 						<button
-							title="Editar classe"
+							title="Editar turma"
 							onClick={this.handleEditing}
 							className="list__item__action material-icons"
 						>
@@ -68,7 +68,7 @@ class ClassesItem extends Component {
 				)}
 				<button
 					disabled={this.state.isEditing}
-					title="Excluir classe"
+					title="Excluir turma"
 					onClick={() => {
 						onDelete(id);
 					}}
