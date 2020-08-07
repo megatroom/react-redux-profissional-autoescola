@@ -72,7 +72,7 @@ export default class App extends Component {
 		});
 	};
 	handleEditAlunos = (id, nome) => {
-		this.setStaAlunoste((prevState) => {
+		this.setState((prevState) => {
 			const newAlunos = prevState.alunos.slice();
 			const i = newAlunos.findIndex((a) => a.id === id);
 			newAlunos[i].nome = nome;
