@@ -13,6 +13,9 @@ body {
 	font-family: "Roboto", sans-serif;
 	background-color: #99889988;
 }
+hr {
+	border: $hr;
+}
 
 .container {
 	display: grid;
@@ -73,7 +76,6 @@ body {
 			font-weight: bold;
 		}
 		hr {
-			border: $hr;
 			margin-bottom: 16px;
 			@include box-shadow(1);
 		}
@@ -147,9 +149,61 @@ body {
 	font-weight: bold;
 	margin-left: 4px;
 }
-hr {
-	border: $hr;
+
+.add_turma {
+	&__buton {
+		transition: all 0.3s ease;
+		position: relative;
+		top: 4.7vh;
+		float: right;
+		right: 4px;
+		border: none;
+		border-radius: 50px;
+		width: 37px;
+		height: 37px;
+		background-color: #ffe60095;
+		color: #2c2c2c;
+		@include box-shadow(1);
+		cursor: pointer;
+		&:hover {
+			@include box-shadow(2);
+			background-color: #fde000;
+		}
+		&:active {
+			@include box-shadow(1);
+			background-color: #ddd100;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+	&--transition {
+		background-color: #f226;
+		color: #0007;
+		top: 9.6vh;
+		right: 117px;
+		width: 55px;
+		height: 32px;
+		&:hover {
+			@include box-shadow(2);
+			background-color: #f229;
+		}
+		&:active {
+			@include box-shadow(1);
+			background-color: #f223;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+	&__input {
+		display: none;
+		&__transition {
+			display: block;
+		}
+	}
 }
+
 .new {
 	@include box-shadow(1);
 	background-color: #fff;

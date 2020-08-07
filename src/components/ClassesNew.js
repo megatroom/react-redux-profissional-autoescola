@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import classnames from "classnames";
 
 export default class ClassesNew extends Component {
 	constructor(props) {
@@ -7,10 +8,14 @@ export default class ClassesNew extends Component {
 	}
 
 	render() {
-		const { onAdd } = this.props;
+		const { onAdd, add_turma } = this.props;
 		const { text } = this.state;
 		return (
-			<Fragment>
+			<div
+				className={classnames("add_turma__input", {
+					add_turma__input__transition: add_turma,
+				})}
+			>
 				<div className="new">
 					<input
 						placeholder="Nome da turma"
@@ -38,7 +43,7 @@ export default class ClassesNew extends Component {
 				>
 					Incluir Turma
 				</button>
-			</Fragment>
+			</div>
 		);
 	}
 }
