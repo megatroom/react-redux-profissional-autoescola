@@ -7,10 +7,10 @@ const Main = ({ history }) => (
 			<span>Serviços</span>
 			<hr />
 			<button
-				className="main__options__button"
 				onClick={() => {
-					history.push("/alunos");
+					history.push("/servicos");
 				}}
+				className="main__options__button"
 			>
 				<i className="material-icons">menu_book</i>
 				<span>Aula Teórica</span>
@@ -19,7 +19,12 @@ const Main = ({ history }) => (
 		<div className="main__options">
 			<span>Cadastros</span>
 			<hr />
-			<button className="main__options__button">
+			<button
+				onClick={() => {
+					history.push("/alunos");
+				}}
+				className="main__options__button"
+			>
 				<i className="material-icons">groups</i>
 				<span>Alunos</span>
 			</button>

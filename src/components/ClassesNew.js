@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-export default class NewAluno extends Component {
+export default class ClassesNew extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { text: "" };
@@ -11,11 +11,11 @@ export default class NewAluno extends Component {
 		const { text } = this.state;
 		return (
 			<Fragment>
-				<div className="alunos__new">
+				<div className="new">
 					<input
-						placeholder="Nome do aluno"
+						placeholder="Nome do classe"
 						type="text"
-						className="alunos__new__input"
+						className="new__input"
 						value={text}
 						onChange={(event) => {
 							this.setState({ text: event.target.value });
@@ -29,14 +29,14 @@ export default class NewAluno extends Component {
 					/>
 				</div>
 				<button
-					title="Registrar aluno"
+					title="Registrar classe"
 					onClick={() => {
 						onAdd(text);
 						this.setState({ text: "" });
 					}}
-					className="alunos__new__button"
+					className="new__button"
 				>
-					Incluir Aluno
+					Incluir Classe
 				</button>
 			</Fragment>
 		);

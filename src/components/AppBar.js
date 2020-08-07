@@ -1,6 +1,12 @@
 import React from "react";
 
-const AppBar = ({ isLoading, saveHasError, handleSave }) => (
+const AppBar = ({
+	isLoading,
+	saveHasError,
+	handleSaveAlunos,
+	handleSaveClasses,
+	p,
+}) => (
 	<div className="appbar">
 		<div className="appbar__container">
 			<button className="appbar__action material-icons">menu</button>
@@ -10,9 +16,12 @@ const AppBar = ({ isLoading, saveHasError, handleSave }) => (
 					refresh
 				</button>
 			)}
+			{/* {console.log(p)} */}
 			{saveHasError && (
 				<button
-					onClick={handleSave}
+					onClick={() => {
+						handleSaveAlunos();
+					}}
 					className="appbar__action material-icons appbar__action--danger"
 				>
 					cloud_off

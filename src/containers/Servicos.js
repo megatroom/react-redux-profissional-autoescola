@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-import AlunoNew from "../components/AlunosNew";
-import AlunosList from "../components/AlunosList";
+import ClassesNew from "../components/ClassesNew";
+import ClassesList from "../components/ClassesList";
 import Error from "../components/Error";
 
-class Alunos extends Component {
+class Servicos extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -13,10 +13,10 @@ class Alunos extends Component {
 
 	render() {
 		const {
-			alunos,
-			onAddAlunos,
-			onEditAlunos,
-			onDeleteAlunos,
+			classes,
+			onAddClasses,
+			onEditClasses,
+			onDeleteClasses,
 			onSortEnd,
 			onRetryReload,
 			history,
@@ -33,18 +33,19 @@ class Alunos extends Component {
 				>
 					chevron_left
 				</button>
-				<span className="brand">Alunos</span>
+				<span className="brand">Aula Teórica</span>
 				<hr />
+
 				{reloadHasError ? (
 					<Error onRetryReload={onRetryReload} />
 				) : (
 					<Fragment>
-						<AlunoNew onAdd={onAddAlunos} />
-						<AlunosList
-							onSortEnd={onSortEnd}
-							alunos={alunos}
-							onEdit={onEditAlunos}
-							onDelete={onDeleteAlunos}
+						<ClassesNew onAdd={onAddClasses} />
+						<ClassesList
+							// onSortEnd={onSortEnd}
+							classes={classes}
+							onEdit={onEditClasses}
+							onDelete={onDeleteClasses}
 						/>
 					</Fragment>
 				)}
@@ -53,4 +54,4 @@ class Alunos extends Component {
 	}
 }
 
-export default withRouter(Alunos);
+export default withRouter(Servicos);

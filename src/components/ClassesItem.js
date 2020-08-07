@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { sortableElement } from "react-sortable-hoc";
 
-class ListItem extends Component {
+class ClassesItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			isEditing: false,
-			// isEditing: true,
 		};
 	}
 
@@ -23,12 +22,12 @@ class ListItem extends Component {
 		const { id, nome, onDelete } = this.props;
 		const { isEditing } = this.state;
 		return (
-			<div key={id} className="alunos__list__aluno">
+			<div key={id} className="list__item">
 				{isEditing ? (
 					<Fragment>
 						<input
 							type="text"
-							className="alunos__list__aluno__input"
+							className="list__item__input"
 							defaultValue={nome}
 							ref={(c) => {
 								this.input = c;
@@ -41,27 +40,27 @@ class ListItem extends Component {
 						<button
 							title="Cancelar edição"
 							onClick={this.handleEditing}
-							className="alunos__list__aluno__action alunos__list__aluno__action--red material-icons"
+							className="list__item__action list__item__action--red material-icons"
 						>
 							cancel
 						</button>
 						<button
 							title="Salvar edição"
 							onClick={this.handleSave}
-							className="alunos__list__aluno__action alunos__list__aluno__action--green material-icons"
+							className="list__item__action list__item__action--green material-icons"
 						>
 							save
 						</button>
 					</Fragment>
 				) : (
 					<Fragment>
-						<div className="alunos__list__aluno__text">
+						<div className="list__item__text">
 							<span>{nome}</span>
 						</div>
 						<button
-							title="Editar aluno"
+							title="Editar classe"
 							onClick={this.handleEditing}
-							className="alunos__list__aluno__action material-icons"
+							className="list__item__action material-icons"
 						>
 							edit
 						</button>
@@ -69,11 +68,11 @@ class ListItem extends Component {
 				)}
 				<button
 					disabled={this.state.isEditing}
-					title="Excluir aluno"
+					title="Excluir classe"
 					onClick={() => {
 						onDelete(id);
 					}}
-					className="alunos__list__aluno__action material-icons"
+					className="list__item__action material-icons"
 				>
 					delete
 				</button>
@@ -82,4 +81,4 @@ class ListItem extends Component {
 	}
 }
 
-export default sortableElement(ListItem);
+export default sortableElement(ClassesItem);

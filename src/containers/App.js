@@ -6,12 +6,13 @@ import arrayMove from "array-move";
 import AppBar from "../components/AppBar";
 import Main from "./Main";
 import Alunos from "./Alunos";
+import Servicos from "./Servicos";
 
-import AlunoService from "../services/Service";
+import { AlunoService, ClasseService } from "../services/Service";
 
 export default class App extends Component {
-	constructor(propos) {
-		super(propos);
+	constructor(props) {
+		super(props);
 		this.state = {
 			alunos: [
 				// { id: 1, nome: "Jaum" },
@@ -19,6 +20,7 @@ export default class App extends Component {
 				// { id: 3, nome: "Tião" },
 				// { id: 4, nome: "Chico" },
 			],
+			classes: [],
 			isLoading: false,
 			isOpenMenu: false,
 			saveHasError: false,
@@ -27,7 +29,8 @@ export default class App extends Component {
 	}
 
 	componentDidMount() {
-		this.handleReload();
+		this.handleReloadAlunos();
+		this.handleReloadClasses();
 	}
 	componentDidCatch() {
 		this.setState({ reloadHasError: true });
@@ -37,9 +40,10 @@ export default class App extends Component {
 		this.setState(({ alunos }) => ({
 			alunos: arrayMove(alunos, oldIndex, newIndex),
 		}));
-		this.handleSave(this.state.alunos);
+		this.handleSaveAlunos(this.state.alunos);
 	};
 
+	//#region handle
 	handleReloadError = (value) => {
 		this.setState({ reloadHasError: value });
 	};
@@ -52,40 +56,80 @@ export default class App extends Component {
 	handleMenu = (value) => {
 		this.setState({ isOpenMenu: value });
 	};
+	//#endregion handle
 
-	handleAdd = (nome) => {
+	//#region handleDados
+	//#region alunos
+	handleAddAlunos = (nome) => {
 		this.setState((prevState) => {
 			const alunos = prevState.alunos.concat({
 				id: uuid(),
 				nome: nome,
 			});
 
-			this.handleSave(alunos);
+			this.handleSaveAlunos(alunos);
 			return { alunos };
 		});
 	};
-	handleEdit = (id, nome) => {
-		this.setState((prevState) => {
+	handleEditAlunos = (id, nome) => {
+		this.setStaAlunoste((prevState) => {
 			const newAlunos = prevState.alunos.slice();
 			const i = newAlunos.findIndex((a) => a.id === id);
 			newAlunos[i].nome = nome;
 
-			this.handleSave(newAlunos);
+			this.handleSaveAlunos(newAlunos);
 			return { alunos: newAlunos };
 		});
 	};
-	handleDelete = (id) => {
+	handleDeleteAlunos = (id) => {
 		this.setState((prevState) => {
 			const newAlunos = prevState.alunos.slice();
 			const i = newAlunos.findIndex((a) => a.id === id);
 			newAlunos.splice(i, 1);
 
-			this.handleSave(newAlunos);
+			this.handleSaveAlunos(newAlunos);
 			return { alunos: newAlunos };
 		});
 	};
+	//#endregion alunos
+	//#region classes
+	handleAddClasses = (nome) => {
+		this.setState((prevState) => {
+			const classes = prevState.classes.concat({
+				id: uuid(),
+				nome: nome,
+			});
 
-	handleReload = () => {
+			this.handleSaveClasses(classes);
+			return { classes };
+		});
+	};
+	handleEditClasses = (id, nome) => {
+		this.setState((prevState) => {
+			const newClasses = prevState.classes.slice();
+			const i = newClasses.findIndex((a) => a.id === id);
+			newClasses[i].nome = nome;
+
+			this.handleSaveClasses(newClasses);
+			return { classes: newClasses };
+		});
+	};
+	handleDeleteClasses = (id) => {
+		this.setState((prevState) => {
+			const newClasses = prevState.classes.slice();
+			const i = newClasses.findIndex((a) => a.id === id);
+			newClasses.splice(i, 1);
+
+			this.handleSaveClasses(newClasses);
+			return { classes: newClasses };
+		});
+	};
+	//#endregion classes
+	//#endregion handleDados
+
+	//#region storage
+	//#region alunos
+	handleReloadAlunos = () => {
 		this.handleReloadError(false);
 		this.handleLoading(true);
 		AlunoService.load()
@@ -101,10 +145,10 @@ export default class App extends Component {
 				this.handleLoading(false);
 			});
 	};
-	handleSave = (alunos) => {
+	handleSaveAlunos = (classes) => {
 		this.handleSaveError(false);
 		this.handleLoading(true);
-		AlunoService.save(alunos)
+		ClasseService.save(classes)
 			.then(() => {})
 			.catch(() => {
 				this.handleSaveError(true);
@@ -113,10 +157,43 @@ export default class App extends Component {
 				this.handleLoading(false);
 			});
 	};
+	//#endregion alunos
+	//#region classes
+	handleReloadClasses = () => {
+		this.handleReloadError(false);
+		this.handleLoading(true);
+		ClasseService.load()
+			.then((classes) => {
+				this.setState({
+					classes: classes,
+				});
+			})
+			.catch(() => {
+				this.handleReloadError(true);
+			})
+			.finally(() => {
+				this.handleLoading(false);
+			});
+	};
+	handleSaveClasses = (classes) => {
+		this.handleSaveError(false);
+		this.handleLoading(true);
+		ClasseService.save(classes)
+			.then(() => {})
+			.catch(() => {
+				this.handleSaveError(true);
+			})
+			.finally(() => {
+				this.handleLoading(false);
+			});
+	};
+	//#endregion classes
+	//#endregion storage
 
 	render() {
 		const {
 			alunos,
+			classes,
 			isLoading,
 			isOpenMenu,
 			reloadHasError,
@@ -128,9 +205,13 @@ export default class App extends Component {
 					<AppBar
 						isLoading={isLoading}
 						saveHasError={saveHasError}
-						handleSave={() => {
-							this.handleSave(alunos);
+						handleSaveAlunos={() => {
+							this.handleSaveAlunos(alunos);
 						}}
+						handleSaveClasses={() => {
+							this.handleSaveClasses(classes);
+						}}
+						p={this}
 					/>
 					<div className="container">
 						<Route path="/" exact render={(props) => <Main />} />
@@ -139,12 +220,25 @@ export default class App extends Component {
 							render={(props) => (
 								<Alunos
 									alunos={alunos}
-									onAddAlunos={this.handleAdd}
-									onEditAlunos={this.handleEdit}
-									onDeleteAlunos={this.handleDelete}
+									onAddAlunos={this.handleAddAlunos}
+									onEditAlunos={this.handleEditAlunos}
+									onDeleteAlunos={this.handleDeleteAlunos}
 									onSortEnd={this.onSortEnd}
+									onRetryReload={this.handleReloadAlunos}
 									reloadHasError={reloadHasError}
-									saveHasError={saveHasError}
+								/>
+							)}
+						/>
+						<Route
+							path="/servicos"
+							render={(props) => (
+								<Servicos
+									classes={classes}
+									onAddClasses={this.handleAddClasses}
+									onEditClasses={this.handleEditClasses}
+									onDeleteClasses={this.handleDeleteClasses}
+									onRetryReload={this.handleReloadClasses}
+									reloadHasError={reloadHasError}
 								/>
 							)}
 						/>
