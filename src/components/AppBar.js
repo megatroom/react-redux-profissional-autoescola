@@ -16,7 +16,6 @@ const AppBar = ({
 					refresh
 				</button>
 			)}
-			{/* {console.log(p)} */}
 			{saveHasError && (
 				<button
 					onClick={() => {

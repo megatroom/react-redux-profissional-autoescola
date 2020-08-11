@@ -4,6 +4,7 @@ import { v1 as uuid } from "uuid";
 import arrayMove from "array-move";
 
 import AppBar from "../components/AppBar";
+import ClasseAluno from "../components/ClasseAluno";
 import Main from "./Main";
 import Alunos from "./Alunos";
 import Servicos from "./Servicos";
@@ -25,6 +26,7 @@ export default class App extends Component {
 			isOpenMenu: false,
 			saveHasError: false,
 			reloadHasError: false,
+			turma: { id: "", nome: "" },
 		};
 	}
 
@@ -65,6 +67,7 @@ export default class App extends Component {
 			const alunos = prevState.alunos.concat({
 				id: uuid(),
 				nome: nome,
+				idTurma: null,
 			});
 
 			this.handleSaveAlunos(alunos);
@@ -98,6 +101,7 @@ export default class App extends Component {
 			const classes = prevState.classes.concat({
 				id: uuid(),
 				nome: nome,
+				qtd: 0,
 			});
 
 			this.handleSaveClasses(classes);
@@ -125,6 +129,29 @@ export default class App extends Component {
 		});
 	};
 	//#endregion classes
+	handleDefineClasse = (id, nome) => {
+		this.setState({ turma: { id: id, nome: nome } });
+		// console.log(this.state.idClasse);
+	};
+
+	getTurma = () => {
+		return this.state.turma;
+	};
+
+	handleEditAlunoClasse = (op, idA) => {
+		this.setState((prevState) => {
+			const newClasses = prevState.classes.slice();
+			const newAlunos = prevState.alunos.slice();
+			const iC = newClasses.findIndex((c) => c.id === this.state.turma.id);
+			const iA = newAlunos.findIndex((a) => a.id === idA);
+			newAlunos[iA].idTurma = op === "+" ? this.state.turma.id : null;
+			newClasses[iC].qtd = eval(newClasses[iC].qtd + op + "1");
+
+			this.handleSaveClasses(newClasses);
+			this.handleSaveAlunos(newAlunos);
+			return { alunos: newAlunos, classes: newClasses };
+		});
+	};
 	//#endregion handleDados
 
 	//#region storage
@@ -145,10 +172,10 @@ export default class App extends Component {
 				this.handleLoading(false);
 			});
 	};
-	handleSaveAlunos = (classes) => {
+	handleSaveAlunos = (alunos) => {
 		this.handleSaveError(false);
 		this.handleLoading(true);
-		ClasseService.save(classes)
+		AlunoService.save(alunos)
 			.then(() => {})
 			.catch(() => {
 				this.handleSaveError(true);
@@ -198,6 +225,7 @@ export default class App extends Component {
 			isOpenMenu,
 			reloadHasError,
 			saveHasError,
+			turma,
 		} = this.state;
 		return (
 			<Router>
@@ -211,7 +239,6 @@ export default class App extends Component {
 						handleSaveClasses={() => {
 							this.handleSaveClasses(classes);
 						}}
-						p={this}
 					/>
 					<div className="container">
 						<Route path="/" exact render={(props) => <Main />} />
@@ -238,7 +265,18 @@ export default class App extends Component {
 									onEditClasses={this.handleEditClasses}
 									onDeleteClasses={this.handleDeleteClasses}
 									onRetryReload={this.handleReloadClasses}
+									onDefineClasse={this.handleDefineClasse}
 									reloadHasError={reloadHasError}
+								/>
+							)}
+						/>
+						<Route
+							path="/turma"
+							render={(props) => (
+								<ClasseAluno
+									alunos={alunos}
+									turma={turma.nome}
+									onEditAlunoClasse={this.handleEditAlunoClasse}
 								/>
 							)}
 						/>

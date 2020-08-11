@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { sortableElement } from "react-sortable-hoc";
+import { withRouter } from "react-router-dom";
 
 class ClassesItem extends Component {
 	constructor(props) {
@@ -19,7 +20,7 @@ class ClassesItem extends Component {
 	};
 
 	render() {
-		const { id, nome, onDelete } = this.props;
+		const { id, nome, onDelete, onDefineClasse, history } = this.props;
 		const { isEditing } = this.state;
 		return (
 			<div key={id} className="list__item">
@@ -58,6 +59,16 @@ class ClassesItem extends Component {
 							<span>{nome}</span>
 						</div>
 						<button
+							title="Editar Alunos"
+							onClick={() => {
+								onDefineClasse(id, nome);
+								history.push("/turma");
+							}}
+							className="list__item__action material-icons"
+						>
+							people
+						</button>
+						<button
 							title="Editar turma"
 							onClick={this.handleEditing}
 							className="list__item__action material-icons"
@@ -81,4 +92,4 @@ class ClassesItem extends Component {
 	}
 }
 
-export default sortableElement(ClassesItem);
+export default sortableElement(withRouter(ClassesItem));

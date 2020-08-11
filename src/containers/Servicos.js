@@ -26,6 +26,7 @@ class Servicos extends Component {
 			onRetryReload,
 			history,
 			reloadHasError,
+			onDefineClasse,
 		} = this.props;
 		const { add_turma } = this.state;
 		return (
@@ -61,6 +62,7 @@ class Servicos extends Component {
 							classes={classes}
 							onEdit={onEditClasses}
 							onDelete={onDeleteClasses}
+							onDefineClasse={onDefineClasse}
 						/>
 					</Fragment>
 				)}
