@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import AlunosList from "./AlunosList";
 
 const ClasseAluno = ({ turma, alunos, onEditAlunoClasse, history }) => {
-	if (!turma) history.push("/servicos");
+	if (!turma.id) history.push("/servicos");
 	return (
 		<div>
 			<button
@@ -16,7 +16,7 @@ const ClasseAluno = ({ turma, alunos, onEditAlunoClasse, history }) => {
 			>
 				chevron_left
 			</button>
-			<span className="brand">{turma}</span>
+			<span className="brand">{turma.nome}</span>
 			<hr />
 			<AlunosList
 				alunos={alunos}

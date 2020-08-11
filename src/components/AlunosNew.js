@@ -21,7 +21,7 @@ export default class NewAluno extends Component {
 							this.setState({ text: event.target.value });
 						}}
 						onKeyPress={(event) => {
-							if (event.key === "Enter") {
+							if (text && event.key === "Enter") {
 								onAdd(text);
 								this.setState({ text: "" });
 							}
@@ -31,8 +31,10 @@ export default class NewAluno extends Component {
 				<button
 					title="Registrar aluno"
 					onClick={() => {
-						onAdd(text);
-						this.setState({ text: "" });
+						if (text) {
+							onAdd(text);
+							this.setState({ text: "" });
+						}
 					}}
 					className="new__button"
 				>

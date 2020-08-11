@@ -15,12 +15,7 @@ export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			alunos: [
-				// { id: 1, nome: "Jaum" },
-				// { id: 2, nome: "Toin" },
-				// { id: 3, nome: "Tião" },
-				// { id: 4, nome: "Chico" },
-			],
+			alunos: [],
 			classes: [],
 			isLoading: false,
 			isOpenMenu: false,
@@ -131,11 +126,10 @@ export default class App extends Component {
 	//#endregion classes
 	handleDefineClasse = (id, nome) => {
 		this.setState({ turma: { id: id, nome: nome } });
-		// console.log(this.state.idClasse);
 	};
 
-	getTurma = () => {
-		return this.state.turma;
+	getTurma = (id) => {
+		return this.state.classes.find((e) => e.id === id);
 	};
 
 	handleEditAlunoClasse = (op, idA) => {
@@ -252,6 +246,7 @@ export default class App extends Component {
 									onDeleteAlunos={this.handleDeleteAlunos}
 									onSortEnd={this.onSortEnd}
 									onRetryReload={this.handleReloadAlunos}
+									getTurma={this.getTurma}
 									reloadHasError={reloadHasError}
 								/>
 							)}
@@ -275,7 +270,7 @@ export default class App extends Component {
 							render={(props) => (
 								<ClasseAluno
 									alunos={alunos}
-									turma={turma.nome}
+									turma={turma}
 									onEditAlunoClasse={this.handleEditAlunoClasse}
 								/>
 							)}

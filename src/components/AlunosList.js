@@ -3,21 +3,25 @@ import { sortableContainer } from "react-sortable-hoc";
 import AlunosItem from "./AlunosItem";
 
 const AlunosList = sortableContainer(
-	({ alunos, onEdit, onDelete, turma, onEditAlunoClasse }) => (
+	({ alunos, onEdit, onDelete, turma, onEditAlunoClasse, getTurma }) => (
 		<div className="list">
-			{alunos.map(({ id, nome, idTurma }, i) => (
-				<AlunosItem
-					key={id}
-					index={i}
-					id={id}
-					nome={nome}
-					idTurma={idTurma}
-					onEdit={onEdit}
-					onDelete={onDelete}
-					turma={turma}
-					onEditAlunoClasse={onEditAlunoClasse}
-				/>
-			))}
+			{alunos.map(({ id, nome, idTurma }, i) => {
+				if (!turma || (turma && idTurma === turma.id) || !idTurma)
+					return (
+						<AlunosItem
+							key={id}
+							index={i}
+							id={id}
+							nome={nome}
+							idTurma={idTurma}
+							onEdit={onEdit}
+							onDelete={onDelete}
+							turma={turma}
+							getTurma={getTurma}
+							onEditAlunoClasse={onEditAlunoClasse}
+						/>
+					);
+			})}
 		</div>
 	)
 );

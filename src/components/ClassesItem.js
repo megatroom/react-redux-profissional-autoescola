@@ -20,7 +20,7 @@ class ClassesItem extends Component {
 	};
 
 	render() {
-		const { id, nome, onDelete, onDefineClasse, history } = this.props;
+		const { id, nome, qtd, onDelete, onDefineClasse, history } = this.props;
 		const { isEditing } = this.state;
 		return (
 			<div key={id} className="list__item">
@@ -56,7 +56,13 @@ class ClassesItem extends Component {
 				) : (
 					<Fragment>
 						<div className="list__item__text">
-							<span>{nome}</span>
+							<span>
+								{nome}
+								<br />
+								<span className="list__item__text__qtd">
+									{qtd ? qtd + " aluno" + (qtd > 1 ? "s" : "") : "nenhum aluno"}
+								</span>
+							</span>
 						</div>
 						<button
 							title="Editar Alunos"
@@ -78,10 +84,10 @@ class ClassesItem extends Component {
 					</Fragment>
 				)}
 				<button
-					disabled={this.state.isEditing}
-					title="Excluir turma"
+					disabled={qtd || this.state.isEditing}
+					title={qtd ? "Turma com alunos registrados" : "Excluir turma"}
 					onClick={() => {
-						onDelete(id);
+						if (!qtd) onDelete(id);
 					}}
 					className="list__item__action material-icons"
 				>

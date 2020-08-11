@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { sortableElement } from "react-sortable-hoc";
-import { check } from "prettier";
 
 class AlunosItem extends Component {
 	constructor(props) {
@@ -27,10 +26,12 @@ class AlunosItem extends Component {
 			onDelete,
 			turma,
 			onEditAlunoClasse,
+			getTurma,
 		} = this.props;
+		const n = !!getTurma ? getTurma(idTurma) : null;
 		const { isEditing } = this.state;
 		return (
-			<div key={id} className="list__item">
+			<div key={id} className="list__item" title={n ? n.nome : ""}>
 				{isEditing ? (
 					<Fragment>
 						<input
@@ -64,7 +65,7 @@ class AlunosItem extends Component {
 					<Fragment>
 						<div className="list__item__text">
 							<span>{nome}</span>
-							{/* {idTurma && <i className="material-icons">check</i>} */}
+							{turma && idTurma && <i className="material-icons">check</i>}
 						</div>
 						{!turma && (
 							<button
@@ -79,20 +80,20 @@ class AlunosItem extends Component {
 				)}
 				{turma ? (
 					<button
-						title="Incluir aluno"
+						title={(idTurma ? "Remover" : "Incluir") + " aluno"}
 						onClick={() => {
-							onEditAlunoClasse("+", id);
+							onEditAlunoClasse(idTurma ? "-" : "+", id);
 						}}
 						className="list__item__action material-icons"
 					>
-						add
+						{idTurma ? "remove" : "add"}
 					</button>
 				) : (
 					<button
-						disabled={this.state.isEditing}
-						title="Excluir aluno"
+						disabled={idTurma || this.state.isEditing}
+						title={idTurma ? "Aluno registrado em turma" : "Excluir aluno"}
 						onClick={() => {
-							onDelete(id);
+							if (!idTurma) onDelete(id);
 						}}
 						className="list__item__action material-icons"
 					>

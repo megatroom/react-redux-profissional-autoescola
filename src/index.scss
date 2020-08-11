@@ -154,7 +154,7 @@ hr {
 	&__buton {
 		transition: all 0.3s ease;
 		position: relative;
-		top: 4.7vh;
+		top: 43px;
 		float: right;
 		right: 4px;
 		border: none;
@@ -180,7 +180,6 @@ hr {
 	&--transition {
 		background-color: #f226;
 		color: #0007;
-		// top: 9.2vh;
 		top: 85.5px;
 		right: 117px;
 		width: 55px;
@@ -252,6 +251,15 @@ hr {
 		@include box-shadow(1);
 		&__text {
 			flex: 1;
+			display: flex;
+			align-items: center;
+			i {
+				margin-left: 8px;
+				color: $color-success;
+			}
+			&__qtd {
+				font-size: 10pt;
+			}
 		}
 		&__input {
 			flex: 1;

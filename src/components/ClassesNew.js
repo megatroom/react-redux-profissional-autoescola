@@ -7,6 +7,8 @@ export default class ClassesNew extends Component {
 		this.state = { text: "" };
 	}
 
+	// if (!this.props.add_turma) this.setState({ text: "" });
+
 	render() {
 		const { onAdd, add_turma } = this.props;
 		const { text } = this.state;
@@ -26,7 +28,7 @@ export default class ClassesNew extends Component {
 							this.setState({ text: event.target.value });
 						}}
 						onKeyPress={(event) => {
-							if (event.key === "Enter") {
+							if (text && event.key === "Enter") {
 								onAdd(text);
 								this.setState({ text: "" });
 							}
@@ -36,8 +38,10 @@ export default class ClassesNew extends Component {
 				<button
 					title="Registrar turma"
 					onClick={() => {
-						onAdd(text);
-						this.setState({ text: "" });
+						if (text) {
+							onAdd(text);
+							this.setState({ text: "" });
+						}
 					}}
 					className="new__button"
 				>

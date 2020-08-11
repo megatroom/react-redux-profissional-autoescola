@@ -21,6 +21,7 @@ class Alunos extends Component {
 			onRetryReload,
 			history,
 			reloadHasError,
+			getTurma,
 		} = this.props;
 		return (
 			<div>
@@ -45,6 +46,7 @@ class Alunos extends Component {
 							alunos={alunos}
 							onEdit={onEditAlunos}
 							onDelete={onDeleteAlunos}
+							getTurma={getTurma}
 						/>
 					</Fragment>
 				)}
