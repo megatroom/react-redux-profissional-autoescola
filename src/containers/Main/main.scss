@@ -1,0 +1,41 @@
+@import "../../styles/mixin.scss";
+
+.main {
+	&__options {
+		margin: 24px 0;
+		span {
+			margin: 4px;
+			font-weight: bold;
+		}
+		hr {
+			margin-bottom: 16px;
+			@include box-shadow(1);
+		}
+		&__button {
+			@include box-shadow(1);
+			display: grid;
+			grid-gap: 1vh;
+			align-items: center;
+			width: 17vh;
+			min-width: 108px;
+			max-width: 140px;
+			height: 13vh;
+			min-height: 83px;
+			max-height: 107px;
+			padding: 8px;
+			border: none;
+			cursor: pointer;
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.07);
+				@include box-shadow(2);
+			}
+			&:active {
+				background-color: rgba(0, 0, 0, 0.13);
+				@include box-shadow(1);
+			}
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+}

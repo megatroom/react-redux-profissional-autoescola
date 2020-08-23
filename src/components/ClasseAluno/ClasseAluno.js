@@ -1,7 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import AlunosList from "./AlunosList";
+import AlunosList from "../AlunosList/AlunosList";
+
+import "../../styles/brand.scss";
 
 const ClasseAluno = ({ turma, alunos, onEditAlunoClasse, history }) => {
 	if (!turma.id) history.push("/servicos");

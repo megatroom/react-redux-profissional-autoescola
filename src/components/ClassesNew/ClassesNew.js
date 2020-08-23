@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import classnames from "classnames";
 
+import "./add_turma.scss";
+import "../../styles/new.scss";
+
 export default class ClassesNew extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { text: "" };
 	}
-
-	// if (!this.props.add_turma) this.setState({ text: "" });
 
 	render() {
 		const { onAdd, add_turma } = this.props;

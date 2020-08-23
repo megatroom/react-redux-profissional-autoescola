@@ -3,15 +3,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { v1 as uuid } from "uuid";
 import arrayMove from "array-move";
 
-import AppBar from "../components/AppBar";
-import ClasseAluno from "../components/ClasseAluno";
-import Main from "./Main";
-import Alunos from "./Alunos";
-import Servicos from "./Servicos";
+import { AppBar, ClasseAluno } from "../../components";
+import { MainPage, AlunosPage, ServicosPage } from "../";
+import { AlunoService, ClasseService } from "../../services";
 
-import { AlunoService, ClasseService } from "../services/Service";
+import "./container.scss";
 
-export default class App extends Component {
+export default class AppPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -235,11 +233,11 @@ export default class App extends Component {
 						}}
 					/>
 					<div className="container">
-						<Route path="/" exact render={(props) => <Main />} />
+						<Route path="/" exact render={(props) => <MainPage />} />
 						<Route
 							path="/alunos"
 							render={(props) => (
-								<Alunos
+								<AlunosPage
 									alunos={alunos}
 									onAddAlunos={this.handleAddAlunos}
 									onEditAlunos={this.handleEditAlunos}
@@ -254,7 +252,7 @@ export default class App extends Component {
 						<Route
 							path="/servicos"
 							render={(props) => (
-								<Servicos
+								<ServicosPage
 									classes={classes}
 									onAddClasses={this.handleAddClasses}
 									onEditClasses={this.handleEditClasses}

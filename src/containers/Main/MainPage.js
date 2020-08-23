@@ -1,7 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-const Main = ({ history }) => (
+import "./main.scss";
+
+const MainPage = ({ history }) => (
 	<div className="main">
 		<div className="main__options">
 			<span>Serviços</span>
@@ -32,4 +34,4 @@ const Main = ({ history }) => (
 	</div>
 );
 
-export default withRouter(Main);
+export default withRouter(MainPage);

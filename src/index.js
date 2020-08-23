@@ -2,6 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "./index.scss";
-import App from "./containers/App";
+import AppPage from "./containers";
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(<AppPage />, document.querySelector("#root"));

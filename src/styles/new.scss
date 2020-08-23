@@ -1,0 +1,36 @@
+@import "./mixin.scss";
+
+.new {
+	@include box-shadow(1);
+	background-color: #fff;
+	padding: 8px;
+	border-radius: 4px;
+	&__input {
+		width: 100%;
+		border: none;
+		&:focus {
+			outline: none;
+		}
+	}
+	&__button {
+		margin: 4px 0;
+		float: right;
+		background-color: #ffe60050;
+		border: none;
+		border-radius: 4px;
+		padding: 8px 12px;
+		cursor: pointer;
+		@include box-shadow(1);
+		&:hover {
+			@include box-shadow(2);
+			background-color: rgba(255, 200, 0, 0.73);
+		}
+		&:active {
+			@include box-shadow(1);
+			background-color: rgba(255, 200, 0, 0.52);
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+}

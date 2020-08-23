@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { sortableElement } from "react-sortable-hoc";
 
+import "../../styles/item.scss";
+
 class AlunosItem extends Component {
 	constructor(props) {
 		super(props);
@@ -31,16 +33,15 @@ class AlunosItem extends Component {
 		const n = !!getTurma ? getTurma(idTurma) : null;
 		const { isEditing } = this.state;
 		return (
-			<div key={id} className="list__item" title={n ? n.nome : ""}>
+			<div key={id} className="item" title={n ? n.nome : ""}>
 				{isEditing ? (
 					<Fragment>
 						<input
 							type="text"
-							className="list__item__input"
+							className="item__input"
 							defaultValue={nome}
 							ref={(c) => {
 								this.input = c;
-								// this.input.select();
 							}}
 							onKeyPress={(event) => {
 								if (event.key === "Enter") this.handleSave();
@@ -49,21 +50,21 @@ class AlunosItem extends Component {
 						<button
 							title="Cancelar edição"
 							onClick={this.handleEditing}
-							className="list__item__action list__item__action--red material-icons"
+							className="item__action item__action--red material-icons"
 						>
 							cancel
 						</button>
 						<button
 							title="Salvar edição"
 							onClick={this.handleSave}
-							className="list__item__action list__item__action--green material-icons"
+							className="item__action item__action--green material-icons"
 						>
 							save
 						</button>
 					</Fragment>
 				) : (
 					<Fragment>
-						<div className="list__item__text">
+						<div className="item__text">
 							<span>{nome}</span>
 							{turma && idTurma && <i className="material-icons">check</i>}
 						</div>
@@ -71,7 +72,7 @@ class AlunosItem extends Component {
 							<button
 								title="Editar aluno"
 								onClick={this.handleEditing}
-								className="list__item__action material-icons"
+								className="item__action material-icons"
 							>
 								edit
 							</button>
@@ -84,7 +85,7 @@ class AlunosItem extends Component {
 						onClick={() => {
 							onEditAlunoClasse(idTurma ? "-" : "+", id);
 						}}
-						className="list__item__action material-icons"
+						className="item__action material-icons"
 					>
 						{idTurma ? "remove" : "add"}
 					</button>
@@ -95,7 +96,7 @@ class AlunosItem extends Component {
 						onClick={() => {
 							if (!idTurma) onDelete(id);
 						}}
-						className="list__item__action material-icons"
+						className="item__action material-icons"
 					>
 						delete
 					</button>

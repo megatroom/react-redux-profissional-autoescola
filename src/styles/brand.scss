@@ -1,0 +1,18 @@
+.brand {
+	margin-left: 4px;
+	span {
+		font-weight: bold;
+	}
+	&__back {
+		background-color: transparent;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		&:active {
+			background-color: rgba(0, 0, 0, 0.07);
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+}

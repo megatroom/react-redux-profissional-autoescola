@@ -1,0 +1,8 @@
+@import "../../styles/variables.scss";
+
+.container {
+	display: grid;
+	max-width: $container-max-width;
+	margin: auto;
+	padding: 61px $container-padding;
+}

@@ -2,11 +2,9 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import classnames from "classnames";
 
-import ClassesNew from "../components/ClassesNew";
-import ClassesList from "../components/ClassesList";
-import Error from "../components/Error";
+import { ClassesNew, ClassesList, Error } from "../../components";
 
-class Servicos extends Component {
+class ServicosPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { add_turma: false };
@@ -31,26 +29,28 @@ class Servicos extends Component {
 		const { add_turma } = this.state;
 		return (
 			<div>
-				<button
-					title="Voltar para tela principal"
-					className="back material-icons"
-					onClick={() => {
-						history.push("/");
-					}}
-				>
-					chevron_left
-				</button>
-				<span className="brand">Aula Teórica</span>
-				<button
-					title="Adicionar nova turma"
-					onClick={this.handleAdd}
-					className={classnames("add_turma__buton material-icons", {
-						"add_turma--transition": add_turma,
-					})}
-				>
-					{add_turma ? "cancel" : "add_circle_outline"}
-				</button>
-				<hr />
+				<div className="brand">
+					<button
+						title="Voltar para tela principal"
+						className="brand__back material-icons"
+						onClick={() => {
+							history.push("/");
+						}}
+					>
+						chevron_left
+					</button>
+					<span>Aula Teórica</span>
+					<button
+						title="Adicionar nova turma"
+						onClick={this.handleAdd}
+						className={classnames("add_turma__buton material-icons", {
+							"add_turma--transition": add_turma,
+						})}
+					>
+						{add_turma ? "cancel" : "add_circle_outline"}
+					</button>
+					<hr />
+				</div>
 
 				{reloadHasError ? (
 					<Error onRetryReload={onRetryReload} />
@@ -71,4 +71,4 @@ class Servicos extends Component {
 	}
 }
 
-export default withRouter(Servicos);
+export default withRouter(ServicosPage);

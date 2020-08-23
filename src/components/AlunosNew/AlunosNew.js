@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 
+import "../../styles/new.scss";
+
 export default class NewAluno extends Component {
 	constructor(props) {
 		super(props);

@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { sortableElement } from "react-sortable-hoc";
 import { withRouter } from "react-router-dom";
 
+import "../../styles/item.scss";
+
 class ClassesItem extends Component {
 	constructor(props) {
 		super(props);
@@ -23,16 +25,15 @@ class ClassesItem extends Component {
 		const { id, nome, qtd, onDelete, onDefineClasse, history } = this.props;
 		const { isEditing } = this.state;
 		return (
-			<div key={id} className="list__item">
+			<div key={id} className="item">
 				{isEditing ? (
 					<Fragment>
 						<input
 							type="text"
-							className="list__item__input"
+							className="item__input"
 							defaultValue={nome}
 							ref={(c) => {
 								this.input = c;
-								// this.input.select();
 							}}
 							onKeyPress={(event) => {
 								if (event.key === "Enter") this.handleSave();
@@ -41,25 +42,25 @@ class ClassesItem extends Component {
 						<button
 							title="Cancelar edição"
 							onClick={this.handleEditing}
-							className="list__item__action list__item__action--red material-icons"
+							className="item__action item__action--red material-icons"
 						>
 							cancel
 						</button>
 						<button
 							title="Salvar edição"
 							onClick={this.handleSave}
-							className="list__item__action list__item__action--green material-icons"
+							className="item__action item__action--green material-icons"
 						>
 							save
 						</button>
 					</Fragment>
 				) : (
 					<Fragment>
-						<div className="list__item__text">
+						<div className="item__text">
 							<span>
 								{nome}
 								<br />
-								<span className="list__item__text__qtd">
+								<span className="item__text__qtd">
 									{qtd ? qtd + " aluno" + (qtd > 1 ? "s" : "") : "nenhum aluno"}
 								</span>
 							</span>
@@ -70,14 +71,14 @@ class ClassesItem extends Component {
 								onDefineClasse(id, nome);
 								history.push("/turma");
 							}}
-							className="list__item__action material-icons"
+							className="item__action material-icons"
 						>
 							people
 						</button>
 						<button
 							title="Editar turma"
 							onClick={this.handleEditing}
-							className="list__item__action material-icons"
+							className="item__action material-icons"
 						>
 							edit
 						</button>
@@ -89,7 +90,7 @@ class ClassesItem extends Component {
 					onClick={() => {
 						if (!qtd) onDelete(id);
 					}}
-					className="list__item__action material-icons"
+					className="item__action material-icons"
 				>
 					delete
 				</button>

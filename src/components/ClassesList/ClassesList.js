@@ -1,6 +1,9 @@
 import React from "react";
 import { sortableContainer } from "react-sortable-hoc";
-import ClassesItem from "./ClassesItem";
+
+import ClassesItem from "../ClassesItem/ClassesItem";
+
+import "../../styles/list.scss";
 
 const ClassesList = sortableContainer(
 	({ classes, onEdit, onDelete, onDefineClasse }) => (

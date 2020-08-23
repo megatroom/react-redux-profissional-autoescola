@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-import AlunoNew from "../components/AlunosNew";
-import AlunosList from "../components/AlunosList";
-import Error from "../components/Error";
+import { AlunosNew, AlunosList, Error } from "../../components";
 
-class Alunos extends Component {
+// import "../../styles/brand.scss";
+
+class AlunosPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -25,22 +25,24 @@ class Alunos extends Component {
 		} = this.props;
 		return (
 			<div>
-				<button
-					title="Voltar para tela principal"
-					className="back material-icons"
-					onClick={() => {
-						history.push("/");
-					}}
-				>
-					chevron_left
-				</button>
-				<span className="brand">Alunos</span>
-				<hr />
+				<div className="brand">
+					<button
+						title="Voltar para tela principal"
+						className="brand__back material-icons"
+						onClick={() => {
+							history.push("/");
+						}}
+					>
+						chevron_left
+					</button>
+					<span>Alunos</span>
+					<hr />
+				</div>
 				{reloadHasError ? (
 					<Error onRetryReload={onRetryReload} />
 				) : (
 					<Fragment>
-						<AlunoNew onAdd={onAddAlunos} />
+						<AlunosNew onAdd={onAddAlunos} />
 						<AlunosList
 							onSortEnd={onSortEnd}
 							alunos={alunos}
@@ -55,4 +57,4 @@ class Alunos extends Component {
 	}
 }
 
-export default withRouter(Alunos);
+export default withRouter(AlunosPage);
