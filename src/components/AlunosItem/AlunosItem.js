@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { sortableElement } from "react-sortable-hoc";
 
-import "../../styles/item.scss";
+import Item from "../Item/Item";
+import ItemEditing from "../Item/ItemEditing";
+import ItemButton from "../Item/ItemButton";
 
 class AlunosItem extends Component {
 	constructor(props) {
@@ -33,35 +35,19 @@ class AlunosItem extends Component {
 		const n = !!getTurma ? getTurma(idTurma) : null;
 		const { isEditing } = this.state;
 		return (
-			<div key={id} className="item" title={n ? n.nome : ""}>
+			<Item id={id} title={n ? n.nome : ""}>
 				{isEditing ? (
-					<Fragment>
-						<input
-							type="text"
-							className="item__input"
-							defaultValue={nome}
-							ref={(c) => {
-								this.input = c;
-							}}
-							onKeyPress={(event) => {
-								if (event.key === "Enter") this.handleSave();
-							}}
-						/>
-						<button
-							title="Cancelar edição"
-							onClick={this.handleEditing}
-							className="item__action item__action--red material-icons"
-						>
-							cancel
-						</button>
-						<button
-							title="Salvar edição"
-							onClick={this.handleSave}
-							className="item__action item__action--green material-icons"
-						>
-							save
-						</button>
-					</Fragment>
+					<ItemEditing
+						defaultValue={nome}
+						thisInput={(c) => {
+							this.input = c;
+						}}
+						onKeyPress={(event) => {
+							if (event.key === "Enter") this.handleSave();
+						}}
+						Editing={this.handleEditing}
+						Save={this.handleSave}
+					/>
 				) : (
 					<Fragment>
 						<div className="item__text">
@@ -69,39 +55,33 @@ class AlunosItem extends Component {
 							{turma && idTurma && <i className="material-icons">check</i>}
 						</div>
 						{!turma && (
-							<button
-								title="Editar aluno"
-								onClick={this.handleEditing}
-								className="item__action material-icons"
-							>
+							<ItemButton title="Editar aluno" onClick={this.handleEditing}>
 								edit
-							</button>
+							</ItemButton>
 						)}
 					</Fragment>
 				)}
 				{turma ? (
-					<button
+					<ItemButton
 						title={(idTurma ? "Remover" : "Incluir") + " aluno"}
 						onClick={() => {
 							onEditAlunoClasse(idTurma ? "-" : "+", id);
 						}}
-						className="item__action material-icons"
 					>
 						{idTurma ? "remove" : "add"}
-					</button>
+					</ItemButton>
 				) : (
-					<button
+					<ItemButton
 						disabled={idTurma || this.state.isEditing}
 						title={idTurma ? "Aluno registrado em turma" : "Excluir aluno"}
 						onClick={() => {
 							if (!idTurma) onDelete(id);
 						}}
-						className="item__action material-icons"
 					>
 						delete
-					</button>
+					</ItemButton>
 				)}
-			</div>
+			</Item>
 		);
 	}
 }

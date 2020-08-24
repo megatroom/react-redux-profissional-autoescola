@@ -1,0 +1,10 @@
+.back {
+	text-decoration: none;
+	color: inherit;
+	margin-right: 8px;
+	padding: 4px;
+	border-radius: 4px;
+	&:active {
+		background-color: rgba(0, 0, 0, 0.07);
+	}
+}

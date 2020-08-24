@@ -1,13 +1,12 @@
 import React from "react";
 import { sortableContainer } from "react-sortable-hoc";
 
+import ItemList from "../ItemList/ItemList";
 import AlunosItem from "../AlunosItem/AlunosItem";
-
-import "../../styles/list.scss";
 
 const AlunosList = sortableContainer(
 	({ alunos, onEdit, onDelete, turma, onEditAlunoClasse, getTurma }) => (
-		<div className="list">
+		<ItemList>
 			{alunos.map(({ id, nome, idTurma }, i) => {
 				if (!turma || (turma && idTurma === turma.id) || !idTurma)
 					return (
@@ -25,7 +24,7 @@ const AlunosList = sortableContainer(
 						/>
 					);
 			})}
-		</div>
+		</ItemList>
 	)
 );
 

@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { v1 as uuid } from "uuid";
 import arrayMove from "array-move";
 
-import { AppBar, ClasseAluno } from "../../components";
+import { AppBar, ClasseAluno, Container } from "../../components";
 import { MainPage, AlunosPage, ServicosPage } from "../";
 import { AlunoService, ClasseService } from "../../services";
-
-import "./container.scss";
 
 export default class AppPage extends Component {
 	constructor(props) {
@@ -232,7 +230,7 @@ export default class AppPage extends Component {
 							this.handleSaveClasses(classes);
 						}}
 					/>
-					<div className="container">
+					<Container>
 						<Route path="/" exact render={(props) => <MainPage />} />
 						<Route
 							path="/alunos"
@@ -273,7 +271,7 @@ export default class AppPage extends Component {
 								/>
 							)}
 						/>
-					</div>
+					</Container>
 				</div>
 			</Router>
 		);

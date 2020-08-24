@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 
-import "../../styles/new.scss";
+import ItemNew from "../ItemNew/ItemNew";
 
 export default class NewAluno extends Component {
 	constructor(props) {
@@ -8,41 +8,36 @@ export default class NewAluno extends Component {
 		this.state = { text: "" };
 	}
 
+	componentDidUpdate() {
+		if (!this.props.add_aluno && this.state.text) this.setState({ text: "" });
+	}
+
 	render() {
-		const { onAdd } = this.props;
+		const { onAdd, add_aluno } = this.props;
 		const { text } = this.state;
 		return (
-			<Fragment>
-				<div className="new">
-					<input
-						placeholder="Nome do aluno"
-						type="text"
-						className="new__input"
-						value={text}
-						onChange={(event) => {
-							this.setState({ text: event.target.value });
-						}}
-						onKeyPress={(event) => {
-							if (text && event.key === "Enter") {
-								onAdd(text);
-								this.setState({ text: "" });
-							}
-						}}
-					/>
-				</div>
-				<button
-					title="Registrar aluno"
-					onClick={() => {
-						if (text) {
-							onAdd(text);
-							this.setState({ text: "" });
-						}
-					}}
-					className="new__button"
-				>
-					Incluir Aluno
-				</button>
-			</Fragment>
+			<ItemNew
+				_add={add_aluno}
+				placeholder="Nome do aluno"
+				text={text}
+				onChange={(event) => {
+					this.setState({ text: event.target.value });
+				}}
+				onKeyPress={(event) => {
+					if (text && event.key === "Enter") {
+						onAdd(text);
+						this.setState({ text: "" });
+					}
+				}}
+				title="Registrar aluno"
+				onClick={() => {
+					if (text) {
+						onAdd(text);
+						this.setState({ text: "" });
+					}
+				}}
+				textButton="Incluir Aluno"
+			/>
 		);
 	}
 }

@@ -1,8 +1,12 @@
 import React, { Component, Fragment } from "react";
-import { withRouter } from "react-router-dom";
-import classnames from "classnames";
 
-import { ClassesNew, ClassesList, Error } from "../../components";
+import {
+	ClassesNew,
+	ClassesList,
+	Error,
+	Title,
+	ButtonAdd,
+} from "../../components";
 
 class ServicosPage extends Component {
 	constructor(props) {
@@ -22,36 +26,18 @@ class ServicosPage extends Component {
 			onDeleteClasses,
 			onSortEnd,
 			onRetryReload,
-			history,
 			reloadHasError,
 			onDefineClasse,
 		} = this.props;
 		const { add_turma } = this.state;
 		return (
 			<div>
-				<div className="brand">
-					<button
-						title="Voltar para tela principal"
-						className="brand__back material-icons"
-						onClick={() => {
-							history.push("/");
-						}}
-					>
-						chevron_left
-					</button>
-					<span>Aula Teórica</span>
-					<button
-						title="Adicionar nova turma"
-						onClick={this.handleAdd}
-						className={classnames("add_turma__buton material-icons", {
-							"add_turma--transition": add_turma,
-						})}
-					>
-						{add_turma ? "cancel" : "add_circle_outline"}
-					</button>
-					<hr />
-				</div>
-
+				<Title title="Voltar para tela principal" to="/" text="Aula Teórica" />
+				<ButtonAdd
+					title="Adicionar nova turma"
+					onClick={this.handleAdd}
+					_add={add_turma}
+				/>
 				{reloadHasError ? (
 					<Error onRetryReload={onRetryReload} />
 				) : (
@@ -71,4 +57,4 @@ class ServicosPage extends Component {
 	}
 }
 
-export default withRouter(ServicosPage);
+export default ServicosPage;

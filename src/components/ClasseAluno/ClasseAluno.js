@@ -2,24 +2,13 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import AlunosList from "../AlunosList/AlunosList";
-
-import "../../styles/brand.scss";
+import Title from "../Title/Title";
 
 const ClasseAluno = ({ turma, alunos, onEditAlunoClasse, history }) => {
 	if (!turma.id) history.push("/servicos");
 	return (
 		<div>
-			<button
-				title="Voltar para tela principal"
-				className="back material-icons"
-				onClick={() => {
-					history.push("/servicos");
-				}}
-			>
-				chevron_left
-			</button>
-			<span className="brand">{turma.nome}</span>
-			<hr />
+			<Title title="Voltar para turmas" to="/servicos" text={turma.nome} />
 			<AlunosList
 				alunos={alunos}
 				turma={turma}

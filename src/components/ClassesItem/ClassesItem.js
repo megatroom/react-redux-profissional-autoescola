@@ -2,7 +2,9 @@ import React, { Component, Fragment } from "react";
 import { sortableElement } from "react-sortable-hoc";
 import { withRouter } from "react-router-dom";
 
-import "../../styles/item.scss";
+import Item from "../Item/Item";
+import ItemEditing from "../Item/ItemEditing";
+import ItemButton from "../Item/ItemButton";
 
 class ClassesItem extends Component {
 	constructor(props) {
@@ -25,35 +27,19 @@ class ClassesItem extends Component {
 		const { id, nome, qtd, onDelete, onDefineClasse, history } = this.props;
 		const { isEditing } = this.state;
 		return (
-			<div key={id} className="item">
+			<Item id={id}>
 				{isEditing ? (
-					<Fragment>
-						<input
-							type="text"
-							className="item__input"
-							defaultValue={nome}
-							ref={(c) => {
-								this.input = c;
-							}}
-							onKeyPress={(event) => {
-								if (event.key === "Enter") this.handleSave();
-							}}
-						/>
-						<button
-							title="Cancelar edição"
-							onClick={this.handleEditing}
-							className="item__action item__action--red material-icons"
-						>
-							cancel
-						</button>
-						<button
-							title="Salvar edição"
-							onClick={this.handleSave}
-							className="item__action item__action--green material-icons"
-						>
-							save
-						</button>
-					</Fragment>
+					<ItemEditing
+						defaultValue={nome}
+						thisInput={(c) => {
+							this.input = c;
+						}}
+						onKeyPress={(event) => {
+							if (event.key === "Enter") this.handleSave();
+						}}
+						Editing={this.handleEditing}
+						Save={this.handleSave}
+					/>
 				) : (
 					<Fragment>
 						<div className="item__text">
@@ -65,36 +51,30 @@ class ClassesItem extends Component {
 								</span>
 							</span>
 						</div>
-						<button
+						<ItemButton
 							title="Editar Alunos"
 							onClick={() => {
 								onDefineClasse(id, nome);
 								history.push("/turma");
 							}}
-							className="item__action material-icons"
 						>
 							people
-						</button>
-						<button
-							title="Editar turma"
-							onClick={this.handleEditing}
-							className="item__action material-icons"
-						>
+						</ItemButton>
+						<ItemButton title="Editar turma" onClick={this.handleEditing}>
 							edit
-						</button>
+						</ItemButton>
 					</Fragment>
 				)}
-				<button
+				<ItemButton
 					disabled={qtd || this.state.isEditing}
 					title={qtd ? "Turma com alunos registrados" : "Excluir turma"}
 					onClick={() => {
 						if (!qtd) onDelete(id);
 					}}
-					className="item__action material-icons"
 				>
 					delete
-				</button>
-			</div>
+				</ItemButton>
+			</Item>
 		);
 	}
 }

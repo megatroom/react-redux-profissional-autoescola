@@ -1,19 +1,23 @@
-@import "./mixin.scss";
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
 
 .new {
 	@include box-shadow(1);
-	background-color: #fff;
+	background-color: $whitemine;
 	padding: 8px;
 	border-radius: 4px;
+	display: none;
+	&__transition {
+		display: block;
+	}
 	&__input {
-		width: 100%;
+		width: 90%;
 		border: none;
-		&:focus {
-			outline: none;
-		}
 	}
 	&__button {
-		margin: 4px 0;
+		position: relative;
+		top: 13px;
+		right: 12px;
 		float: right;
 		background-color: #ffe60050;
 		border: none;
@@ -28,9 +32,6 @@
 		&:active {
 			@include box-shadow(1);
 			background-color: rgba(255, 200, 0, 0.52);
-		}
-		&:focus {
-			outline: none;
 		}
 	}
 }
