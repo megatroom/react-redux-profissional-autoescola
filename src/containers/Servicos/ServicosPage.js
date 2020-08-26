@@ -8,6 +8,8 @@ import {
 	ButtonAdd,
 } from "../../components";
 
+import withServicos from "./withServicos";
+
 class ServicosPage extends Component {
 	constructor(props) {
 		super(props);
@@ -28,11 +30,20 @@ class ServicosPage extends Component {
 			onRetryReload,
 			reloadHasError,
 			onDefineClasse,
+			saveHasError,
+			handleSaveClasses,
 		} = this.props;
 		const { add_turma } = this.state;
 		return (
 			<div>
-				<Title title="Voltar para tela principal" to="/" text="Aula Teórica" />
+				<Title
+					titleBack="Voltar para tela principal"
+					titleAction="Clique para tentar novamente"
+					to="/"
+					text="Aula Teórica"
+					saveHasError={saveHasError}
+					handleSave={handleSaveClasses}
+				/>
 				<ButtonAdd
 					title="Adicionar nova turma"
 					onClick={this.handleAdd}
@@ -44,10 +55,10 @@ class ServicosPage extends Component {
 					<Fragment>
 						<ClassesNew add_turma={add_turma} onAdd={onAddClasses} />
 						<ClassesList
-							// onSortEnd={onSortEnd}
+							onSortEnd={onSortEnd}
 							classes={classes}
-							onEdit={onEditClasses}
-							onDelete={onDeleteClasses}
+							onEditClasses={onEditClasses}
+							onDeleteClasses={onDeleteClasses}
 							onDefineClasse={onDefineClasse}
 						/>
 					</Fragment>
@@ -57,4 +68,4 @@ class ServicosPage extends Component {
 	}
 }
 
-export default ServicosPage;
+export default withServicos(ServicosPage);

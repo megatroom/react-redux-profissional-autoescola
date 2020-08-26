@@ -1,33 +1,14 @@
 import React from "react";
 
 import "./app-bar.scss";
+import ButtonAction from "../Button/ButtonAction";
 
-const AppBar = ({
-	isLoading,
-	saveHasError,
-	handleSaveAlunos,
-	handleSaveClasses,
-	p,
-}) => (
+const AppBar = ({ isLoading }) => (
 	<div className="appbar">
 		<div className="appbar__container">
-			<button className="appbar__action material-icons">menu</button>
+			<ButtonAction icon="menu" />
 			<span className="appbar__brand">Auto Escola Senna</span>
-			{isLoading && (
-				<button className="appbar__action material-icons appbar__action--rotation">
-					refresh
-				</button>
-			)}
-			{saveHasError && (
-				<button
-					onClick={() => {
-						handleSaveAlunos();
-					}}
-					className="appbar__action material-icons appbar__action--danger"
-				>
-					cloud_off
-				</button>
-			)}
+			{isLoading && <ButtonAction type="rotation" icon="refresh" />}
 		</div>
 	</div>
 );

@@ -1,5 +1,8 @@
 .brand {
+	display: flex;
+	align-items: center;
 	span {
+		flex: 1;
 		font-weight: bold;
 	}
 }

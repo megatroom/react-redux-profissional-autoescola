@@ -18,7 +18,7 @@ class AlunosItem extends Component {
 	};
 
 	handleSave = () => {
-		this.props.onEdit(this.props.id, this.input.value);
+		this.props.onEditAlunos({ id: this.props.id, nome: this.input.value });
 		this.handleEditing();
 	};
 
@@ -27,15 +27,14 @@ class AlunosItem extends Component {
 			id,
 			nome,
 			idTurma,
-			onDelete,
+			onDeleteAlunos,
+			onEditAlunos,
 			turma,
-			onEditAlunoClasse,
-			getTurma,
+			onEditClasses,
 		} = this.props;
-		const n = !!getTurma ? getTurma(idTurma) : null;
 		const { isEditing } = this.state;
 		return (
-			<Item id={id} title={n ? n.nome : ""}>
+			<Item id={id} title={!!turma ? turma.nome : null}>
 				{isEditing ? (
 					<ItemEditing
 						defaultValue={nome}
@@ -52,7 +51,9 @@ class AlunosItem extends Component {
 					<Fragment>
 						<div className="item__text">
 							<span>{nome}</span>
-							{turma && idTurma && <i className="material-icons">check</i>}
+							{!!turma && turma.id && idTurma && (
+								<i className="material-icons">check</i>
+							)}
 						</div>
 						{!turma && (
 							<ItemButton title="Editar aluno" onClick={this.handleEditing}>
@@ -61,11 +62,16 @@ class AlunosItem extends Component {
 						)}
 					</Fragment>
 				)}
-				{turma ? (
+				{!!turma && turma.id ? (
 					<ItemButton
 						title={(idTurma ? "Remover" : "Incluir") + " aluno"}
 						onClick={() => {
-							onEditAlunoClasse(idTurma ? "-" : "+", id);
+							onEditClasses({ id: turma.id, op: idTurma ? "-" : "+" });
+							onEditAlunos({
+								id: id,
+								op: idTurma ? "-" : "+",
+								idTurma: turma.id,
+							});
 						}}
 					>
 						{idTurma ? "remove" : "add"}
@@ -75,7 +81,7 @@ class AlunosItem extends Component {
 						disabled={idTurma || this.state.isEditing}
 						title={idTurma ? "Aluno registrado em turma" : "Excluir aluno"}
 						onClick={() => {
-							if (!idTurma) onDelete(id);
+							if (!idTurma) onDeleteAlunos(id);
 						}}
 					>
 						delete

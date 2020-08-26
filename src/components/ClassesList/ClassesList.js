@@ -2,10 +2,11 @@ import React from "react";
 import { sortableContainer } from "react-sortable-hoc";
 
 import ClassesItem from "../ClassesItem/ClassesItem";
+import ItemList from "../ItemList/ItemList";
 
 const ClassesList = sortableContainer(
-	({ classes, onEdit, onDelete, onDefineClasse }) => (
-		<div className="list">
+	({ classes, onEditClasses, onDeleteClasses, onDefineClasse }) => (
+		<ItemList>
 			{classes.map(({ id, nome, qtd }, i) => (
 				<ClassesItem
 					key={id}
@@ -13,12 +14,12 @@ const ClassesList = sortableContainer(
 					id={id}
 					nome={nome}
 					qtd={qtd}
-					onEdit={onEdit}
-					onDelete={onDelete}
+					onEditClasses={onEditClasses}
+					onDeleteClasses={onDeleteClasses}
 					onDefineClasse={onDefineClasse}
 				/>
 			))}
-		</div>
+		</ItemList>
 	)
 );
 

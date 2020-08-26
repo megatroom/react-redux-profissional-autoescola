@@ -5,7 +5,7 @@ import ItemList from "../ItemList/ItemList";
 import AlunosItem from "../AlunosItem/AlunosItem";
 
 const AlunosList = sortableContainer(
-	({ alunos, onEdit, onDelete, turma, onEditAlunoClasse, getTurma }) => (
+	({ alunos, onEditAlunos, onDeleteAlunos, onEditClasses, turma }) => (
 		<ItemList>
 			{alunos.map(({ id, nome, idTurma }, i) => {
 				if (!turma || (turma && idTurma === turma.id) || !idTurma)
@@ -16,11 +16,10 @@ const AlunosList = sortableContainer(
 							id={id}
 							nome={nome}
 							idTurma={idTurma}
-							onEdit={onEdit}
-							onDelete={onDelete}
+							onEditAlunos={onEditAlunos}
+							onDeleteAlunos={onDeleteAlunos}
 							turma={turma}
-							getTurma={getTurma}
-							onEditAlunoClasse={onEditAlunoClasse}
+							onEditClasses={onEditClasses}
 						/>
 					);
 			})}

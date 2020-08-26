@@ -8,6 +8,8 @@ import {
 	ButtonAdd,
 } from "../../components";
 
+import withAlunos from "./withAlunos";
+
 class AlunosPage extends Component {
 	constructor(props) {
 		super(props);
@@ -27,12 +29,20 @@ class AlunosPage extends Component {
 			onSortEnd,
 			onRetryReload,
 			reloadHasError,
-			getTurma,
+			saveHasError,
+			handleSaveAlunos,
 		} = this.props;
 		const { add_aluno } = this.state;
 		return (
 			<div>
-				<Title title="Voltar para tela principal" to="/" text="Alunos" />
+				<Title
+					titleBack="Voltar para tela principal"
+					titleAction="Clique para tentar novamente"
+					to="/"
+					text="Alunos"
+					saveHasError={saveHasError}
+					handleSave={handleSaveAlunos}
+				/>
 				<ButtonAdd
 					title="Adicionar novo aluno"
 					onClick={this.handleAdd}
@@ -46,9 +56,8 @@ class AlunosPage extends Component {
 						<AlunosList
 							onSortEnd={onSortEnd}
 							alunos={alunos}
-							onEdit={onEditAlunos}
-							onDelete={onDeleteAlunos}
-							getTurma={getTurma}
+							onEditAlunos={onEditAlunos}
+							onDeleteAlunos={onDeleteAlunos}
 						/>
 					</Fragment>
 				)}
@@ -57,4 +66,4 @@ class AlunosPage extends Component {
 	}
 }
 
-export default AlunosPage;
+export default withAlunos(AlunosPage);

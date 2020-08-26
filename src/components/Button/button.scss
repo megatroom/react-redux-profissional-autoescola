@@ -1,0 +1,37 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixin.scss";
+
+.button {
+	cursor: pointer;
+	background-color: $color-primary;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 12px;
+	color: #fff;
+	text-decoration: none;
+	@include box-shadow(1);
+
+	&:hover {
+		@include box-shadow(2);
+		background-color: rgba($color-primary, 0.85);
+	}
+	&:active {
+		@include box-shadow(1);
+		background-color: $color-primary;
+	}
+	&:focus {
+		outline: none;
+	}
+}
+
+.back {
+	text-decoration: none;
+	color: inherit;
+	margin-right: 8px;
+	padding: 4px;
+	border-radius: 4px;
+
+	&:active {
+		background-color: rgba(0, 0, 0, 0.07);
+	}
+}

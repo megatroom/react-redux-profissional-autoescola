@@ -19,12 +19,19 @@ class ClassesItem extends Component {
 	};
 
 	handleSave = () => {
-		this.props.onEdit(this.props.id, this.input.value);
+		this.props.onEditClasses({ id: this.props.id, nome: this.input.value });
 		this.handleEditing();
 	};
 
 	render() {
-		const { id, nome, qtd, onDelete, onDefineClasse, history } = this.props;
+		const {
+			id,
+			nome,
+			qtd,
+			onDeleteClasses,
+			onDefineClasse,
+			history,
+		} = this.props;
 		const { isEditing } = this.state;
 		return (
 			<Item id={id}>
@@ -69,7 +76,7 @@ class ClassesItem extends Component {
 					disabled={qtd || this.state.isEditing}
 					title={qtd ? "Turma com alunos registrados" : "Excluir turma"}
 					onClick={() => {
-						if (!qtd) onDelete(id);
+						if (!qtd) onDeleteClasses(id);
 					}}
 				>
 					delete
