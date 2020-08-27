@@ -6,7 +6,7 @@ import Item from "../Item/Item";
 import ItemEditing from "../Item/ItemEditing";
 import ItemButton from "../Item/ItemButton";
 
-class ClassesItem extends Component {
+class TheoricClassesItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -19,7 +19,10 @@ class ClassesItem extends Component {
 	};
 
 	handleSave = () => {
-		this.props.onEditClasses({ id: this.props.id, nome: this.input.value });
+		this.props.onEditTheoricClasses({
+			id: this.props.id,
+			nome: this.input.value,
+		});
 		this.handleEditing();
 	};
 
@@ -28,8 +31,8 @@ class ClassesItem extends Component {
 			id,
 			nome,
 			qtd,
-			onDeleteClasses,
-			onDefineClasse,
+			onDeleteTheoricClasses,
+			onDefineTheoricClass,
 			history,
 		} = this.props;
 		const { isEditing } = this.state;
@@ -59,10 +62,10 @@ class ClassesItem extends Component {
 							</span>
 						</div>
 						<ItemButton
-							title="Editar Alunos"
+							title="Editar aluno"
 							onClick={() => {
-								onDefineClasse(id, nome);
-								history.push("/turma");
+								onDefineTheoricClass(id, nome);
+								history.push("/theoric_class");
 							}}
 						>
 							people
@@ -76,7 +79,7 @@ class ClassesItem extends Component {
 					disabled={qtd || this.state.isEditing}
 					title={qtd ? "Turma com alunos registrados" : "Excluir turma"}
 					onClick={() => {
-						if (!qtd) onDeleteClasses(id);
+						if (!qtd) onDeleteTheoricClasses(id);
 					}}
 				>
 					delete
@@ -86,4 +89,4 @@ class ClassesItem extends Component {
 	}
 }
 
-export default sortableElement(withRouter(ClassesItem));
+export default sortableElement(withRouter(TheoricClassesItem));

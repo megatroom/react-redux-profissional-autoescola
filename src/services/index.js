@@ -1,4 +1,4 @@
-import AlunoService from "./AlunoService";
-import ClasseService from "./ClasseService";
+import StudentService from "./StudentService";
+import TheoricClassService from "./TheoricClassService";
 
-export { AlunoService, ClasseService };
+export { StudentService, TheoricClassService };

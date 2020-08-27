@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import ItemNew from "../ItemNew/ItemNew";
 
-export default class ClassesNew extends Component {
+export default class TheoricClassesNew extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { text: "" };

@@ -4,10 +4,6 @@ import classnames from "classnames";
 import withSettings from "../../containers/Settings/withSettings";
 
 const MenuItem = ({ isActive, onClick, icon, label, theme }) => {
-	{
-		let s = theme ? theme.navBar : {};
-		console.log(s);
-	}
 	return (
 		<button
 			className={classnames("navigation_drawer__menu__item", {

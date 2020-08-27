@@ -1,7 +1,6 @@
 import React from "react";
-import { ButtonLink } from "..";
 
-import ButtonAction from "../Button/ButtonAction";
+import { ButtonLink, ButtonAction } from "..";
 
 import "./title.scss";
 
@@ -15,7 +14,7 @@ const Title = ({
 }) => (
 	<div>
 		<div className="brand">
-			<ButtonLink title={titleBack} typeClass="back material-icons" to={to}>
+			<ButtonLink title={titleBack} className="back material-icons" to={to}>
 				chevron_left
 			</ButtonLink>
 			<span>{text}</span>

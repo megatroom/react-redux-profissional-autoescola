@@ -1,10 +1,10 @@
-import AlunosItem from "./AlunosItem/AlunosItem";
-import AlunosList from "./AlunosList/AlunosList";
-import AlunosNew from "./AlunosNew/AlunosNew";
-import ClassesItem from "./ClassesItem/ClassesItem";
-import ClassesList from "./ClassesList/ClassesList";
-import ClassesNew from "./ClassesNew/ClassesNew";
-import ClasseAluno from "./ClasseAluno/ClasseAluno";
+import StudentsItem from "./StudentsItem/StudentsItem";
+import StudentsList from "./StudentsList/StudentsList";
+import StudentsNew from "./StudentsNew/StudentsNew";
+import TheoricClassesItem from "./TheoricClassesItem/TheoricClassesItem";
+import TheoricClassesList from "./TheoricClassesList/TheoricClassesList";
+import TheoricClassesNew from "./TheoricClassesNew/TheoricClassesNew";
+import TheoricClassStudent from "./TheoricClassStudent/TheoricClassStudent";
 import AppBar from "./AppBar/AppBar";
 import Error from "./Error/Error";
 import Center from "./Center/Center";
@@ -18,13 +18,13 @@ import Item from "./Item/Item";
 import Title from "./Title/Title";
 
 export {
-	AlunosItem,
-	AlunosList,
-	AlunosNew,
-	ClassesItem,
-	ClassesList,
-	ClassesNew,
-	ClasseAluno,
+	StudentsItem,
+	StudentsList,
+	StudentsNew,
+	TheoricClassesItem,
+	TheoricClassesList,
+	TheoricClassesNew,
+	TheoricClassStudent,
 	AppBar,
 	Error,
 	Center,

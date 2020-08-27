@@ -7,31 +7,35 @@
 	padding: 8px;
 	border-radius: 4px;
 	display: none;
+
 	&__transition {
 		display: block;
 	}
+
 	&__input {
 		width: 90%;
 		border: none;
 	}
+
 	&__button {
+		background-color: rgba($color-primary, 0.5);
 		position: relative;
 		top: 13px;
 		right: 12px;
 		float: right;
-		background-color: #ffe60050;
 		border: none;
 		border-radius: 4px;
 		padding: 8px 12px;
 		cursor: pointer;
 		@include box-shadow(1);
+
 		&:hover {
 			@include box-shadow(2);
-			background-color: rgba(255, 200, 0, 0.73);
+			background-color: rgba($color-primary, 0.73);
 		}
 		&:active {
 			@include box-shadow(1);
-			background-color: rgba(255, 200, 0, 0.52);
+			background-color: rgba($color-primary, 0.52);
 		}
 	}
 }

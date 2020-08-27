@@ -1,16 +1,16 @@
 import React, { Component, Fragment } from "react";
 
 import {
-	ClassesNew,
-	ClassesList,
+	TheoricClassesNew,
+	TheoricClassesList,
 	Error,
 	Title,
 	ButtonAdd,
 } from "../../components";
 
-import withServicos from "./withServicos";
+import withTheoricClasses from "./withTheoricClasses";
 
-class ServicosPage extends Component {
+class TheoricClassesPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { add_turma: false };
@@ -22,16 +22,16 @@ class ServicosPage extends Component {
 
 	render() {
 		const {
-			classes,
-			onAddClasses,
-			onEditClasses,
-			onDeleteClasses,
+			theoric_classes,
+			onAddTheoricClasses,
+			onEditTheoricClasses,
+			onDeleteTheoricClasses,
 			onSortEnd,
 			onRetryReload,
 			reloadHasError,
-			onDefineClasse,
+			onDefineTheoricClass,
 			saveHasError,
-			handleSaveClasses,
+			handleSaveTheoricClasses,
 		} = this.props;
 		const { add_turma } = this.state;
 		return (
@@ -42,7 +42,7 @@ class ServicosPage extends Component {
 					to="/"
 					text="Aula Teórica"
 					saveHasError={saveHasError}
-					handleSave={handleSaveClasses}
+					handleSave={handleSaveTheoricClasses}
 				/>
 				<ButtonAdd
 					title="Adicionar nova turma"
@@ -53,13 +53,16 @@ class ServicosPage extends Component {
 					<Error onRetryReload={onRetryReload} />
 				) : (
 					<Fragment>
-						<ClassesNew add_turma={add_turma} onAdd={onAddClasses} />
-						<ClassesList
+						<TheoricClassesNew
+							add_turma={add_turma}
+							onAdd={onAddTheoricClasses}
+						/>
+						<TheoricClassesList
 							onSortEnd={onSortEnd}
-							classes={classes}
-							onEditClasses={onEditClasses}
-							onDeleteClasses={onDeleteClasses}
-							onDefineClasse={onDefineClasse}
+							theoric_classes={theoric_classes}
+							onEditTheoricClasses={onEditTheoricClasses}
+							onDeleteTheoricClasses={onDeleteTheoricClasses}
+							onDefineTheoricClass={onDefineTheoricClass}
 						/>
 					</Fragment>
 				)}
@@ -68,4 +71,4 @@ class ServicosPage extends Component {
 	}
 }
 
-export default withServicos(ServicosPage);
+export default withTheoricClasses(TheoricClassesPage);

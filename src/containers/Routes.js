@@ -1,25 +1,43 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { PageNotFoundPage, AlunosPage, ServicosPage, MainPage } from ".";
-import { ClasseAluno } from "../components";
+import {
+	PageNotFoundPage,
+	StudentsPage,
+	TheoricClassesPage,
+	MainPage,
+} from ".";
+import { TheoricClassStudent } from "../components";
 
-export const main = {
-	servicos: [{ desc: "Aula Teórica", path: "/servicos", icon: "menu_book" }],
-	cadastros: [{ desc: "Alunos", path: "/alunos", icon: "groups" }],
-};
-const Routes = ({ reloadHasError }) => (
+export const main = [
+	{
+		Serviços: [
+			{
+				title: "Controle de turmas",
+				desc: "Aula Teórica",
+				path: "/theoric_classes",
+				icon: "menu_book",
+			},
+		],
+	},
+	{
+		Cadastros: [
+			{
+				title: "Controle de alunos",
+				desc: "Alunos",
+				path: "/students",
+				icon: "groups",
+			},
+		],
+	},
+];
+
+const Routes = () => (
 	<Switch>
 		<Route path="/" exact component={MainPage} />
-		<Route
-			path="/alunos"
-			render={(props) => <AlunosPage reloadHasError={reloadHasError} />}
-		/>
-		<Route
-			path="/servicos"
-			render={(props) => <ServicosPage reloadHasError={reloadHasError} />}
-		/>
-		<Route path="/turma" component={ClasseAluno} />
+		<Route path="/students" component={StudentsPage} />
+		<Route path="/theoric_classes" component={TheoricClassesPage} />
+		<Route path="/theoric_class" component={TheoricClassStudent} />
 		<Route path="" component={PageNotFoundPage} />
 	</Switch>
 );

@@ -1,7 +1,8 @@
 import React from "react";
 
-import "./app-bar.scss";
 import ButtonAction from "../Button/ButtonAction";
+
+import "./app-bar.scss";
 
 const AppBar = ({ isLoading }) => (
 	<div className="appbar">

@@ -2,23 +2,23 @@ import React, { Component } from "react";
 
 import ItemNew from "../ItemNew/ItemNew";
 
-export default class NewAluno extends Component {
+export default class NewStudent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { text: "" };
 	}
 
 	componentDidUpdate() {
-		if (!this.props.add_aluno && this.state.text) this.setState({ text: "" });
+		if (!this.props.add_student && this.state.text) this.setState({ text: "" });
 	}
 
 	render() {
-		const { onAdd, add_aluno } = this.props;
+		const { onAdd, add_student } = this.props;
 		const { text } = this.state;
 		return (
 			<ItemNew
-				_add={add_aluno}
-				placeholder="Nome do aluno"
+				_add={add_student}
+				placeholder="Nome do student"
 				text={text}
 				onChange={(event) => {
 					this.setState({ text: event.target.value });
@@ -29,14 +29,14 @@ export default class NewAluno extends Component {
 						this.setState({ text: "" });
 					}
 				}}
-				title="Registrar aluno"
+				title="Registrar student"
 				onClick={() => {
 					if (text) {
 						onAdd(text);
 						this.setState({ text: "" });
 					}
 				}}
-				textButton="Incluir Aluno"
+				textButton="Incluir Student"
 			/>
 		);
 	}

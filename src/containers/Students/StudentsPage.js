@@ -1,38 +1,38 @@
 import React, { Component, Fragment } from "react";
 
 import {
-	AlunosNew,
-	AlunosList,
+	StudentsNew,
+	StudentsList,
 	Error,
 	Title,
 	ButtonAdd,
 } from "../../components";
 
-import withAlunos from "./withAlunos";
+import withStudents from "./withStudents";
 
-class AlunosPage extends Component {
+class StudentsPage extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { add_aluno: false };
+		this.state = { add_student: false };
 	}
 
 	handleAdd = () => {
-		this.setState({ add_aluno: !this.state.add_aluno });
+		this.setState({ add_student: !this.state.add_student });
 	};
 
 	render() {
 		const {
-			alunos,
-			onAddAlunos,
-			onEditAlunos,
-			onDeleteAlunos,
+			students,
+			onAddStudents,
+			onEditStudents,
+			onDeleteStudents,
 			onSortEnd,
 			onRetryReload,
 			reloadHasError,
 			saveHasError,
-			handleSaveAlunos,
+			handleSaveStudents,
 		} = this.props;
-		const { add_aluno } = this.state;
+		const { add_student } = this.state;
 		return (
 			<div>
 				<Title
@@ -41,23 +41,23 @@ class AlunosPage extends Component {
 					to="/"
 					text="Alunos"
 					saveHasError={saveHasError}
-					handleSave={handleSaveAlunos}
+					handleSave={handleSaveStudents}
 				/>
 				<ButtonAdd
 					title="Adicionar novo aluno"
 					onClick={this.handleAdd}
-					_add={add_aluno}
+					_add={add_student}
 				/>
 				{reloadHasError ? (
 					<Error onRetryReload={onRetryReload} />
 				) : (
 					<Fragment>
-						<AlunosNew add_aluno={add_aluno} onAdd={onAddAlunos} />
-						<AlunosList
+						<StudentsNew add_student={add_student} onAdd={onAddStudents} />
+						<StudentsList
 							onSortEnd={onSortEnd}
-							alunos={alunos}
-							onEditAlunos={onEditAlunos}
-							onDeleteAlunos={onDeleteAlunos}
+							students={students}
+							onEditStudents={onEditStudents}
+							onDeleteStudents={onDeleteStudents}
 						/>
 					</Fragment>
 				)}
@@ -66,4 +66,4 @@ class AlunosPage extends Component {
 	}
 }
 
-export default withAlunos(AlunosPage);
+export default withStudents(StudentsPage);

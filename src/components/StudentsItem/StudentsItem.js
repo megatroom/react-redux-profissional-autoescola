@@ -5,7 +5,7 @@ import Item from "../Item/Item";
 import ItemEditing from "../Item/ItemEditing";
 import ItemButton from "../Item/ItemButton";
 
-class AlunosItem extends Component {
+class StudentsItem extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,7 +18,7 @@ class AlunosItem extends Component {
 	};
 
 	handleSave = () => {
-		this.props.onEditAlunos({ id: this.props.id, nome: this.input.value });
+		this.props.onEditStudents({ id: this.props.id, nome: this.input.value });
 		this.handleEditing();
 	};
 
@@ -27,10 +27,10 @@ class AlunosItem extends Component {
 			id,
 			nome,
 			idTurma,
-			onDeleteAlunos,
-			onEditAlunos,
+			onDeleteStudents,
+			onEditStudents,
 			turma,
-			onEditClasses,
+			onEditTheoricClasses,
 		} = this.props;
 		const { isEditing } = this.state;
 		return (
@@ -66,8 +66,8 @@ class AlunosItem extends Component {
 					<ItemButton
 						title={(idTurma ? "Remover" : "Incluir") + " aluno"}
 						onClick={() => {
-							onEditClasses({ id: turma.id, op: idTurma ? "-" : "+" });
-							onEditAlunos({
+							onEditTheoricClasses({ id: turma.id, op: idTurma ? "-" : "+" });
+							onEditStudents({
 								id: id,
 								op: idTurma ? "-" : "+",
 								idTurma: turma.id,
@@ -79,9 +79,9 @@ class AlunosItem extends Component {
 				) : (
 					<ItemButton
 						disabled={idTurma || this.state.isEditing}
-						title={idTurma ? "Aluno registrado em turma" : "Excluir aluno"}
+						title={idTurma ? "Student registrado em turma" : "Excluir aluno"}
 						onClick={() => {
-							if (!idTurma) onDeleteAlunos(id);
+							if (!idTurma) onDeleteStudents(id);
 						}}
 					>
 						delete
@@ -92,4 +92,4 @@ class AlunosItem extends Component {
 	}
 }
 
-export default sortableElement(AlunosItem);
+export default sortableElement(StudentsItem);
