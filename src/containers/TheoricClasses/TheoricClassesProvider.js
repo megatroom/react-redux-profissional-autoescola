@@ -7,13 +7,10 @@ import { TheoricClassService } from "../../services";
 import withApp from "../App/withApp";
 
 class TheoricClassesProvider extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			theoric_classes: [],
-			turma: { id: "", nome: "" },
-		};
-	}
+	state = {
+		theoric_classes: [],
+		turma: { id: "", nome: "" },
+	};
 
 	componentDidMount() {
 		this.handleReloadTheoricClasses();

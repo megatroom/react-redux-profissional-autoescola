@@ -7,12 +7,9 @@ import ItemEditing from "../Item/ItemEditing";
 import ItemButton from "../Item/ItemButton";
 
 class TheoricClassesItem extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isEditing: false,
-		};
-	}
+	state = {
+		isEditing: false,
+	};
 
 	handleEditing = () => {
 		this.setState({ isEditing: !this.state.isEditing });

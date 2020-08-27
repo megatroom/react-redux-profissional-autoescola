@@ -10,10 +10,7 @@ import {
 import withTheoricClasses from "./withTheoricClasses";
 
 class TheoricClassesPage extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { add_turma: false };
-	}
+	state = { add_turma: false };
 
 	handleAdd = () => {
 		this.setState({ add_turma: !this.state.add_turma });

@@ -4,12 +4,9 @@ import { AppBar, Container } from "../../components";
 import withApp from "../App/withApp";
 
 class PageLayoutPage extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isOpenMenu: false,
-		};
-	}
+	state = {
+		isOpenMenu: false,
+	};
 
 	handleMenu = (value) => {
 		this.setState({ isOpenMenu: value });

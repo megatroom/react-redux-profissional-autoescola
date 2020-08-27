@@ -3,10 +3,7 @@ import React, { Component } from "react";
 import ItemNew from "../ItemNew/ItemNew";
 
 export default class NewStudent extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { text: "" };
-	}
+	state = { text: "" };
 
 	componentDidUpdate() {
 		if (!this.props.add_student && this.state.text) this.setState({ text: "" });

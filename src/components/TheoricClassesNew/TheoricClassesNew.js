@@ -3,10 +3,7 @@ import React, { Component } from "react";
 import ItemNew from "../ItemNew/ItemNew";
 
 export default class TheoricClassesNew extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { text: "" };
-	}
+	state = { text: "" };
 
 	componentDidUpdate() {
 		if (!this.props.add_turma && this.state.text) this.setState({ text: "" });

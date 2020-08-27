@@ -7,12 +7,9 @@ import { StudentService } from "../../services";
 import withApp from "../App/withApp";
 
 class StudentsProvider extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			students: [],
-		};
-	}
+	state = {
+		students: [],
+	};
 
 	componentDidMount() {
 		this.handleReloadStudents();
@@ -64,6 +61,9 @@ class StudentsProvider extends Component {
 
 	//#region students
 	handleReloadStudents = () => {
+		// console.log(
+		// 	this.props.handleReloadError ? this.props.handleReloadError : null
+		// );
 		this.props.handleReloadError(false);
 		this.props.handleLoading(true);
 		StudentService.load()

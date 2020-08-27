@@ -5,10 +5,7 @@ import { StudentsNew, StudentsList, Error, Title } from "../../components";
 import withStudents from "./withStudents";
 
 class StudentsPage extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { add_student: false };
-	}
+	state = { add_student: false };
 
 	handleAdd = () => {
 		this.setState({ add_student: !this.state.add_student });

@@ -3,14 +3,11 @@ import React, { Component } from "react";
 import AppContext from "./AppContext";
 
 export default class AppProvider extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isLoading: false,
-			saveHasError: false,
-			reloadHasError: false,
-		};
-	}
+	state = {
+		isLoading: false,
+		saveHasError: false,
+		reloadHasError: false,
+	};
 
 	componentDidCatch() {
 		this.handleReloadError(true);
