@@ -11,9 +11,9 @@ import { TheoricClassStudent } from "../components";
 
 export const main = [
 	{
-		Serviços: [
+		"Serviços": [
 			{
-				title: "Controle de turmas",
+				title: "Controle de turmas teóricas",
 				desc: "Aula Teórica",
 				path: "/theoric_classes",
 				icon: "menu_book",
@@ -21,12 +21,12 @@ export const main = [
 		],
 	},
 	{
-		Cadastros: [
+		"Cadastros": [
 			{
 				title: "Controle de alunos",
 				desc: "Alunos",
 				path: "/students",
-				icon: "groups",
+				icon: "person",
 			},
 		],
 	},
