@@ -1,12 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import {
-	StudentsNew,
-	StudentsList,
-	Error,
-	Title,
-	ButtonAdd,
-} from "../../components";
+import { StudentsNew, StudentsList, Error, Title } from "../../components";
 
 import withStudents from "./withStudents";
 
@@ -43,16 +37,15 @@ class StudentsPage extends Component {
 					saveHasError={saveHasError}
 					handleSave={handleSaveStudents}
 				/>
-				<ButtonAdd
-					title="Adicionar novo aluno"
-					onClick={this.handleAdd}
-					_add={add_student}
-				/>
 				{reloadHasError ? (
 					<Error onRetryReload={onRetryReload} />
 				) : (
 					<Fragment>
-						<StudentsNew add_student={add_student} onAdd={onAddStudents} />
+						<StudentsNew
+							add_student={add_student}
+							onAdd={onAddStudents}
+							onClick={this.handleAdd}
+						/>
 						<StudentsList
 							onSortEnd={onSortEnd}
 							students={students}

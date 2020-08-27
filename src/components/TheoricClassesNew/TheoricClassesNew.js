@@ -13,7 +13,7 @@ export default class TheoricClassesNew extends Component {
 	}
 
 	render() {
-		const { onAdd, add_turma } = this.props;
+		const { onAdd, add_turma, onClick } = this.props;
 		const { text } = this.state;
 		return (
 			<ItemNew
@@ -37,6 +37,7 @@ export default class TheoricClassesNew extends Component {
 					}
 				}}
 				textButton="Incluir Turma"
+				onAddNew={onClick}
 			/>
 		);
 	}

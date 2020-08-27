@@ -7,9 +7,11 @@
 	border-radius: 4px;
 	color: #2c2c2c;
 	cursor: pointer;
+
 	&:active {
 		background-color: rgba(0, 0, 0, 0.13);
 	}
+
 	&--rotation {
 		border-radius: 46px;
 		height: 46px;

@@ -15,7 +15,7 @@ const Title = ({
 	<div>
 		<div className="brand">
 			<ButtonLink title={titleBack} className="back material-icons" to={to}>
-				chevron_left
+				navigate_before
 			</ButtonLink>
 			<span>{text}</span>
 			{saveHasError && (

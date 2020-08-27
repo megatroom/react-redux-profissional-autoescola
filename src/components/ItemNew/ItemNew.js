@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import classnames from "classnames";
+
+import { ButtonAdd } from "..";
 
 import "./new.scss";
 
@@ -12,20 +14,34 @@ const ItemNew = ({
 	title,
 	onClick,
 	textButton,
+	onAddNew,
 }) => (
-	<div className={classnames("new", { new__transition: _add })}>
-		<input
-			placeholder={placeholder}
-			type="text"
-			className="new__input"
-			value={text}
-			onChange={onChange}
-			onKeyPress={onKeyPress}
-		/>
-		<button title={title} className="new__button" onClick={onClick}>
+	<Fragment>
+		<div
+			className={classnames("new", {
+				new__transition: _add,
+			})}
+		>
+			<input
+				placeholder={placeholder}
+				type="text"
+				className="new__input"
+				value={text}
+				onChange={onChange}
+				onKeyPress={onKeyPress}
+			/>
+		</div>
+		<ButtonAdd title="Adicionar nova turma" onClick={onAddNew} _add={_add} />
+		<button
+			title={title}
+			className={classnames("new__button", {
+				new__transition: _add,
+			})}
+			onClick={onClick}
+		>
 			{textButton}
 		</button>
-	</div>
+	</Fragment>
 );
 
 export default ItemNew;

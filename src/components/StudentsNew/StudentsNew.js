@@ -13,7 +13,7 @@ export default class NewStudent extends Component {
 	}
 
 	render() {
-		const { onAdd, add_student } = this.props;
+		const { onAdd, add_student, onClick } = this.props;
 		const { text } = this.state;
 		return (
 			<ItemNew
@@ -37,6 +37,7 @@ export default class NewStudent extends Component {
 					}
 				}}
 				textButton="Incluir Student"
+				onAddNew={onClick}
 			/>
 		);
 	}

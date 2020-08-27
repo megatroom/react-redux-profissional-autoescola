@@ -5,6 +5,10 @@
 	&__options {
 		margin: 24px 0;
 
+		div {
+			display: flex;
+			flex-wrap: wrap;
+		}
 		span {
 			margin: 4px;
 			font-weight: bold;

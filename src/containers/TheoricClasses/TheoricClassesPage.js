@@ -5,7 +5,6 @@ import {
 	TheoricClassesList,
 	Error,
 	Title,
-	ButtonAdd,
 } from "../../components";
 
 import withTheoricClasses from "./withTheoricClasses";
@@ -35,7 +34,7 @@ class TheoricClassesPage extends Component {
 		} = this.props;
 		const { add_turma } = this.state;
 		return (
-			<div>
+			<Fragment>
 				<Title
 					titleBack="Voltar para tela principal"
 					titleAction="Clique para tentar novamente"
@@ -44,11 +43,6 @@ class TheoricClassesPage extends Component {
 					saveHasError={saveHasError}
 					handleSave={handleSaveTheoricClasses}
 				/>
-				<ButtonAdd
-					title="Adicionar nova turma"
-					onClick={this.handleAdd}
-					_add={add_turma}
-				/>
 				{reloadHasError ? (
 					<Error onRetryReload={onRetryReload} />
 				) : (
@@ -56,6 +50,7 @@ class TheoricClassesPage extends Component {
 						<TheoricClassesNew
 							add_turma={add_turma}
 							onAdd={onAddTheoricClasses}
+							onClick={this.handleAdd}
 						/>
 						<TheoricClassesList
 							onSortEnd={onSortEnd}
@@ -66,7 +61,7 @@ class TheoricClassesPage extends Component {
 						/>
 					</Fragment>
 				)}
-			</div>
+			</Fragment>
 		);
 	}
 }
