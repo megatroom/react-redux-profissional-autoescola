@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import PageLayout from "../PageLayout/PageLayout";
+import PageLayoutPage from "../PageLayout/PageLayoutPage";
 import StudentsProvider from "../Students/StudentsProvider";
 import TheoricClassesProvider from "../TheoricClasses/TheoricClassesProvider";
 import Routes from "../Routes";
@@ -12,9 +12,9 @@ const AppPage = () => (
 		<AppProvider>
 			<TheoricClassesProvider>
 				<StudentsProvider>
-					<PageLayout>
+					<PageLayoutPage>
 						<Routes />
-					</PageLayout>
+					</PageLayoutPage>
 				</StudentsProvider>
 			</TheoricClassesProvider>
 		</AppProvider>

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { AppBar, Container } from "../../components";
 import withApp from "../App/withApp";
 
-class PageLayout extends Component {
+class PageLayoutPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -38,4 +38,4 @@ class PageLayout extends Component {
 	}
 }
 
-export default withApp(PageLayout);
+export default withApp(PageLayoutPage);
