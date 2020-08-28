@@ -2,31 +2,52 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import {
-	PageNotFoundPage,
+	TeachersPage,
+	CarsPage,
+	PracticalClassesPage,
 	StudentsPage,
-	TheoricClassesPage,
+	PageNotFoundPage,
+	TheoreticalClassesPage,
 	MainPage,
 } from ".";
-import { TheoricClassStudent } from "../components";
+import { TeacherCars, TheoreticalClassStudent } from "../components";
 
 export const main = [
 	{
-		"Serviços": [
+		Serviços: [
 			{
 				title: "Controle de turmas teóricas",
 				desc: "Aula Teórica",
-				path: "/theoric_classes",
+				path: "/theoretical_classes",
 				icon: "menu_book",
+			},
+			{
+				title: "Controle de turmas práticas",
+				desc: "Aula Prática",
+				path: "/practical_classes",
+				icon: "speed",
 			},
 		],
 	},
 	{
-		"Cadastros": [
+		Cadastros: [
 			{
 				title: "Controle de alunos",
 				desc: "Alunos",
 				path: "/students",
 				icon: "person",
+			},
+			{
+				title: "Controle de professores",
+				desc: "Professores",
+				path: "/teachers",
+				icon: "visibility",
+			},
+			{
+				title: "Controle de carros",
+				desc: "Carros",
+				path: "/cars",
+				icon: "drive_eta",
 			},
 		],
 	},
@@ -35,8 +56,12 @@ export const main = [
 const Routes = () => (
 	<Switch>
 		<Route path="/" exact component={MainPage} />
+		<Route path="/teachers" component={TeachersPage} />
+		<Route path="/cars" component={CarsPage} />
+		<Route path="/practical_classes" component={PracticalClassesPage} />
+		<Route path="/theoretical_classes" component={TheoreticalClassesPage} />
 		<Route path="/students" component={StudentsPage} />
-		<Route path="/theoric_classes" component={TheoricClassesPage} />
+		<Route path="/theoretical_class" component={TheoreticalClassStudent} />
 		<Route path="/theoric_class" component={TheoricClassStudent} />
 		<Route path="" component={PageNotFoundPage} />
 	</Switch>

@@ -2,14 +2,14 @@ import React from "react";
 import { sortableContainer } from "react-sortable-hoc";
 
 import ItemList from "../ItemList/ItemList";
-import StudentsItem from "../StudentsItem/StudentsItem";
+import StudentsItem from "./StudentsItem";
 
 const StudentsList = sortableContainer(
 	({
 		students,
 		onEditStudents,
 		onDeleteStudents,
-		onEditTheoricClasses,
+		onEditTheoreticalClasses,
 		turma,
 	}) => (
 		<ItemList>
@@ -25,7 +25,7 @@ const StudentsList = sortableContainer(
 							onEditStudents={onEditStudents}
 							onDeleteStudents={onDeleteStudents}
 							turma={turma}
-							onEditTheoricClasses={onEditTheoricClasses}
+							onEditTheoreticalClasses={onEditTheoreticalClasses}
 						/>
 					);
 			})}

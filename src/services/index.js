@@ -1,4 +1,6 @@
+import TeacherService from "./TeacherService";
+import CarService from "./CarService";
 import StudentService from "./StudentService";
-import TheoricClassService from "./TheoricClassService";
+import TheoreticalClassService from "./TheoreticalClassService";
 
-export { StudentService, TheoricClassService };
+export { TeacherService, CarService, StudentService, TheoreticalClassService };

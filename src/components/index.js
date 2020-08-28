@@ -1,10 +1,16 @@
-import StudentsItem from "./StudentsItem/StudentsItem";
-import StudentsList from "./StudentsList/StudentsList";
-import StudentsNew from "./StudentsNew/StudentsNew";
-import TheoricClassesItem from "./TheoricClassesItem/TheoricClassesItem";
-import TheoricClassesList from "./TheoricClassesList/TheoricClassesList";
-import TheoricClassesNew from "./TheoricClassesNew/TheoricClassesNew";
-import TheoricClassStudent from "./TheoricClassStudent/TheoricClassStudent";
+import TeachersItem from "./Teachers/TeachersItem";
+import TeachersList from "./Teachers/TeachersList";
+import TeachersNew from "./Teachers/TeachersNew";
+import CarsItem from "./Cars/CarsItem";
+import CarsList from "./Cars/CarsList";
+import CarsNew from "./Cars/CarsNew";
+import StudentsItem from "./Students/StudentsItem";
+import StudentsList from "./Students/StudentsList";
+import StudentsNew from "./Students/StudentsNew";
+import TheoreticalClassesItem from "./TheoreticalClasses/TheoreticalClassesItem";
+import TheoreticalClassesList from "./TheoreticalClasses/TheoreticalClassesList";
+import TheoreticalClassesNew from "./TheoreticalClasses/TheoreticalClassesNew";
+import TheoreticalClassStudent from "./TheoreticalClassStudent/TheoreticalClassStudent";
 import AppBar from "./AppBar/AppBar";
 import Error from "./Error/Error";
 import Center from "./Center/Center";
@@ -18,13 +24,20 @@ import Item from "./Item/Item";
 import Title from "./Title/Title";
 
 export {
+	TeachersItem,
+	TeachersList,
+	TeachersNew,
+	CarsItem,
+	CarsList,
+	CarsNew,
 	StudentsItem,
 	StudentsList,
 	StudentsNew,
-	TheoricClassesItem,
-	TheoricClassesList,
-	TheoricClassesNew,
+	TheoreticalClassesItem,
+	TheoreticalClassesList,
+	TheoreticalClassesNew,
 	TheoricClassStudent,
+	TheoreticalClassStudent,
 	AppBar,
 	Error,
 	Center,

@@ -6,7 +6,7 @@ import Item from "../Item/Item";
 import ItemEditing from "../Item/ItemEditing";
 import ItemButton from "../Item/ItemButton";
 
-class TheoricClassesItem extends Component {
+class TheoreticalClassesItem extends Component {
 	state = {
 		isEditing: false,
 	};
@@ -16,7 +16,7 @@ class TheoricClassesItem extends Component {
 	};
 
 	handleSave = () => {
-		this.props.onEditTheoricClasses({
+		this.props.onEditTheoreticalClasses({
 			id: this.props.id,
 			nome: this.input.value,
 		});
@@ -28,8 +28,8 @@ class TheoricClassesItem extends Component {
 			id,
 			nome,
 			qtd,
-			onDeleteTheoricClasses,
-			onDefineTheoricClass,
+			onDeleteTheoreticalClasses,
+			onDefineTheoreticalClass,
 			history,
 		} = this.props;
 		const { isEditing } = this.state;
@@ -61,8 +61,8 @@ class TheoricClassesItem extends Component {
 						<ItemButton
 							title="Editar aluno"
 							onClick={() => {
-								onDefineTheoricClass(id, nome);
-								history.push("/theoric_class");
+								onDefineTheoreticalClass(id, nome);
+								history.push("/theoretical_class");
 							}}
 						>
 							people
@@ -76,7 +76,7 @@ class TheoricClassesItem extends Component {
 					disabled={qtd || this.state.isEditing}
 					title={qtd ? "Turma com alunos registrados" : "Excluir turma"}
 					onClick={() => {
-						if (!qtd) onDeleteTheoricClasses(id);
+						if (!qtd) onDeleteTheoreticalClasses(id);
 					}}
 				>
 					delete
@@ -86,4 +86,4 @@ class TheoricClassesItem extends Component {
 	}
 }
 
-export default sortableElement(withRouter(TheoricClassesItem));
+export default sortableElement(withRouter(TheoreticalClassesItem));

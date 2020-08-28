@@ -35,8 +35,7 @@ class StudentsProvider extends Component {
 			return { students };
 		});
 	};
-	handleEditStudents = (params) => {
-		const { id, nome, op, idTurma } = params;
+	handleEditStudents = ({ id, nome, op, idTurma }) => {
 		this.setState((prevState) => {
 			const newStudents = prevState.students.slice();
 			const i = newStudents.findIndex((a) => a.id === id);

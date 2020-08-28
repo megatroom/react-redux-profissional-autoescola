@@ -1,31 +1,31 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import StudentsList from "../StudentsList/StudentsList";
+import StudentsList from "../Students/StudentsList";
 import Title from "../Title/Title";
 
 import withStudents from "../../containers/Students/withStudents";
-import withTheoricClasses from "../../containers/TheoricClasses/withTheoricClasses";
+import withTheoreticalClasses from "../../containers/TheoreticalClasses/withTheoreticalClasses";
 
-const TheoricClassStudent = ({
+const TheoreticalClassStudent = ({
 	turma,
 	students,
-	onEditTheoricClasses,
+	onEditTheoreticalClasses,
 	onEditStudents,
 	history,
 }) => {
-	if (!turma.id) history.push("/theoric_classes");
+	if (!turma.id) history.push("/theoretical_classes");
 	return (
 		<div>
 			<Title
 				title="Voltar para turmas"
-				to="/theoric_classes"
+				to="/theoretical_classes"
 				text={turma.nome}
 			/>
 			<StudentsList
 				students={students}
 				onEditStudents={onEditStudents}
-				onEditTheoricClasses={onEditTheoricClasses}
+				onEditTheoreticalClasses={onEditTheoreticalClasses}
 				turma={turma}
 			/>
 		</div>
@@ -33,5 +33,5 @@ const TheoricClassStudent = ({
 };
 
 export default withRouter(
-	withTheoricClasses(withStudents(TheoricClassStudent))
+	withTheoreticalClasses(withStudents(TheoreticalClassStudent))
 );

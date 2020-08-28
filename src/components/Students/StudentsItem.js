@@ -27,7 +27,7 @@ class StudentsItem extends Component {
 			onDeleteStudents,
 			onEditStudents,
 			turma,
-			onEditTheoricClasses,
+			onEditTheoreticalClasses,
 		} = this.props;
 		const { isEditing } = this.state;
 		return (
@@ -63,7 +63,10 @@ class StudentsItem extends Component {
 					<ItemButton
 						title={(idTurma ? "Remover" : "Incluir") + " aluno"}
 						onClick={() => {
-							onEditTheoricClasses({ id: turma.id, op: idTurma ? "-" : "+" });
+							onEditTheoreticalClasses({
+								id: turma.id,
+								op: idTurma ? "-" : "+",
+							});
 							onEditStudents({
 								id: id,
 								op: idTurma ? "-" : "+",

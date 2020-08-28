@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from "react";
 
 import {
-	TheoricClassesNew,
-	TheoricClassesList,
+	PracticalClassesNew,
+	PracticalClassesList,
 	Error,
 	Title,
 } from "../../components";
 
-import withTheoricClasses from "./withTheoricClasses";
+import withPracticalClasses from "./withPracticalClasses";
 
-class TheoricClassesPage extends Component {
+class PracticalClassesPage extends Component {
 	state = { add_turma: false };
 
 	handleAdd = () => {
@@ -18,16 +18,16 @@ class TheoricClassesPage extends Component {
 
 	render() {
 		const {
-			theoric_classes,
-			onAddTheoricClasses,
-			onEditTheoricClasses,
-			onDeleteTheoricClasses,
+			Practical_classes,
+			onAddPracticalClasses,
+			onEditPracticalClasses,
+			onDeletePracticalClasses,
 			onSortEnd,
 			onRetryReload,
 			reloadHasError,
-			onDefineTheoricClass,
+			onDefinePracticalClass,
 			saveHasError,
-			handleSaveTheoricClasses,
+			handleSavePracticalClasses,
 		} = this.props;
 		const { add_turma } = this.state;
 		return (
@@ -38,23 +38,23 @@ class TheoricClassesPage extends Component {
 					to="/"
 					text="Aula Teórica"
 					saveHasError={saveHasError}
-					handleSave={handleSaveTheoricClasses}
+					handleSave={handleSavePracticalClasses}
 				/>
 				{reloadHasError ? (
 					<Error onRetryReload={onRetryReload} />
 				) : (
 					<Fragment>
-						<TheoricClassesNew
+						<PracticalClassesNew
 							add_turma={add_turma}
-							onAdd={onAddTheoricClasses}
+							onAdd={onAddPracticalClasses}
 							onClick={this.handleAdd}
 						/>
-						<TheoricClassesList
+						<PracticalClassesList
 							onSortEnd={onSortEnd}
-							theoric_classes={theoric_classes}
-							onEditTheoricClasses={onEditTheoricClasses}
-							onDeleteTheoricClasses={onDeleteTheoricClasses}
-							onDefineTheoricClass={onDefineTheoricClass}
+							Practical_classes={Practical_classes}
+							onEditPracticalClasses={onEditPracticalClasses}
+							onDeletePracticalClasses={onDeletePracticalClasses}
+							onDefinePracticalClass={onDefinePracticalClass}
 						/>
 					</Fragment>
 				)}
@@ -63,4 +63,4 @@ class TheoricClassesPage extends Component {
 	}
 }
 
-export default withTheoricClasses(TheoricClassesPage);
+export default withPracticalClasses(PracticalClassesPage);

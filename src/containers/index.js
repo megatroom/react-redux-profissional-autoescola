@@ -1,13 +1,17 @@
 import PageNotFoundPage from "./PageNotFound/PageNotFoundPage";
+import TeachersPage from "./Teachers/TeachersPage";
+import CarsPage from "./Cars/CarsPage";
 import StudentsPage from "./Students/StudentsPage";
-import TheoricClassesPage from "./TheoricClasses/TheoricClassesPage";
+import TheoreticalClassesPage from "./TheoreticalClasses/TheoreticalClassesPage";
 import MainPage from "./Main/MainPage";
 import AppPage from "./App/AppPage";
 
 export {
 	PageNotFoundPage,
+	TeachersPage,
+	CarsPage,
 	StudentsPage,
-	TheoricClassesPage,
+	TheoreticalClassesPage,
 	MainPage,
 	AppPage as default,
 };
