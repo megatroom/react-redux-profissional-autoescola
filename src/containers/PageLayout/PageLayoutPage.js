@@ -16,18 +16,18 @@ class PageLayoutPage extends Component {
 		const {
 			children,
 			isLoading,
-			saveHasError,
-			handleSaveStudents,
-			handleSaveTheoricClasses,
+			// saveHasError,
+			// handleSaveStudents,
+			// handleSaveTheoreticalClasses,
 		} = this.props;
 		const { isOpenMenu } = this.state;
 		return (
 			<div>
 				<AppBar
 					isLoading={isLoading}
-					saveHasError={saveHasError}
-					handleSaveStudents={handleSaveStudents}
-					handleSaveTheoricClasses={handleSaveTheoricClasses}
+					// saveHasError={saveHasError}
+					// handleSaveStudents={handleSaveStudents}
+					// handleSaveTheoreticalClasses={handleSaveTheoreticalClasses}
 				/>
 				<Container>{children}</Container>
 			</div>
