@@ -9,7 +9,7 @@ import withApp from "../App/withApp";
 class PracticalClassesProvider extends Component {
 	state = {
 		Practical_classes: [],
-		turma: { id: "", nome: "" },
+		turma: { id: "", name: "" },
 	};
 
 	componentDidMount() {
@@ -23,16 +23,16 @@ class PracticalClassesProvider extends Component {
 		this.handleSavePracticalClasses(this.state.Practical_classes);
 	};
 
-	handleDefinePracticalClass = (id, nome) => {
-		this.setState({ turma: { id: id, nome: nome } });
+	handleDefinePracticalClass = (id, name) => {
+		this.setState({ turma: { id: id, name: name } });
 	};
 
 	//#region Practical_classes
-	handleAddPracticalClasses = (nome) => {
+	handleAddPracticalClasses = (name) => {
 		this.setState((prevState) => {
 			const Practical_classes = prevState.Practical_classes.concat({
 				id: uuid(),
-				nome: nome,
+				name: name,
 				qtd: 0,
 			});
 
@@ -41,11 +41,11 @@ class PracticalClassesProvider extends Component {
 		});
 	};
 	handleEditPracticalClasses = (params) => {
-		const { id, nome, op } = params;
+		const { id, name, op } = params;
 		this.setState((prevState) => {
 			const newPracticalClasses = prevState.Practical_classes.slice();
 			const i = newPracticalClasses.findIndex((a) => a.id === id);
-			if (nome) newPracticalClasses[i].nome = nome;
+			if (name) newPracticalClasses[i].name = name;
 			if (op)
 				newPracticalClasses[i].qtd = eval(
 					newPracticalClasses[i].qtd + op + "1"

@@ -15,26 +15,29 @@ class TeachersItem extends Component {
 	};
 
 	handleSave = () => {
-		this.props.onEditTeachers({ id: this.props.id, nome: this.input.value });
+		this.props.onEditTeachers({ id: this.props.id, name: this.input.value });
 		this.handleEditing();
 	};
 
 	render() {
 		const {
 			id,
-			nome,
-			idCarro,
+			name,
+			cars,
 			onDeleteTeachers,
 			onEditTeachers,
 			carro,
+			idTeacher,
 			onEditCars,
 		} = this.props;
 		const { isEditing } = this.state;
+		const confirmed = cars.findIndex((c) => c.idCarro === carro.id) >= 0;
+		const teacherGotCar = idTeacher && !(idTeacher === id) && !confirmed;
 		return (
-			<Item id={id} title={!!carro ? carro.descricao : null}>
+			<Item id={id} title={!!carro ? carro.description : null}>
 				{isEditing ? (
 					<ItemEditing
-						defaultValue={nome}
+						defaultValue={name}
 						thisInput={(c) => {
 							this.input = c;
 						}}
@@ -47,8 +50,8 @@ class TeachersItem extends Component {
 				) : (
 					<Fragment>
 						<div className="item__text">
-							<span>{nome}</span>
-							{!!carro && carro.id && idCarro && (
+							<span>{name}</span>
+							{!!carro && carro.id && confirmed && (
 								<i className="material-icons">check</i>
 							)}
 						</div>
@@ -61,30 +64,37 @@ class TeachersItem extends Component {
 				)}
 				{!!carro && carro.id ? (
 					<ItemButton
-						title={(idCarro ? "Remover" : "Incluir") + " professor"}
+						disabled={teacherGotCar}
+						title={
+							(confirmed
+								? "Desatribuir"
+								: teacherGotCar
+								? "Carro já atribuído a outro"
+								: "Atribuir") + " professor"
+						}
 						onClick={() => {
 							onEditCars({
 								id: carro.id,
-								att: idCarro ? 0 : 1,
+								att: !confirmed,
 								idTeacher: id,
 							});
 							onEditTeachers({
 								id: id,
-								att: idCarro ? 0 : 1,
+								att: !confirmed,
 								idCarro: carro.id,
 							});
 						}}
 					>
-						{idCarro ? "remove" : "add"}
+						{confirmed ? "remove" : teacherGotCar ? "block" : "add"}
 					</ItemButton>
 				) : (
 					<ItemButton
-						disabled={idCarro || this.state.isEditing}
+						disabled={confirmed || this.state.isEditing}
 						title={
-							idCarro ? "Teacher registrado em carro" : "Excluir professor"
+							confirmed ? "Professor com carro atribuído" : "Excluir professor"
 						}
 						onClick={() => {
-							if (!idCarro) onDeleteTeachers(id);
+							if (!confirmed) onDeleteTeachers(id);
 						}}
 					>
 						delete

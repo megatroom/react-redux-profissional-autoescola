@@ -12,12 +12,12 @@ const TheoreticalClassesList = sortableContainer(
 		onDefineTheoreticalClass,
 	}) => (
 		<ItemList>
-			{theoretical_classes.map(({ id, nome, qtd }, i) => (
+			{theoretical_classes.map(({ id, name, qtd }, i) => (
 				<TheoreticalClassesItem
 					key={id}
 					index={i}
 					id={id}
-					nome={nome}
+					name={name}
 					qtd={qtd}
 					onEditTheoreticalClasses={onEditTheoreticalClasses}
 					onDeleteTheoreticalClasses={onDeleteTheoreticalClasses}

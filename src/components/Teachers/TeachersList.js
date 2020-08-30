@@ -5,23 +5,30 @@ import ItemList from "../ItemList/ItemList";
 import TeachersItem from "./TeachersItem";
 
 const TeachersList = sortableContainer(
-	({ teachers, onEditTeachers, onDeleteTeachers, onEditCars, carro }) => (
+	({
+		teachers,
+		onEditTeachers,
+		onDeleteTeachers,
+		onEditCars,
+		carro,
+		idTeacher,
+	}) => (
 		<ItemList>
-			{teachers.map(({ id, nome, idCarro }, i) => {
-				if (!carro || (carro && idCarro === carro.id) || !idCarro)
-					return (
-						<TeachersItem
-							key={id}
-							index={i}
-							id={id}
-							nome={nome}
-							idCarro={idCarro}
-							onEditTeachers={onEditTeachers}
-							onDeleteTeachers={onDeleteTeachers}
-							carro={carro}
-							onEditCars={onEditCars}
-						/>
-					);
+			{teachers.map(({ id, name, cars }, i) => {
+				return (
+					<TeachersItem
+						key={id}
+						index={i}
+						id={id}
+						name={name}
+						cars={cars}
+						onEditTeachers={onEditTeachers}
+						onDeleteTeachers={onDeleteTeachers}
+						carro={carro}
+						idTeacher={idTeacher}
+						onEditCars={onEditCars}
+					/>
+				);
 			})}
 		</ItemList>
 	)

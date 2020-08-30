@@ -23,11 +23,11 @@ class TeachersProvider extends Component {
 	};
 
 	//#region teachers
-	handleAddTeachers = (nome) => {
+	handleAddTeachers = (name) => {
 		this.setState((prevState) => {
 			const teachers = prevState.teachers.concat({
 				id: uuid(),
-				nome: nome,
+				name: name,
 				cars: [],
 			});
 
@@ -35,22 +35,21 @@ class TeachersProvider extends Component {
 			return { teachers };
 		});
 	};
-	handleEditTeachers = ({ id, nome, att, idCarro }) => {
+	handleEditTeachers = ({ id, name, att, idCarro }) => {
 		this.setState((prevState) => {
 			const newTeachers = prevState.teachers.slice();
 			const i = newTeachers.findIndex((t) => t.id === id);
-			if (nome) newTeachers[i].nome = nome;
+			if (name) newTeachers[i].name = name;
 			if (idCarro)
-				// if (att)
-				// 	newTeachers[i].cars = newTeachers[i].cars.concat({
-				// 		idCarro: idCarro,
-				// 	});
-				// else
-				// 	newTeachers[i].cars.splice(
-				// 		newTeachers[i].cars.findIndex((c) => c.idCarro === idCarro),
-				// 		1
-				// 	);
-				console.log(att, idCarro);
+				if (att)
+					newTeachers[i].cars = newTeachers[i].cars.concat({
+						idCarro: idCarro,
+					});
+				else
+					newTeachers[i].cars.splice(
+						newTeachers[i].cars.findIndex((c) => c.idCarro === idCarro),
+						1
+					);
 
 			this.handleSaveTeachers(newTeachers);
 			return { teachers: newTeachers };

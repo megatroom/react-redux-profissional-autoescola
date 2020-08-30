@@ -13,14 +13,14 @@ const StudentsList = sortableContainer(
 		turma,
 	}) => (
 		<ItemList>
-			{students.map(({ id, nome, idTurma }, i) => {
+			{students.map(({ id, name, idTurma }, i) => {
 				if (!turma || (turma && idTurma === turma.id) || !idTurma)
 					return (
 						<StudentsItem
 							key={id}
 							index={i}
 							id={id}
-							nome={nome}
+							name={name}
 							idTurma={idTurma}
 							onEditStudents={onEditStudents}
 							onDeleteStudents={onDeleteStudents}

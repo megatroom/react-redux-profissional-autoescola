@@ -20,7 +20,7 @@ const TheoreticalClassStudent = ({
 			<Title
 				title="Voltar para turmas"
 				to="/theoretical_classes"
-				text={turma.nome}
+				text={turma.name}
 			/>
 			<StudentsList
 				students={students}

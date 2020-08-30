@@ -18,7 +18,7 @@ class TheoreticalClassesItem extends Component {
 	handleSave = () => {
 		this.props.onEditTheoreticalClasses({
 			id: this.props.id,
-			nome: this.input.value,
+			name: this.input.value,
 		});
 		this.handleEditing();
 	};
@@ -26,7 +26,7 @@ class TheoreticalClassesItem extends Component {
 	render() {
 		const {
 			id,
-			nome,
+			name,
 			qtd,
 			onDeleteTheoreticalClasses,
 			onDefineTheoreticalClass,
@@ -37,7 +37,7 @@ class TheoreticalClassesItem extends Component {
 			<Item id={id}>
 				{isEditing ? (
 					<ItemEditing
-						defaultValue={nome}
+						defaultValue={name}
 						thisInput={(c) => {
 							this.input = c;
 						}}
@@ -51,7 +51,7 @@ class TheoreticalClassesItem extends Component {
 					<Fragment>
 						<div className="item__text">
 							<span>
-								{nome}
+								{name}
 								<br />
 								<span className="item__text__qtd">
 									{qtd ? qtd + " aluno" + (qtd > 1 ? "s" : "") : "nenhum aluno"}
@@ -61,7 +61,7 @@ class TheoreticalClassesItem extends Component {
 						<ItemButton
 							title="Editar aluno"
 							onClick={() => {
-								onDefineTheoreticalClass(id, nome);
+								onDefineTheoreticalClass(id, name);
 								history.push("/theoretical_class");
 							}}
 						>

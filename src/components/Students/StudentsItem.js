@@ -15,14 +15,14 @@ class StudentsItem extends Component {
 	};
 
 	handleSave = () => {
-		this.props.onEditStudents({ id: this.props.id, nome: this.input.value });
+		this.props.onEditStudents({ id: this.props.id, name: this.input.value });
 		this.handleEditing();
 	};
 
 	render() {
 		const {
 			id,
-			nome,
+			name,
 			idTurma,
 			onDeleteStudents,
 			onEditStudents,
@@ -31,10 +31,10 @@ class StudentsItem extends Component {
 		} = this.props;
 		const { isEditing } = this.state;
 		return (
-			<Item id={id} title={!!turma ? turma.nome : null}>
+			<Item id={id} title={!!turma ? turma.name : null}>
 				{isEditing ? (
 					<ItemEditing
-						defaultValue={nome}
+						defaultValue={name}
 						thisInput={(c) => {
 							this.input = c;
 						}}
@@ -47,7 +47,7 @@ class StudentsItem extends Component {
 				) : (
 					<Fragment>
 						<div className="item__text">
-							<span>{nome}</span>
+							<span>{name}</span>
 							{!!turma && turma.id && idTurma && (
 								<i className="material-icons">check</i>
 							)}

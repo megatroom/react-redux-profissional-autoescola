@@ -10,6 +10,7 @@ import StudentsNew from "./Students/StudentsNew";
 import TheoreticalClassesItem from "./TheoreticalClasses/TheoreticalClassesItem";
 import TheoreticalClassesList from "./TheoreticalClasses/TheoreticalClassesList";
 import TheoreticalClassesNew from "./TheoreticalClasses/TheoreticalClassesNew";
+import TeacherCars from "./TeacherCars/TeacherCars";
 import TheoreticalClassStudent from "./TheoreticalClassStudent/TheoreticalClassStudent";
 import AppBar from "./AppBar/AppBar";
 import Error from "./Error/Error";
@@ -36,7 +37,7 @@ export {
 	TheoreticalClassesItem,
 	TheoreticalClassesList,
 	TheoreticalClassesNew,
-	TheoricClassStudent,
+	TeacherCars,
 	TheoreticalClassStudent,
 	AppBar,
 	Error,

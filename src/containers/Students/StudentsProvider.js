@@ -23,11 +23,11 @@ class StudentsProvider extends Component {
 	};
 
 	//#region students
-	handleAddStudents = (nome) => {
+	handleAddStudents = (name) => {
 		this.setState((prevState) => {
 			const students = prevState.students.concat({
 				id: uuid(),
-				nome: nome,
+				name: name,
 				idTurma: null,
 			});
 
@@ -35,11 +35,11 @@ class StudentsProvider extends Component {
 			return { students };
 		});
 	};
-	handleEditStudents = ({ id, nome, op, idTurma }) => {
+	handleEditStudents = ({ id, name, op, idTurma }) => {
 		this.setState((prevState) => {
 			const newStudents = prevState.students.slice();
 			const i = newStudents.findIndex((a) => a.id === id);
-			if (nome) newStudents[i].nome = nome;
+			if (name) newStudents[i].name = name;
 			if (op) newStudents[i].idTurma = op === "+" ? idTurma : null;
 
 			this.handleSaveStudents(newStudents);

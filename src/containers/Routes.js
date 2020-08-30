@@ -62,7 +62,7 @@ const Routes = () => (
 		<Route path="/theoretical_classes" component={TheoreticalClassesPage} />
 		<Route path="/students" component={StudentsPage} />
 		<Route path="/theoretical_class" component={TheoreticalClassStudent} />
-		<Route path="/theoric_class" component={TheoricClassStudent} />
+		<Route path="/teacher_cars" component={TeacherCars} />
 		<Route path="" component={PageNotFoundPage} />
 	</Switch>
 );

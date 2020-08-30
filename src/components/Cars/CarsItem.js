@@ -18,7 +18,7 @@ class CarsItem extends Component {
 	handleSave = () => {
 		this.props.onEditCars({
 			id: this.props.id,
-			descricao: this.input.value,
+			description: this.input.value,
 		});
 		this.handleEditing();
 	};
@@ -26,8 +26,8 @@ class CarsItem extends Component {
 	render() {
 		const {
 			id,
-			descricao,
-			qtd,
+			description,
+			idTeacher,
 			onDeleteCars,
 			onDefineCar,
 			history,
@@ -37,7 +37,7 @@ class CarsItem extends Component {
 			<Item id={id}>
 				{isEditing ? (
 					<ItemEditing
-						defaultValue={descricao}
+						defaultValue={description}
 						thisInput={(c) => {
 							this.input = c;
 						}}
@@ -51,19 +51,17 @@ class CarsItem extends Component {
 					<Fragment>
 						<div className="item__text">
 							<span>
-								{descricao}
+								{description}
 								<br />
 								<span className="item__text__qtd">
-									{qtd
-										? qtd + " professor" + (qtd > 1 ? "s" : "")
-										: "nenhum professor"}
+									{idTeacher ? "Atribuído a professor" : "Não atribuído"}
 								</span>
 							</span>
 						</div>
 						<ItemButton
 							title="Atribuir professor"
 							onClick={() => {
-								onDefineCar(id, descricao);
+								onDefineCar(id, description, idTeacher);
 								history.push("/teacher_cars");
 							}}
 						>
@@ -75,10 +73,10 @@ class CarsItem extends Component {
 					</Fragment>
 				)}
 				<ItemButton
-					disabled={qtd || this.state.isEditing}
-					title={qtd ? "Carro com professor registrado" : "Excluir carro"}
+					disabled={idTeacher || this.state.isEditing}
+					title={idTeacher ? "Carro com professor registrado" : "Excluir carro"}
 					onClick={() => {
-						if (!qtd) onDeleteCars(id);
+						if (!idTeacher) onDeleteCars(id);
 					}}
 				>
 					delete

@@ -9,7 +9,7 @@ import withApp from "../App/withApp";
 class CarsProvider extends Component {
 	state = {
 		cars: [],
-		carro: { id: "", descricao: "" },
+		carro: { id: "", description: "", idTeacher: null },
 	};
 
 	componentDidMount() {
@@ -23,16 +23,18 @@ class CarsProvider extends Component {
 		this.handleSaveCars(this.state.cars);
 	};
 
-	handleDefineCar = (id, descricao) => {
-		this.setState({ carro: { id: id, descricao: descricao } });
+	handleDefineCar = (id, description, idTeacher) => {
+		this.setState({
+			carro: { id: id, description: description, idTeacher: idTeacher },
+		});
 	};
 
 	//#region cars
-	handleAddCars = (descricao) => {
+	handleAddCars = (description) => {
 		this.setState((prevState) => {
 			const cars = prevState.cars.concat({
 				id: uuid(),
-				descricao: descricao,
+				description: description,
 				idTeacher: null,
 			});
 
@@ -40,14 +42,13 @@ class CarsProvider extends Component {
 			return { cars };
 		});
 	};
-	handleEditCars = ({ id, descricao, att, idTeacher }) => {
+	handleEditCars = ({ id, description, att, idTeacher }) => {
 		this.setState((prevState) => {
 			const newCars = prevState.cars.slice();
 			const i = newCars.findIndex((a) => a.id === id);
-			if (descricao) newCars[i].descricao = descricao;
-			if (idTeacher)
-				//newCars[i].idTeacher = att ? idTeacher : null;
-				console.log(att, idTeacher);
+			if (description) newCars[i].description = description;
+			if (idTeacher) newCars[i].idTeacher = att ? idTeacher : null;
+			if (idTeacher && !att) this.setState({ carro: newCars[i] });
 
 			this.handleSaveCars(newCars);
 			return { cars: newCars };

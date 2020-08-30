@@ -9,7 +9,7 @@ import withApp from "../App/withApp";
 class TheoreticalClassesProvider extends Component {
 	state = {
 		theoretical_classes: [],
-		turma: { id: "", nome: "" },
+		turma: { id: "", name: "" },
 	};
 
 	componentDidMount() {
@@ -23,16 +23,16 @@ class TheoreticalClassesProvider extends Component {
 		this.handleSaveTheoreticalClasses(this.state.theoretical_classes);
 	};
 
-	handleDefineTheoreticalClass = (id, nome) => {
-		this.setState({ turma: { id: id, nome: nome } });
+	handleDefineTheoreticalClass = (id, name) => {
+		this.setState({ turma: { id: id, name: name } });
 	};
 
 	//#region theoretical_classes
-	handleAddTheoreticalClasses = (nome) => {
+	handleAddTheoreticalClasses = (name) => {
 		this.setState((prevState) => {
 			const theoretical_classes = prevState.theoretical_classes.concat({
 				id: uuid(),
-				nome: nome,
+				name: name,
 				qtd: 0,
 			});
 
@@ -41,11 +41,11 @@ class TheoreticalClassesProvider extends Component {
 		});
 	};
 	handleEditTheoreticalClasses = (params) => {
-		const { id, nome, op } = params;
+		const { id, name, op } = params;
 		this.setState((prevState) => {
 			const newTheoreticalClasses = prevState.theoretical_classes.slice();
 			const i = newTheoreticalClasses.findIndex((a) => a.id === id);
-			if (nome) newTheoreticalClasses[i].nome = nome;
+			if (name) newTheoreticalClasses[i].name = name;
 			if (op)
 				newTheoreticalClasses[i].qtd = eval(
 					newTheoreticalClasses[i].qtd + op + "1"
