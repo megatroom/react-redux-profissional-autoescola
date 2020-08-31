@@ -69,8 +69,8 @@ class TheoreticalClassesProvider extends Component {
 
 	//#region theoretical_classes
 	handleReloadTheoreticalClasses = () => {
-		this.props.handleReloadError(false);
-		this.props.handleLoading(true);
+		// this.props.handleReloadError(false);
+		// this.props.handleLoading(true);
 		TheoreticalClassService.load()
 			.then((theoretical_classes) => {
 				this.setState({
@@ -78,22 +78,22 @@ class TheoreticalClassesProvider extends Component {
 				});
 			})
 			.catch(() => {
-				this.props.handleReloadError(true);
+				// this.props.handleReloadError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
 	handleSaveTheoreticalClasses = (theoretical_classes) => {
-		this.props.handleSaveError(false);
-		this.props.handleLoading(true);
+		// this.props.handleSaveError(false);
+		// this.props.handleLoading(true);
 		TheoreticalClassService.save(theoretical_classes)
 			.then(() => {})
 			.catch(() => {
-				this.props.handleSaveError(true);
+				// this.props.handleSaveError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
 	//#endregion theoretical_classes

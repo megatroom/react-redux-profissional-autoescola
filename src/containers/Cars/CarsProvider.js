@@ -68,8 +68,8 @@ class CarsProvider extends Component {
 
 	//#region cars
 	handleReloadCars = () => {
-		this.props.handleReloadError(false);
-		this.props.handleLoading(true);
+		// this.props.handleReloadError(false);
+		// this.props.handleLoading(true);
 		CarService.load()
 			.then((cars) => {
 				this.setState({
@@ -77,22 +77,22 @@ class CarsProvider extends Component {
 				});
 			})
 			.catch(() => {
-				this.props.handleReloadError(true);
+				// this.props.handleReloadError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
 	handleSaveCars = (cars) => {
-		this.props.handleSaveError(false);
-		this.props.handleLoading(true);
+		// this.props.handleSaveError(false);
+		// this.props.handleLoading(true);
 		CarService.save(cars)
 			.then(() => {})
 			.catch(() => {
-				this.props.handleSaveError(true);
+				// this.props.handleSaveError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
 	//#endregion cars

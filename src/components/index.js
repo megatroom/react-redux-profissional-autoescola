@@ -1,17 +1,16 @@
-import TeachersItem from "./Teachers/TeachersItem";
 import TeachersList from "./Teachers/TeachersList";
 import TeachersNew from "./Teachers/TeachersNew";
-import CarsItem from "./Cars/CarsItem";
 import CarsList from "./Cars/CarsList";
 import CarsNew from "./Cars/CarsNew";
-import StudentsItem from "./Students/StudentsItem";
 import StudentsList from "./Students/StudentsList";
 import StudentsNew from "./Students/StudentsNew";
-import TheoreticalClassesItem from "./TheoreticalClasses/TheoreticalClassesItem";
 import TheoreticalClassesList from "./TheoreticalClasses/TheoreticalClassesList";
 import TheoreticalClassesNew from "./TheoreticalClasses/TheoreticalClassesNew";
+import PracticalClassesList from "./PracticalClasses/PracticalClassesList";
+import PracticalClassesNew from "./PracticalClasses/PracticalClassesNew";
 import TeacherCars from "./TeacherCars/TeacherCars";
 import TheoreticalClassStudent from "./TheoreticalClassStudent/TheoreticalClassStudent";
+import PracticalSchedule from "./PracticalSchedule/PracticalSchedule";
 import AppBar from "./AppBar/AppBar";
 import Error from "./Error/Error";
 import Center from "./Center/Center";
@@ -25,20 +24,19 @@ import Item from "./Item/Item";
 import Title from "./Title/Title";
 
 export {
-	TeachersItem,
 	TeachersList,
 	TeachersNew,
-	CarsItem,
 	CarsList,
 	CarsNew,
-	StudentsItem,
+	TeacherCars,
 	StudentsList,
 	StudentsNew,
-	TheoreticalClassesItem,
 	TheoreticalClassesList,
 	TheoreticalClassesNew,
-	TeacherCars,
 	TheoreticalClassStudent,
+	PracticalClassesList,
+	PracticalClassesNew,
+	PracticalSchedule,
 	AppBar,
 	Error,
 	Center,
@@ -51,3 +49,5 @@ export {
 	Item,
 	Title,
 };
+
+console.log(PracticalSchedule);

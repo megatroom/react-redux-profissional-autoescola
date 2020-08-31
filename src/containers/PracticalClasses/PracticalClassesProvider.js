@@ -8,8 +8,8 @@ import withApp from "../App/withApp";
 
 class PracticalClassesProvider extends Component {
 	state = {
-		Practical_classes: [],
-		turma: { id: "", name: "" },
+		practical_classes: [],
+		schedule: { id: "", description: "" },
 	};
 
 	componentDidMount() {
@@ -17,96 +17,104 @@ class PracticalClassesProvider extends Component {
 	}
 
 	onSortEnd = ({ oldIndex, newIndex }) => {
-		this.setState(({ Practical_classes }) => ({
-			Practical_classes: arrayMove(Practical_classes, oldIndex, newIndex),
+		this.setState(({ practical_classes }) => ({
+			practical_classes: arrayMove(practical_classes, oldIndex, newIndex),
 		}));
-		this.handleSavePracticalClasses(this.state.Practical_classes);
+		this.handleSavePracticalClasses(this.state.practical_classes);
 	};
 
-	handleDefinePracticalClass = (id, name) => {
-		this.setState({ turma: { id: id, name: name } });
-	};
-
-	//#region Practical_classes
-	handleAddPracticalClasses = (name) => {
-		this.setState((prevState) => {
-			const Practical_classes = prevState.Practical_classes.concat({
-				id: uuid(),
-				name: name,
-				qtd: 0,
-			});
-
-			this.handleSavePracticalClasses(Practical_classes);
-			return { Practical_classes };
+	handleDefinePracticalClass = (id, description, idTeacher) => {
+		this.setState({
+			schedule: { id: id, description: description },
 		});
 	};
-	handleEditPracticalClasses = (params) => {
-		const { id, name, op } = params;
+
+	//#region practical_classes
+	handleAddPracticalClasses = (description) => {
 		this.setState((prevState) => {
-			const newPracticalClasses = prevState.Practical_classes.slice();
+			const practical_classes = prevState.practical_classes.concat({
+				id: uuid(),
+				description: description,
+				students: [],
+			});
+
+			this.handleSavePracticalClasses(practical_classes);
+			return { practical_classes };
+		});
+	};
+	handleEditPracticalClasses = ({ id, description, att, schedule }) => {
+		this.setState((prevState) => {
+			const newPracticalClasses = prevState.practical_classes.slice();
 			const i = newPracticalClasses.findIndex((a) => a.id === id);
-			if (name) newPracticalClasses[i].name = name;
-			if (op)
-				newPracticalClasses[i].qtd = eval(
-					newPracticalClasses[i].qtd + op + "1"
-				);
+			if (description) newPracticalClasses[i].description = description;
+			console.log(att, schedule);
+			// if (idCarro)
+			// 	if (att)
+			// 		newTeachers[i].cars = newTeachers[i].cars.concat({
+			// 			idCarro: idCarro,
+			// 		});
+			// 	else
+			// 		newTeachers[i].cars.splice(
+			// 			newTeachers[i].cars.findIndex((c) => c.idCarro === idCarro),
+			// 			1
+			// 		);
 
 			this.handleSavePracticalClasses(newPracticalClasses);
-			return { Practical_classes: newPracticalClasses };
+			return { practical_classes: newPracticalClasses };
 		});
 	};
 	handleDeletePracticalClasses = (id) => {
 		this.setState((prevState) => {
-			const newPracticalClasses = prevState.Practical_classes.slice();
+			const newPracticalClasses = prevState.practical_classes.slice();
 			const i = newPracticalClasses.findIndex((a) => a.id === id);
 			newPracticalClasses.splice(i, 1);
 
 			this.handleSavePracticalClasses(newPracticalClasses);
-			return { Practical_classes: newPracticalClasses };
+			return { practical_classes: newPracticalClasses };
 		});
 	};
-	//#endregion Practical_classes
+	//#endregion practical_classes
 
-	//#region Practical_classes
+	//#region practical_classes
 	handleReloadPracticalClasses = () => {
-		this.props.handleReloadError(false);
-		this.props.handleLoading(true);
+		// this.props.handleReloadError(false);
+		// this.props.handleLoading(true);
 		PracticalClassService.load()
-			.then((Practical_classes) => {
+			.then((practical_classes) => {
 				this.setState({
-					Practical_classes: Practical_classes,
+					practical_classes: practical_classes,
 				});
 			})
 			.catch(() => {
-				this.props.handleReloadError(true);
+				// this.props.handleReloadError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
-	handleSavePracticalClasses = (Practical_classes) => {
-		this.props.handleSaveError(false);
-		this.props.handleLoading(true);
-		PracticalClassService.save(Practical_classes)
+	handleSavePracticalClasses = (practical_classes) => {
+		// this.props.handleSaveError(false);
+		// this.props.handleLoading(true);
+		PracticalClassService.save(practical_classes)
 			.then(() => {})
 			.catch(() => {
-				this.props.handleSaveError(true);
+				// this.props.handleSaveError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
-	//#endregion Practical_classes
+	//#endregion practical_classes
 
 	render() {
 		const { children, saveHasError } = this.props;
-		const { Practical_classes, turma } = this.state;
+		const { practical_classes, schedule } = this.state;
 		return (
 			<PracticalClassesContext.Provider
 				value={{
 					...this.state,
-					Practical_classes: Practical_classes,
-					turma: turma,
+					practical_classes: practical_classes,
+					schedule: schedule,
 					onDefinePracticalClass: this.handleDefinePracticalClass,
 					onAddPracticalClasses: this.handleAddPracticalClasses,
 					onEditPracticalClasses: this.handleEditPracticalClasses,
@@ -115,7 +123,7 @@ class PracticalClassesProvider extends Component {
 					onRetryReload: this.handleReloadPracticalClasses,
 					saveHasError: saveHasError,
 					handleSavePracticalClasses: () => {
-						this.handleSavePracticalClasses(Practical_classes);
+						this.handleSavePracticalClasses(practical_classes);
 					},
 				}}
 			>

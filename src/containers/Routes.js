@@ -11,6 +11,7 @@ import {
 	MainPage,
 } from ".";
 import { TeacherCars, TheoreticalClassStudent } from "../components";
+import PracticalSchedule from "../components/PracticalSchedule/PracticalSchedule";
 
 export const main = [
 	{
@@ -59,6 +60,7 @@ const Routes = () => (
 		<Route path="/teachers" component={TeachersPage} />
 		<Route path="/cars" component={CarsPage} />
 		<Route path="/practical_classes" component={PracticalClassesPage} />
+		<Route path="/practical_schedule" component={PracticalSchedule} />
 		<Route path="/theoretical_classes" component={TheoreticalClassesPage} />
 		<Route path="/students" component={StudentsPage} />
 		<Route path="/theoretical_class" component={TheoreticalClassStudent} />

@@ -18,7 +18,7 @@ class PracticalClassesPage extends Component {
 
 	render() {
 		const {
-			Practical_classes,
+			practical_classes,
 			onAddPracticalClasses,
 			onEditPracticalClasses,
 			onDeletePracticalClasses,
@@ -36,7 +36,7 @@ class PracticalClassesPage extends Component {
 					titleBack="Voltar para tela principal"
 					titleAction="Clique para tentar novamente"
 					to="/"
-					text="Aula Teórica"
+					text="Aulas Práticas"
 					saveHasError={saveHasError}
 					handleSave={handleSavePracticalClasses}
 				/>
@@ -51,7 +51,7 @@ class PracticalClassesPage extends Component {
 						/>
 						<PracticalClassesList
 							onSortEnd={onSortEnd}
-							Practical_classes={Practical_classes}
+							practical_classes={practical_classes}
 							onEditPracticalClasses={onEditPracticalClasses}
 							onDeletePracticalClasses={onDeletePracticalClasses}
 							onDefinePracticalClass={onDefinePracticalClass}

@@ -69,8 +69,8 @@ class TeachersProvider extends Component {
 
 	//#region teachers
 	handleReloadTeachers = () => {
-		this.props.handleReloadError(false);
-		this.props.handleLoading(true);
+		// this.props.handleReloadError(false);
+		// this.props.handleLoading(true);
 		TeacherService.load()
 			.then((teachers) => {
 				this.setState({
@@ -78,22 +78,22 @@ class TeachersProvider extends Component {
 				});
 			})
 			.catch(() => {
-				this.props.handleReloadError(true);
+				// this.props.handleReloadError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
 	handleSaveTeachers = (teachers) => {
-		this.props.handleSaveError(false);
-		this.props.handleLoading(true);
+		// this.props.handleSaveError(false);
+		// this.props.handleLoading(true);
 		TeacherService.save(teachers)
 			.then(() => {})
 			.catch(() => {
-				this.props.handleSaveError(true);
+				// this.props.handleSaveError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
 	//#endregion teachers

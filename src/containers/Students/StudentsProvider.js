@@ -11,8 +11,8 @@ class StudentsProvider extends Component {
 		students: [],
 	};
 
-	componentDidMount() {
-		this.handleReloadStudents();
+	componentDidMount(...s) {
+		this.handleReloadStudents(s);
 	}
 
 	onSortEnd = ({ oldIndex, newIndex }) => {
@@ -29,18 +29,20 @@ class StudentsProvider extends Component {
 				id: uuid(),
 				name: name,
 				idTurma: null,
+				qtdPractical: 0,
 			});
 
 			this.handleSaveStudents(students);
 			return { students };
 		});
 	};
-	handleEditStudents = ({ id, name, op, idTurma }) => {
+	handleEditStudents = ({ id, name, op, idTurma, qtdPractical }) => {
 		this.setState((prevState) => {
 			const newStudents = prevState.students.slice();
 			const i = newStudents.findIndex((a) => a.id === id);
 			if (name) newStudents[i].name = name;
 			if (op) newStudents[i].idTurma = op === "+" ? idTurma : null;
+			console.log(qtdPractical);
 
 			this.handleSaveStudents(newStudents);
 			return { students: newStudents };
@@ -59,12 +61,10 @@ class StudentsProvider extends Component {
 	//#endregion students
 
 	//#region students
-	handleReloadStudents = () => {
-		// console.log(
-		// 	this.props.handleReloadError ? this.props.handleReloadError : null
-		// );
-		this.props.handleReloadError(false);
-		this.props.handleLoading(true);
+	handleReloadStudents = (s) => {
+		console.log(this.props, s);
+		// this.props.handleReloadError(false);
+		// this.props.handleLoading(true);
 		StudentService.load()
 			.then((students) => {
 				this.setState({
@@ -72,22 +72,22 @@ class StudentsProvider extends Component {
 				});
 			})
 			.catch(() => {
-				this.props.handleReloadError(true);
+				// this.props.handleReloadError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
 	handleSaveStudents = (students) => {
-		this.props.handleSaveError(false);
-		this.props.handleLoading(true);
+		// this.props.handleSaveError(false);
+		// this.props.handleLoading(true);
 		StudentService.save(students)
 			.then(() => {})
 			.catch(() => {
-				this.props.handleSaveError(true);
+				// this.props.handleSaveError(true);
 			})
 			.finally(() => {
-				this.props.handleLoading(false);
+				// this.props.handleLoading(false);
 			});
 	};
 	//#endregion students

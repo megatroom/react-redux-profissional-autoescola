@@ -31,7 +31,10 @@ class TeachersItem extends Component {
 			onEditCars,
 		} = this.props;
 		const { isEditing } = this.state;
-		const confirmed = cars.findIndex((c) => c.idCarro === carro.id) >= 0;
+		const confirmed =
+			carro && carro.id
+				? cars.findIndex((c) => c.idCarro === carro.id) >= 0
+				: 0;
 		const teacherGotCar = idTeacher && !(idTeacher === id) && !confirmed;
 		return (
 			<Item id={id} title={!!carro ? carro.description : null}>
