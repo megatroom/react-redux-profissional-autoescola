@@ -1,0 +1,21 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.main {
+	&__options {
+		margin: 24px 0;
+
+		div {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		span {
+			margin: 4px;
+			font-weight: bold;
+		}
+		hr {
+			margin-bottom: 16px;
+			@include box-shadow(1);
+		}
+	}
+}

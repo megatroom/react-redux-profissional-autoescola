@@ -1,0 +1,45 @@
+@import "../../styles/mixin.scss";
+
+.add_turma {
+	&__buton {
+		transition: all 0.3s ease;
+		background-color: #ffe60095;
+		position: relative;
+		float: right;
+		top: -3px;
+		border-radius: 43px;
+		width: 37px;
+		height: 37px;
+		color: #2c2c2c;
+		display: block;
+		cursor: pointer;
+		@include box-shadow(1);
+
+		&:hover {
+			@include box-shadow(2);
+			background-color: #fde000;
+		}
+		&:active {
+			@include box-shadow(1);
+			background-color: #ddd100;
+		}
+	}
+
+	&--transition {
+		background-color: #f226;
+		color: #0007;
+		top: -1.6px;
+		width: 52px;
+		height: 34px;
+		margin-left: 7px;
+
+		&:hover {
+			@include box-shadow(2);
+			background-color: #f229;
+		}
+		&:active {
+			@include box-shadow(1);
+			background-color: #f223;
+		}
+	}
+}

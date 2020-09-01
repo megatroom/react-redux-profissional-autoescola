@@ -1,0 +1,35 @@
+{
+	"name": "autoescola",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "parcel ./src/index.html",
+		"build": "parcel build src/index.html --out-dir deploy"
+	},
+	"keywords": [
+		"autoescola",
+		"senna"
+	],
+	"author": "douglas braga",
+	"license": "ISC",
+	"dependencies": {
+		"array-move": "^3.0.0",
+		"babel-plugin-transform-class-properties": "^6.24.1",
+		"babel-plugin-transform-object-rest-spread": "^6.26.0",
+		"classnames": "^2.2.6",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1",
+		"react-router-dom": "^5.2.0",
+		"react-sortable-hoc": "^1.11.0",
+		"uuid": "^8.3.0"
+	},
+	"devDependencies": {
+		"babel-preset-env": "^1.7.0",
+		"babel-preset-react": "^6.24.1",
+		"parcel-bundler": "^1.12.4",
+		"prettier": "^2.0.5",
+		"sass": "^1.26.10"
+	}
+}

@@ -1,0 +1,7 @@
+@import "../../styles/variables.scss";
+
+.container {
+	max-width: $container-max-width;
+	margin: auto;
+	padding: 61px $container-padding;
+}

@@ -1,0 +1,27 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Roboto", sans-serif;
+	background-color: #99889988;
+}
+
+hr {
+	border: 1px solid #999;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+input[type="text"] {
+	background: transparent;
+	border: none;
+	outline: none;
+}

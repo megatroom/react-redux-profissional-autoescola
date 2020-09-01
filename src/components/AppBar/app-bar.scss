@@ -1,0 +1,26 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.appbar {
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: $color-primary;
+	position: fixed;
+	@include box-shadow(2);
+
+	&__container {
+		padding: 0 $container-padding;
+		height: 46px;
+		display: flex;
+		align-items: center;
+		max-width: $container-max-width;
+		margin: auto;
+	}
+
+	&__brand {
+		flex: 1;
+		font-weight: bold;
+		padding-left: 8px;
+	}
+}

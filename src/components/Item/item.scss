@@ -1,0 +1,52 @@
+@import "../../styles/mixin.scss";
+@import "../../styles/variables.scss";
+
+.item {
+	background-color: $whitemine;
+	margin: 8px 0;
+	border-radius: 4px;
+	display: flex;
+	padding: 8px 12px;
+	align-items: center;
+	@include box-shadow(1);
+
+	&__text {
+		flex: 1;
+		display: flex;
+		align-items: center;
+
+		i {
+			margin-left: 8px;
+			color: $color-success;
+		}
+
+		&__qtd {
+			font-size: 10pt;
+		}
+	}
+
+	&__input {
+		flex: 1;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		margin: 0 4px;
+	}
+
+	&__action {
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.13);
+			@include box-shadow(1);
+		}
+		&:active {
+			background-color: rgba(0, 0, 0, 0.025);
+		}
+
+		&--red {
+			color: $color-danger;
+		}
+		&--green {
+			color: $color-success;
+		}
+	}
+}
