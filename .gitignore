@@ -127,3 +127,6 @@ sketch
 
 build
 deploy
+
+# package managers lock
+*lock*
